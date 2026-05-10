@@ -759,7 +759,7 @@
         <div class="tool-chip"><div class="tool-chip-icon">💬</div><div class="tool-chip-name">LINE</div><div class="tool-chip-role">日常溝通 / 通知推播</div></div>
         <div class="tool-chip"><div class="tool-chip-icon">📋</div><div class="tool-chip-name">GitHub Board</div><div class="tool-chip-role">工項管理 / 看板</div></div>
         <div class="tool-chip"><div class="tool-chip-icon">📁</div><div class="tool-chip-name">Notion</div><div class="tool-chip-role">文件 / 資料共享</div></div>
-        <div class="tool-chip"><div class="tool-chip-icon">⚙️</div><div class="tool-chip-name">n8n / Make</div><div class="tool-chip-role">排程引擎</div></div>
+        <div class="tool-chip"><div class="tool-chip-icon">⚙️</div><div class="tool-chip-name">openclaw機制</div><div class="tool-chip-role">排程引擎</div></div>
         <div class="tool-chip"><div class="tool-chip-icon">🔥</div><div class="tool-chip-name">Firebase</div><div class="tool-chip-role">AI 使用追蹤</div></div>
       </div>
     </div>
@@ -794,7 +794,7 @@
     <div class="schedule-list">
       <div class="schedule-item"><div class="schedule-time">08:50</div><div class="schedule-body"><div class="schedule-name">☀️ 早安點名</div><div class="schedule-desc">今日待辦 + 團隊請假名單 + 暖場一句話</div></div></div>
       <div class="schedule-item"><div class="schedule-time">17:00</div><div class="schedule-body"><div class="schedule-name">📋 下班 SOP 提醒</div><div class="schedule-desc">@未更新 GitHub Board 工項成員 + IDA Pulse 提醒</div></div></div>
-      <div class="schedule-item"><div class="schedule-time">17:20</div><div class="schedule-body"><div class="schedule-name">🦀 IDA Pulse 確認</div><div class="schedule-desc">比對 Firebase，@未填成員</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">17:45</div><div class="schedule-body"><div class="schedule-name">🦀 IDA Pulse 確認</div><div class="schedule-desc">比對 Firebase，@未填成員</div></div></div>
       <div class="schedule-item"><div class="schedule-time">17:45</div><div class="schedule-body"><div class="schedule-name">📊 每日工作總結</div><div class="schedule-desc">完成 / 進行中 / 阻塞 三欄摘要（來源：GitHub Board）</div></div></div>
       <div class="schedule-item"><div class="schedule-time">18:00</div><div class="schedule-body"><div class="schedule-name">🔴 逾期 Alert + 🚨 IDA Pulse 最終通知</div><div class="schedule-desc">到期未完成 → @負責人 + @組長 ｜ 未填者記錄 + 知會組長</div></div></div>
     </div>
@@ -812,8 +812,8 @@
       <div class="schedule-item"><div class="schedule-time">週一 09:00</div><div class="schedule-body"><div class="schedule-name">🚀 Sprint 週開工包</div><div class="schedule-desc">工項總覽 + 人力預警 + deadline 清單（GitHub Board）</div></div></div>
       <div class="schedule-item"><div class="schedule-time">週一 09:30</div><div class="schedule-body"><div class="schedule-name">🗞️ AI 週報新聞</div><div class="schedule-desc">上週 AI 大事 + Claude 專區 + 閱讀連結</div></div></div>
       <div class="schedule-item"><div class="schedule-time">週四 17:30</div><div class="schedule-body"><div class="schedule-name">🏁 週收尾報告</div><div class="schedule-desc">完成率 + 燃盡圖快照 + 下週預告</div></div></div>
-      <div class="schedule-item"><div class="schedule-time">週四 23:00</div><div class="schedule-body"><div class="schedule-name">📊 Claude 使用量週報推播</div><div class="schedule-desc">統計截止，彙整全員使用量報告推播至 LINE</div></div></div>
-      <div class="schedule-item"><div class="schedule-time">週五 00:00</div><div class="schedule-body"><div class="schedule-name">📊 Claude 使用量統計區間啟動</div><div class="schedule-desc">統計區間：本週五 00:00 ～ 下週四 23:59</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">週四 23:00</div><div class="schedule-body"><div class="schedule-name">📊 Claude 使用量週報推播(上週五至本週四)</div><div class="schedule-desc">統計截止，彙整全員使用量報告推播至 LINE</div></div></div>
+      <div class="schedule-item"><div class="schedule-time">週五 00:00</div><div class="schedule-body"><div class="schedule-name">📊 Claude 新一輪使用量統計區間啟動</div><div class="schedule-desc">統計區間：本週五 00:00 ～ 下週四 23:59</div></div></div>
       <div class="schedule-item"><div class="schedule-time">週日 23:00</div><div class="schedule-body"><div class="schedule-name">🔍 AI 新聞自動爬取</div><div class="schedule-desc">背景執行，收集各來源 RSS / API，準備週一週報</div></div></div>
     </div>
     <div class="code-label" style="margin-bottom: var(--spacing-12);">AI 週報新聞 · 收集優先級</div>
@@ -822,9 +822,8 @@
         <thead><tr><th>優先級</th><th>來源類型</th><th>說明</th></tr></thead>
         <tbody>
           <tr><td><span class="tag" style="background:#fee2e2;border-color:#fca5a5;color:#b91c1c;">🔴 最高</span></td><td><strong>Claude / Anthropic 相關</strong></td><td>新功能、模型更新、政策異動、API 變動</td></tr>
+                <tr><td><span class="tag" style="background:#f0fdf4;border-color:#86efac;color:#166534;">🔴 最高</span></td><td>業界 AI 大事</td><td>值得團隊知道的行業動態</td></tr>
           <tr><td><span class="tag" style="background:#fefce8;border-color:#fde047;color:#a16207;">🟡 高</span></td><td>OpenAI / GPT 相關</td><td>重大發布、SDK 更新、政策調整</td></tr>
-          <tr><td><span class="tag" style="background:#fefce8;border-color:#fde047;color:#a16207;">🟡 高</span></td><td>AI Agent / RAG 技術</td><td>直接影響本專案技術選型</td></tr>
-          <tr><td><span class="tag" style="background:#f0fdf4;border-color:#86efac;color:#166534;">🟢 中</span></td><td>業界 AI 大事</td><td>值得團隊知道的行業動態</td></tr>
           <tr><td><span class="tag" style="background:#f0fdf4;border-color:#86efac;color:#166534;">🟢 中</span></td><td>金融 AI 應用</td><td>同業案例、監管動向</td></tr>
         </tbody>
       </table>
@@ -844,7 +843,7 @@
   @組長　　claude.ai × 5 天　　主要：需求分析
   @Maggie　Cowork × 3 天　　　 主要：週報整理
 
-⚠️ 本週未回報（1 人）
+⚠️ 本週無使用量（1 人）
   @小王　← 疑 ~ 這週有用 Claude 嗎？如果誤會了什麼請跟我說一下 👀
 
 ── 工具使用分布 ──
@@ -879,7 +878,7 @@
       <div class="section-icon">🏃</div>
       <div>
         <div class="section-number">Section 07</div>
-        <h2 class="section-title">Sprint 節奏支援</h2>
+        <h2 class="section-title">Sprint 節奏支援(可討論是否需要，純發想)</h2>
       </div>
     </div>
     <div class="card-grid" style="margin-bottom: var(--spacing-24);">
