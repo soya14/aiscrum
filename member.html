@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>O大 🦀｜AI Scrum Team 第 9 位成員</title>
+
+<style>
+/* ── Design System: Design.md v2.0 ── */
+:root {
+  --color-canvas-white: #ffffff;
+  --color-slate-ink: #181925;
+  --color-medium-gray: #666666;
+  --color-muted-gray: #999999;
+  --color-light-gray: #e8e8e8;
+  --color-whisper-purple: #dad9fc;
+  --color-radiant-violet: #918df6;
+  --color-electric-blue: #2c78fc;
+  --gradient-electric-blue: linear-gradient(to right in oklab, rgb(44,120,252) 0%, rgb(145,141,246) 100%);
+  --color-success-green: #33c758;
+  --color-warning-yellow: #ffa600;
+  --color-accent-pink: #d6409f;
+  --color-pale-mint: #def6e4;
+  --color-deep-purple: #9580ff;
+  --color-vivid-orange: #ff3e00;
+
+  --font-openrunde: 'OpenRunde', ui-sans-serif, system-ui, -apple-system,
+                    BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  --text-caption: 12px;     --leading-caption: 1.56;   --tracking-caption: -0.05px;
+  --text-body: 14px;        --leading-body: 1.43;      --tracking-body: -0.025px;
+  --text-heading-sm: 18px;  --leading-heading-sm: 1.33; --tracking-heading-sm: -0.02px;
+  --text-heading: 20px;     --leading-heading: 1.22;   --tracking-heading: -0.018px;
+  --text-heading-lg: 24px;  --leading-heading-lg: 1.17; --tracking-heading-lg: -0.017px;
+  --text-display: 48px;     --leading-display: 1.13;   --tracking-display: -0.013px;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --spacing-4: 4px;   --spacing-8: 8px;   --spacing-12: 12px;
+  --spacing-16: 16px; --spacing-20: 20px; --spacing-24: 24px;
+  --spacing-32: 32px; --spacing-48: 48px; --spacing-64: 64px;
+
+  --section-gap: 64px;
+  --card-padding: 16px;
+  --element-gap: 16px;
+
+  --radius-default: 8px;
+  --radius-cards: 16px;
+  --radius-large: 24px;
+  --radius-pill: 9999px;
+  --radius-buttons: 9999px;
+
+  --shadow-subtle:   rgba(0,0,0,0.08) 0px 1px 1px 1px, rgba(0,0,0,0.06) 0px 0px 0px 0.5px;
+  --shadow-subtle-2: rgba(0,0,0,0.08) 0px 1px 1px 0px, rgba(0,0,0,0.05) 0px 0px 0px 1px;
+  --shadow-subtle-3: rgba(0,0,0,0.06) 0px 1px 3px 0px, rgba(0,0,0,0.06) 0px 8px 16px 0px,
+                     rgba(0,0,0,0.02) 0px 0px 0px 1px;
+
+  --surface-canvas-white: #ffffff;
+  --surface-subtle-accent: #fafafa;
+  --surface-light-card: rgba(0,0,0,0.03);
+  --surface-pale-mint-overlay: #def6e4;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-openrunde);
+  background: var(--color-canvas-white);
+  color: var(--color-slate-ink);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  letter-spacing: var(--tracking-body);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── NAVBAR ── */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: var(--color-canvas-white);
+  border-bottom: 1px solid var(--color-light-gray);
+  padding: 0 var(--spacing-32);
+}
+.navbar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-32);
+}
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  font-size: var(--text-heading-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-slate-ink);
+  letter-spacing: var(--tracking-heading-sm);
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.navbar-logo .logo-crab { font-size: 20px; }
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+.nav-ghost-btn {
+  background: transparent;
+  border: none;
+  color: var(--color-slate-ink);
+  font-family: var(--font-openrunde);
+  font-size: 14px;
+  font-weight: var(--font-weight-regular);
+  padding: 6px var(--spacing-12);
+  cursor: pointer;
+  border-radius: var(--radius-pill);
+  transition: background 0.15s;
+  white-space: nowrap;
+  text-decoration: none;
+  display: inline-block;
+}
+.nav-ghost-btn:hover { background: var(--surface-light-card); }
+.nav-accent-pill {
+  background: var(--color-deep-purple);
+  color: #fff;
+  border: none;
+  font-family: var(--font-openrunde);
+  font-size: 14px;
+  font-weight: var(--font-weight-regular);
+  padding: 6px var(--spacing-16);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: opacity 0.15s;
+  text-decoration: none;
+  display: inline-block;
+}
+.nav-accent-pill:hover { opacity: 0.88; }
+
+/* ── HERO ── */
+.hero {
+  padding: var(--spacing-64) var(--spacing-32) var(--spacing-48);
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--spacing-48);
+  align-items: center;
+}
+@media (max-width: 768px) { .hero { grid-template-columns: 1fr; } }
+
+.hero-left {}
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  background: var(--color-whisper-purple);
+  color: var(--color-deep-purple);
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: var(--spacing-4) var(--spacing-12);
+  border-radius: var(--radius-pill);
+  margin-bottom: var(--spacing-20);
+}
+.hero-eyebrow .dot {
+  width: 6px; height: 6px;
+  background: var(--color-radiant-violet);
+  border-radius: 50%;
+  animation: blink 2s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+.hero-title {
+  font-size: var(--text-display);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
+  color: var(--color-slate-ink);
+  margin-bottom: var(--spacing-16);
+}
+.hero-title .violet { color: var(--color-radiant-violet); }
+
+.hero-desc {
+  font-size: var(--text-heading-sm);
+  color: var(--color-medium-gray);
+  line-height: 1.6;
+  letter-spacing: var(--tracking-heading-sm);
+  max-width: 520px;
+  margin-bottom: var(--spacing-32);
+}
+
+.hero-stats {
+  display: flex;
+  gap: var(--spacing-32);
+  flex-wrap: wrap;
+}
+.hero-stat {}
+.hero-stat .num {
+  font-size: var(--text-heading-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-slate-ink);
+  letter-spacing: var(--tracking-heading-lg);
+  display: block;
+}
+.hero-stat .lbl {
+  font-size: var(--text-caption);
+  color: var(--color-muted-gray);
+  letter-spacing: var(--tracking-caption);
+  display: block;
+  margin-top: 2px;
+}
+
+.hero-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-avatar-wrap {
+  width: 200px;
+  height: 200px;
+  background: linear-gradient(135deg, var(--color-whisper-purple) 0%, #ebe9fd 100%);
+  border-radius: var(--radius-large);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-8);
+  box-shadow: var(--shadow-subtle-3);
+}
+.hero-avatar-wrap .crab-emoji { font-size: 72px; line-height: 1; }
+.hero-avatar-wrap .member-tag {
+  font-size: var(--text-caption);
+  color: var(--color-deep-purple);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ── TAB BAR ── */
+.tab-bar-wrap {
+  border-bottom: 1px solid var(--color-light-gray);
+  background: var(--color-canvas-white);
+  position: sticky;
+  top: 56px;
+  z-index: 100;
+  padding: 0 var(--spacing-32);
+}
+.tab-bar {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tab-bar::-webkit-scrollbar { display: none; }
+.tab-btn {
+  flex-shrink: 0;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: var(--spacing-16) var(--spacing-20);
+  font-family: var(--font-openrunde);
+  font-size: var(--text-body);
+  color: var(--color-medium-gray);
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+  white-space: nowrap;
+  letter-spacing: var(--tracking-body);
+  margin-bottom: -1px;
+}
+.tab-btn:hover { color: var(--color-slate-ink); }
+.tab-btn.active {
+  color: var(--color-slate-ink);
+  font-weight: var(--font-weight-medium);
+  border-bottom: 2px solid var(--color-radiant-violet);
+}
+
+/* ── MAIN LAYOUT ── */
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-48) var(--spacing-32) var(--spacing-64);
+}
+.section { display: none; }
+.section.active { display: block; }
+
+/* ── SECTION HEADER ── */
+.sec-header { margin-bottom: var(--spacing-32); }
+.sec-title {
+  font-size: var(--text-heading-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-slate-ink);
+  letter-spacing: var(--tracking-heading-lg);
+  margin-bottom: var(--spacing-8);
+}
+.sec-desc {
+  font-size: var(--text-body);
+  color: var(--color-medium-gray);
+  letter-spacing: var(--tracking-body);
+  line-height: var(--leading-body);
+}
+
+/* ── FEATURE CARD ── */
+.feature-card {
+  background: var(--surface-light-card);
+  border-radius: var(--radius-cards);
+  padding: var(--spacing-24);
+}
+
+/* ── ELEVATED CARD ── */
+.elevated-card {
+  background: var(--color-canvas-white);
+  border-radius: var(--radius-large);
+  padding: var(--spacing-32);
+  box-shadow: var(--shadow-subtle-3);
+}
+
+/* ── GRID LAYOUTS ── */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--element-gap); }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--element-gap); }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--element-gap); }
+.grid-auto { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: var(--element-gap); }
+@media (max-width: 900px) { .grid-3 { grid-template-columns: 1fr 1fr; } .grid-4 { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .grid-2,.grid-3,.grid-4 { grid-template-columns: 1fr; } }
+
+/* ── SECTION DIVIDER ── */
+.section-gap { margin-top: var(--section-gap); }
+.sub-gap { margin-top: var(--spacing-48); }
+
+/* ── LABEL / PILL ── */
+.pill {
+  display: inline-block;
+  font-size: var(--text-caption);
+  letter-spacing: var(--tracking-caption);
+  padding: var(--spacing-4) var(--spacing-12);
+  border-radius: var(--radius-pill);
+  font-weight: var(--font-weight-medium);
+}
+.pill-violet { background: var(--color-whisper-purple); color: var(--color-deep-purple); }
+.pill-green  { background: var(--color-pale-mint); color: #1a6b31; }
+.pill-yellow { background: #fff3cc; color: #7a4d00; }
+.pill-red    { background: #ffe5e5; color: #c0392b; }
+.pill-gray   { background: var(--surface-light-card); color: var(--color-medium-gray); }
+.pill-pink   { background: #fce4f3; color: var(--color-accent-pink); }
+
+/* ── MINI LABEL ── */
+.mini-label {
+  font-size: var(--text-caption);
+  color: var(--color-muted-gray);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: var(--font-weight-medium);
+  margin-bottom: var(--spacing-8);
+  display: block;
+}
+
+/* ── TABLE ── */
+.table-wrap { border-radius: var(--radius-default); overflow: hidden; box-shadow: var(--shadow-subtle-2); }
+.ds-table { width: 100%; border-collapse: collapse; font-size: var(--text-body); }
+.ds-table thead th {
+  background: var(--surface-subtle-accent);
+  color: var(--color-medium-gray);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--text-caption);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: var(--spacing-12) var(--spacing-16);
+  text-align: left;
+  border-bottom: 1px solid var(--color-light-gray);
+}
+.ds-table tbody td {
+  padding: var(--spacing-12) var(--spacing-16);
+  border-bottom: 1px solid var(--color-light-gray);
+  color: var(--color-medium-gray);
+  vertical-align: top;
+  line-height: 1.6;
+}
+.ds-table tbody tr:last-child td { border-bottom: none; }
+.ds-table tbody tr:hover td { background: var(--surface-subtle-accent); }
+.ds-table td.td-em { color: var(--color-slate-ink); font-weight: var(--font-weight-medium); }
+.ds-table td.td-time {
+  color: var(--color-radiant-violet);
+  font-weight: var(--font-weight-semibold);
+  white-space: nowrap;
+  font-size: var(--text-caption);
+  letter-spacing: 0.04em;
+}
+
+/* ── INLINE LIST ── */
+.kv-list { display: flex; flex-direction: column; gap: var(--spacing-12); }
+.kv-row {
+  display: grid;
+  grid-template-columns: 88px 1fr;
+  gap: var(--spacing-12);
+  font-size: var(--text-body);
+  padding-bottom: var(--spacing-12);
+  border-bottom: 1px solid var(--color-light-gray);
+}
+.kv-row:last-child { border-bottom: none; padding-bottom: 0; }
+.kv-key { color: var(--color-muted-gray); font-size: var(--text-caption); letter-spacing: var(--tracking-caption); padding-top: 2px; }
+.kv-val { color: var(--color-slate-ink); line-height: 1.6; }
+
+/* ── TRIGGER CARD ── */
+.trigger-card {
+  background: var(--surface-subtle-accent);
+  border-radius: var(--radius-cards);
+  padding: var(--spacing-20);
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: var(--spacing-16);
+  align-items: start;
+  transition: box-shadow 0.15s;
+}
+@media (max-width: 600px) { .trigger-card { grid-template-columns: 1fr; } }
+.trigger-card:hover { box-shadow: var(--shadow-subtle-2); }
+.trigger-kw {
+  background: var(--color-canvas-white);
+  border: 1px solid var(--color-light-gray);
+  border-radius: var(--radius-default);
+  padding: var(--spacing-8) var(--spacing-12);
+  font-size: var(--text-caption);
+  color: var(--color-slate-ink);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.7;
+}
+.trigger-action { font-size: var(--text-body); color: var(--color-medium-gray); line-height: 1.7; padding-top: 4px; }
+
+/* ── ALERT CARDS ── */
+.alert-card {
+  background: var(--color-canvas-white);
+  border-radius: var(--radius-cards);
+  padding: var(--spacing-20);
+  box-shadow: var(--shadow-subtle-2);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+}
+.alert-level-name { font-size: var(--text-heading-sm); font-weight: var(--font-weight-semibold); letter-spacing: var(--tracking-heading-sm); color: var(--color-slate-ink); }
+.alert-cond { font-size: var(--text-body); color: var(--color-medium-gray); line-height: 1.6; }
+.alert-who { font-size: var(--text-caption); color: var(--color-muted-gray); letter-spacing: var(--tracking-caption); }
+.alert-bar { height: 4px; border-radius: 2px; margin-bottom: var(--spacing-4); }
+.alert-bar.yellow { background: var(--color-warning-yellow); }
+.alert-bar.red    { background: #ef4444; }
+.alert-bar.black  { background: var(--color-slate-ink); }
+
+/* ── PHASE CARD ── */
+.phase-wrap {
+  background: var(--surface-subtle-accent);
+  border-radius: var(--radius-large);
+  padding: var(--spacing-32);
+  margin-bottom: var(--spacing-24);
+}
+.phase-head {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-16);
+  margin-bottom: var(--spacing-24);
+}
+.phase-icon {
+  width: 48px; height: 48px;
+  border-radius: var(--radius-cards);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.phase-icon.p1 { background: var(--color-whisper-purple); }
+.phase-icon.p2 { background: var(--color-pale-mint); }
+.phase-icon.p3 { background: #fce4f3; }
+.phase-head-text {}
+.phase-name { font-size: var(--text-heading); font-weight: var(--font-weight-bold); color: var(--color-slate-ink); letter-spacing: var(--tracking-heading); }
+.phase-sub { font-size: var(--text-body); color: var(--color-medium-gray); }
+.phase-items { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: var(--spacing-12)); }
+.phase-item {
+  background: var(--color-canvas-white);
+  border-radius: var(--radius-default);
+  padding: var(--spacing-16);
+  font-size: var(--text-body);
+  color: var(--color-medium-gray);
+  line-height: 1.6;
+  box-shadow: var(--shadow-subtle-2);
+}
+.phase-item strong { display: block; color: var(--color-slate-ink); font-weight: var(--font-weight-semibold); margin-bottom: var(--spacing-4); font-size: var(--text-body); }
+
+/* ── FLOW ROW ── */
+.flow-list { display: flex; flex-direction: column; gap: var(--spacing-4)); }
+.flow-step {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-12);
+  padding: var(--spacing-12) 0;
+  border-bottom: 1px solid var(--color-light-gray);
+  font-size: var(--text-body);
+  color: var(--color-medium-gray);
+  line-height: 1.6;
+}
+.flow-step:last-child { border-bottom: none; }
+.flow-num {
+  width: 24px; height: 24px;
+  background: var(--color-whisper-purple);
+  color: var(--color-deep-purple);
+  border-radius: var(--radius-pill);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-bold);
+  flex-shrink: 0;
+}
+
+/* ── DATA FLOW ── */
+.data-flow-list { display: flex; flex-direction: column; gap: var(--spacing-8); }
+.data-flow-row {
+  background: var(--surface-subtle-accent);
+  border-radius: var(--radius-default);
+  padding: var(--spacing-12) var(--spacing-16);
+  display: grid;
+  grid-template-columns: 200px 24px 1fr;
+  align-items: center;
+  gap: var(--spacing-12);
+  font-size: var(--text-body);
+  transition: box-shadow 0.15s;
+}
+@media (max-width: 700px) { .data-flow-row { grid-template-columns: 1fr; } }
+.data-flow-row:hover { box-shadow: var(--shadow-subtle-2); }
+.dfr-src { color: var(--color-slate-ink); font-weight: var(--font-weight-medium); font-size: var(--text-body); }
+.dfr-arrow { color: var(--color-muted-gray); text-align: center; font-size: 14px; }
+.dfr-dest { color: var(--color-medium-gray); display: flex; flex-wrap: wrap; gap: var(--spacing-4); align-items: center; }
+.dfr-dest .dest-tag {
+  background: var(--color-canvas-white);
+  border: 1px solid var(--color-light-gray);
+  font-size: var(--text-caption);
+  padding: 2px var(--spacing-8);
+  border-radius: var(--radius-pill);
+  color: var(--color-medium-gray);
+}
+
+/* ── MESSAGE BOX ── */
+.msg-box {
+  background: #1a1b2e;
+  border-radius: var(--radius-cards);
+  padding: var(--spacing-24);
+  font-size: 13px;
+  line-height: 1.9;
+  color: #c8cff0;
+  white-space: pre-wrap;
+  overflow-x: auto;
+  box-shadow: var(--shadow-subtle-3);
+}
+.msg-box .mg { color: #a8e6b8; }
+.msg-box .mv { color: #b8a8f8; }
+.msg-box .mw { color: #f8a8a8; }
+
+/* ── RESPONSIBILITY COL ── */
+.resp-item {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-12);
+  font-size: var(--text-body);
+  color: var(--color-medium-gray);
+  padding: var(--spacing-8) 0;
+  border-bottom: 1px solid var(--color-light-gray);
+  line-height: 1.5;
+}
+.resp-item:last-child { border-bottom: none; }
+.resp-time {
+  font-size: var(--text-caption);
+  color: var(--color-radiant-violet);
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-caption);
+  min-width: 72px;
+}
+
+/* ── NOTION TABLE ── */
+.notion-table-wrap { border-radius: var(--radius-default); overflow: hidden; box-shadow: var(--shadow-subtle-2); margin-top: var(--spacing-16); }
+
+/* ── STAT BOX ── */
+.stat-box {
+  background: var(--surface-light-card);
+  border-radius: var(--radius-cards);
+  padding: var(--spacing-20);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+.stat-box .s-num {
+  font-size: var(--text-heading-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-slate-ink);
+  letter-spacing: var(--tracking-heading-lg);
+}
+.stat-box .s-lbl {
+  font-size: var(--text-caption);
+  color: var(--color-muted-gray);
+  letter-spacing: var(--tracking-caption);
+}
+.stat-box .s-bar { height: 3px; background: var(--color-whisper-purple); border-radius: 2px; margin-top: var(--spacing-4); }
+.stat-box .s-bar-fill { height: 100%; border-radius: 2px; background: var(--color-radiant-violet); }
+
+/* ── TOOL CHIP ── */
+.tool-chip {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  background: var(--surface-subtle-accent);
+  border: 1px solid var(--color-light-gray);
+  border-radius: var(--radius-default);
+  padding: var(--spacing-8) var(--spacing-12);
+  font-size: var(--text-body);
+  color: var(--color-slate-ink);
+}
+.tool-chip .tc-icon { font-size: 18px; }
+.tool-chip .tc-name { font-weight: var(--font-weight-medium); }
+.tool-chip .tc-use { font-size: var(--text-caption); color: var(--color-muted-gray); margin-top: 1px; }
+.tool-chip-inner { display: flex; flex-direction: column; }
+
+/* ── LINE GROUP ── */
+.line-group {
+  background: var(--surface-subtle-accent);
+  border-left: 3px solid var(--color-success-green);
+  border-radius: 0 var(--radius-default) var(--radius-default) 0;
+  padding: var(--spacing-16) var(--spacing-20);
+}
+.line-group h4 {
+  font-size: var(--text-body);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-slate-ink);
+  margin-bottom: var(--spacing-8);
+}
+.line-group p { font-size: var(--text-body); color: var(--color-medium-gray); line-height: 1.6; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up { opacity: 0; animation: fadeUp 0.5s ease forwards; }
+.d1 { animation-delay: 0.04s; }
+.d2 { animation-delay: 0.10s; }
+.d3 { animation-delay: 0.16s; }
+.d4 { animation-delay: 0.22s; }
+.d5 { animation-delay: 0.28s; }
+.d6 { animation-delay: 0.34s; }
+
+/* ── FOOTER ── */
+footer {
+  text-align: center;
+  padding: var(--spacing-32);
+  font-size: var(--text-caption);
+  color: var(--color-muted-gray);
+  border-top: 1px solid var(--color-light-gray);
+  letter-spacing: var(--tracking-caption);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .navbar { padding: 0 var(--spacing-16); }
+  .hero { padding: var(--spacing-32) var(--spacing-16) var(--spacing-32); }
+  main { padding: var(--spacing-32) var(--spacing-16) var(--spacing-48); }
+  .tab-bar-wrap { padding: 0 var(--spacing-16); }
+  .hero-title { font-size: 36px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAVBAR ── -->
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-logo" href="#">
+      <span class="logo-crab">🦀</span>
+      <span>O大</span>
+    </a>
+    <div class="navbar-right">
+      <span class="nav-ghost-btn">AI Scrum Team</span>
+      <span class="nav-accent-pill">Member #09</span>
+    </div>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section style="border-bottom:1px solid var(--color-light-gray);">
+  <div class="hero">
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <span class="dot"></span>
+        <span>AI Scrum Team · Member Profile v3.0</span>
+      </div>
+      <h1 class="hero-title">
+        有溫度的<br><span class="violet">AI 隊友</span>
+      </h1>
+      <p class="hero-desc">O大 是 AI Scrum Team 二團隊的第 9 位成員，不是通知機器人——主動回報進度、即時回應阻塞、說話像真人。</p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="num">6</span>
+          <span class="lbl">每日排程任務</span>
+        </div>
+        <div class="hero-stat">
+          <span class="num">5</span>
+          <span class="lbl">每週排程任務</span>
+        </div>
+        <div class="hero-stat">
+          <span class="num">7</span>
+          <span class="lbl">即時觸發情境</span>
+        </div>
+        <div class="hero-stat">
+          <span class="num">3</span>
+          <span class="lbl">實作 Phase</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-avatar-wrap">
+        <span class="crab-emoji">🦀</span>
+        <span class="member-tag">Member #09</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TAB BAR ── -->
+<div class="tab-bar-wrap">
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('profile',this)">人設簡介</button>
+    <button class="tab-btn" onclick="switchTab('schedule',this)">自動排程</button>
+    <button class="tab-btn" onclick="switchTab('realtime',this)">即時支援</button>
+    <button class="tab-btn" onclick="switchTab('sprint',this)">Sprint 節奏</button>
+    <button class="tab-btn" onclick="switchTab('roadmap',this)">技術路線圖</button>
+    <button class="tab-btn" onclick="switchTab('engineer',this)">工程需求</button>
+  </div>
+</div>
+
+<!-- ── MAIN ── -->
+<main>
+
+  <!-- ════════ PROFILE ════════ -->
+  <div class="section active" id="sec-profile">
+
+    <div class="sec-header">
+      <h2 class="sec-title">O大 是誰？</h2>
+      <p class="sec-desc">AI Scrum Team 第 9 位成員，定位：輕鬆熱情、熱心有溫度，但進度的事絕對不放過</p>
+    </div>
+
+    <!-- 上半：個性 + 溝通管道 -->
+    <div class="grid-2" style="gap:var(--spacing-16);margin-bottom:var(--spacing-16);">
+
+      <div class="elevated-card fade-up d1">
+        <span class="mini-label">人設特徵</span>
+        <div class="kv-list">
+          <div class="kv-row">
+            <span class="kv-key">核心工作</span>
+            <span class="kv-val">記住容易忘的事、主動回報進度、說話像真人</span>
+          </div>
+          <div class="kv-row">
+            <span class="kv-key">個性</span>
+            <span class="kv-val">熱心、有點碎嘴、偶爾幽默、對 AI 軟體發展充滿熱情</span>
+          </div>
+          <div class="kv-row">
+            <span class="kv-key">看到阻塞</span>
+            <span class="kv-val">會緊張，馬上通知組長、PMO</span>
+          </div>
+          <div class="kv-row">
+            <span class="kv-key">全員準時</span>
+            <span class="kv-val">開心到會說：「🎉 大家很棒，都完成了！」</span>
+          </div>
+          <div class="kv-row">
+            <span class="kv-key">絕不做</span>
+            <span class="kv-val">冷冰冰地貼條列式系統通知、責怪語氣</span>
+          </div>
+        </div>
+        <div style="margin-top:var(--spacing-20);">
+          <span class="mini-label">口頭禪</span>
+          <div style="display:flex;flex-wrap:wrap;gap:var(--spacing-8);margin-top:var(--spacing-8);">
+            <span class="pill pill-violet">欸等等⋯⋯</span>
+            <span class="pill pill-violet">我去查一下！</span>
+            <span class="pill pill-violet">你放心，我盯著呢 👀</span>
+            <span class="pill pill-violet">好哦</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="fade-up d2" style="display:flex;flex-direction:column;gap:var(--spacing-16);">
+
+        <div class="feature-card" style="flex:1;">
+          <span class="mini-label">溝通管道</span>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--spacing-8);margin-top:var(--spacing-12);">
+            <div class="tool-chip">
+              <span class="tc-icon">💬</span>
+              <div class="tool-chip-inner">
+                <span class="tc-name">LINE</span>
+                <span class="tc-use">日常溝通 / 推播（主要）</span>
+              </div>
+            </div>
+            <div class="tool-chip">
+              <span class="tc-icon">📋</span>
+              <div class="tool-chip-inner">
+                <span class="tc-name">GitHub Board</span>
+                <span class="tc-use">工項管理 / 看板</span>
+              </div>
+            </div>
+            <div class="tool-chip">
+              <span class="tc-icon">📄</span>
+              <div class="tool-chip-inner">
+                <span class="tc-name">GitHub + Notion</span>
+                <span class="tc-use">文件 / 資料共享</span>
+              </div>
+            </div>
+            <div class="tool-chip">
+              <span class="tc-icon">⚙️</span>
+              <div class="tool-chip-inner">
+                <span class="tc-name">n8n / Make.com</span>
+                <span class="tc-use">排程引擎</span>
+              </div>
+            </div>
+            <div class="tool-chip">
+              <span class="tc-icon">🔥</span>
+              <div class="tool-chip-inner">
+                <span class="tc-name">Firebase</span>
+                <span class="tc-use">IDA Pulse 追蹤</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <span class="mini-label">LINE 群組結構</span>
+          <div style="display:flex;flex-direction:column;gap:var(--spacing-8);margin-top:var(--spacing-12);">
+            <div class="line-group">
+              <h4>📌 AI Scrum Team — 主群</h4>
+              <p>日常討論、日報、大 PO 指示、O大 互動</p>
+            </div>
+            <div class="line-group">
+              <h4>📌 AI Scrum｜任務追蹤</h4>
+              <p>工項 Alert、逾期警報、IDA Pulse 確認（純任務訊號）</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 成員對照表 -->
+    <div class="feature-card fade-up d3">
+      <span class="mini-label">成員對照表（建立於 Notion，負責人：PMO 及團隊 PO）</span>
+      <div class="table-wrap notion-table-wrap">
+        <table class="ds-table">
+          <thead>
+            <tr>
+              <th>欄位</th>
+              <th>說明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="td-em">真實姓名</td><td>身份識別</td></tr>
+            <tr><td class="td-em">LINE 顯示名稱</td><td>群組中的暱稱</td></tr>
+            <tr><td class="td-em">IDA Pulse 填寫名稱</td><td>系統中的填寫用名</td></tr>
+            <tr><td class="td-em">LINE UserID</td><td>Bot @mention 所需</td></tr>
+            <tr><td class="td-em">GitHub 帳號</td><td>Board 工項比對用</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ════════ SCHEDULE ════════ -->
+  <div class="section" id="sec-schedule">
+
+    <div class="sec-header">
+      <h2 class="sec-title">自動排程任務</h2>
+      <p class="sec-desc">O大 每天、每週定時執行的任務一覽</p>
+    </div>
+
+    <!-- 每日 -->
+    <div class="sub-gap" style="margin-top:0;">
+      <h3 style="font-size:var(--text-heading-sm);font-weight:var(--font-weight-semibold);letter-spacing:var(--tracking-heading-sm);margin-bottom:var(--spacing-16);">每日排程</h3>
+      <div class="table-wrap fade-up d1">
+        <table class="ds-table">
+          <thead><tr><th>時間</th><th>任務</th><th>說明</th></tr></thead>
+          <tbody>
+            <tr><td class="td-time">08:50</td><td class="td-em">☀️ 早安點名</td><td>今日待辦 + 團隊請假名單 + 暖場一句話</td></tr>
+            <tr><td class="td-time">17:00</td><td class="td-em">📋 下班 SOP 提醒</td><td>@未更新 GitHub Board 工項成員 + IDA Pulse 提醒</td></tr>
+            <tr><td class="td-time">17:20</td><td class="td-em">🦀 IDA Pulse 確認</td><td>比對 Firebase，@未填成員</td></tr>
+            <tr><td class="td-time">17:45</td><td class="td-em">📊 每日工作總結</td><td>完成 / 進行中 / 阻塞 三欄摘要（來源：GitHub Board）</td></tr>
+            <tr><td class="td-time">18:00</td><td class="td-em">🔴 逾期 Alert</td><td>到期未完成 → @負責人 + @組長</td></tr>
+            <tr><td class="td-time">18:00</td><td class="td-em">🚨 IDA Pulse 最終通知</td><td>未填者記錄 + 知會組長</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 每週 -->
+    <div class="sub-gap">
+      <h3 style="font-size:var(--text-heading-sm);font-weight:var(--font-weight-semibold);letter-spacing:var(--tracking-heading-sm);margin-bottom:var(--spacing-16);">每週排程</h3>
+      <div class="table-wrap fade-up d2">
+        <table class="ds-table">
+          <thead><tr><th>時間</th><th>任務</th><th>說明</th></tr></thead>
+          <tbody>
+            <tr><td class="td-time">週一 09:00</td><td class="td-em">🚀 Sprint 週開工包</td><td>工項總覽 + 人力預警 + deadline 清單（GitHub Board）</td></tr>
+            <tr><td class="td-time">週一 09:30</td><td class="td-em">🗞️ AI 週報新聞</td><td>上週 AI 大事 + Claude 專區 + 閱讀連結（Claude 相關置頂）</td></tr>
+            <tr><td class="td-time">週四 17:30</td><td class="td-em">🏁 週收尾報告</td><td>完成率 + 燃盡圖快照 + 下週預告</td></tr>
+            <tr><td class="td-time">週四 23:00</td><td class="td-em">📊 Claude 使用量週報</td><td>彙整全員使用量，推播至 LINE（統計：上週五 ～ 本週四）</td></tr>
+            <tr><td class="td-time">週五 00:00</td><td class="td-em">📊 統計區間啟動</td><td>Claude 使用量新週期開始</td></tr>
+            <tr><td class="td-time">週日 23:00</td><td class="td-em">🔍 AI 新聞爬取</td><td>n8n 自動爬取各來源，Claude API 摘要，週一推播用</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 新聞優先級 -->
+    <div class="sub-gap">
+      <h3 style="font-size:var(--text-heading-sm);font-weight:var(--font-weight-semibold);letter-spacing:var(--tracking-heading-sm);margin-bottom:var(--spacing-16);">AI 週報新聞收集優先級</h3>
+      <div class="table-wrap fade-up d3">
+        <table class="ds-table">
+          <thead><tr><th>優先級</th><th>來源類型</th><th>說明</th></tr></thead>
+          <tbody>
+            <tr><td><span class="pill pill-red">🔴 最高</span></td><td class="td-em">Claude / Anthropic 相關</td><td>新功能、模型更新、政策異動、API 變動</td></tr>
+            <tr><td><span class="pill pill-yellow">🟡 高</span></td><td class="td-em">OpenAI / GPT 相關</td><td>重大發布、SDK 更新、政策調整</td></tr>
+            <tr><td><span class="pill pill-yellow">🟡 高</span></td><td class="td-em">AI Agent / RAG 技術</td><td>直接影響本專案技術選型</td></tr>
+            <tr><td><span class="pill pill-green">🟢 中</span></td><td class="td-em">業界 AI 大事</td><td>值得團隊知道的行業動態</td></tr>
+            <tr><td><span class="pill pill-green">🟢 中</span></td><td class="td-em">金融 AI 應用</td><td>同業案例、監管動向</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 訊息範例 -->
+    <div class="sub-gap">
+      <h3 style="font-size:var(--text-heading-sm);font-weight:var(--font-weight-semibold);letter-spacing:var(--tracking-heading-sm);margin-bottom:var(--spacing-16);">Claude 使用量週報範例</h3>
+      <div class="msg-box fade-up d4"><span class="mv">📊 本週 Claude 使用量報告 🦀</span>
+<span class="mg">統計區間：5/2（五）00:00 ～ 5/8（四）23:59</span>
+
+── 全員使用概況 ──
+
+<span class="mg">✅ 有使用（5 人）</span>
+  @小明    Claude Code × 3 天   主要：程式撰寫
+  @小美    claude.ai × 4 天     主要：設計說明文件
+  @阿凱    Claude Code × 5 天   主要：PR Review
+  @組長    claude.ai × 5 天     主要：需求分析
+  @Maggie  Cowork × 3 天        主要：週報整理
+
+<span class="mw">⚠️ 本週未回報（1 人）</span>
+  @小王 ← 疑 ~ 這週有用 Claude 嗎？如果誤會了什麼請跟我說一下 👀
+
+── 工具使用分布 ──
+  claude.ai      3 人
+  Claude Code    2 人
+  Claude Cowork  1 人
+
+本週報告存到 Notion 了 📝  有問題找我 🦀</div>
+    </div>
+
+    <div class="sub-gap">
+      <h3 style="font-size:var(--text-heading-sm);font-weight:var(--font-weight-semibold);letter-spacing:var(--tracking-heading-sm);margin-bottom:var(--spacing-16);">AI 週報新聞範例</h3>
+      <div class="msg-box fade-up d5"><span class="mv">🗞️ 本週 AI 大事 — O大 週報</span>
+<span class="mg">2026/05/04 ～ 2026/05/09</span>
+
+── 🔴 Claude 專區（重點看這個）──
+
+📌 Claude Sonnet 4.5 正式發布
+📝 Anthropic 推出新版 Sonnet，推理能力提升 30%，API 費用維持不變。
+   對我們的 LLM Gateway 選型有直接影響，組長記得評估一下 👀
+🏷️ #Claude #API更新
+
+── 🟡 業界動態 ──
+
+📌 OpenAI Responses API 確認 8/26 日落
+📝 Assistants API 將於 2026/8/26 停止服務。
+   我們的架構已採用新版，不受影響 ✅
+🏷️ #OpenAI #API
+
+📌 金管會發布生成式 AI 使用指引草案
+📝 金融業 AI 應用風險管控框架，含資料隱私、模型可解釋性。
+   SA + 法務需確認是否影響 Guardrail 設計。
+🏷️ #金融AI #法規
+
+── 💡 本週推薦閱讀 ──
+
+📌 RAG 2.0：混合檢索最佳實踐
+📝 關鍵字 + 向量混合檢索調校，跟我們 KM 平台架構高度相關。
+🏷️ #RAG #技術
+
+──────────────────
+共 4 則 | 下週見 🦀</div>
+    </div>
+
+  </div>
+
+  <!-- ════════ REALTIME ════════ -->
+  <div class="section" id="sec-realtime">
+
+    <div class="sec-header">
+      <h2 class="sec-title">即時對話支援</h2>
+      <p class="sec-desc">非排程觸發——說這些話，O大 就會出動</p>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:var(--spacing-8);">
+      <div class="trigger-card fade-up d1">
+        <div class="trigger-kw">「我卡住了」<br>「阻塞」</div>
+        <div class="trigger-action">記錄阻塞 + 通知組長 + 在 GitHub Board 標記</div>
+      </div>
+      <div class="trigger-card fade-up d2">
+        <div class="trigger-kw">「請假」<br>「明天不來」</div>
+        <div class="trigger-action">更新 Notion 請假表 + 比對 GitHub Board 工項風險</div>
+      </div>
+      <div class="trigger-card fade-up d3">
+        <div class="trigger-kw">「@O大 幫我開單」</div>
+        <div class="trigger-action">引導填欄位 → 產出工單草稿 → 建立至 GitHub Board</div>
+      </div>
+      <div class="trigger-card fade-up d4">
+        <div class="trigger-kw">「大 PO 說⋯⋯」<br>轉貼指示</div>
+        <div class="trigger-action">解析意圖 → 判斷 PMO 或組長 → GitHub Board 工單草稿</div>
+      </div>
+      <div class="trigger-card fade-up d5">
+        <div class="trigger-kw">「進度怎樣了」</div>
+        <div class="trigger-action">即時回報 GitHub Board Sprint 燃盡數據</div>
+      </div>
+      <div class="trigger-card fade-up d6">
+        <div class="trigger-kw">「@O大 會議備料」</div>
+        <div class="trigger-action">5 分鐘內產出臨時會議備料包</div>
+      </div>
+      <div class="trigger-card fade-up" style="animation-delay:0.38s;">
+        <div class="trigger-kw">「Claude 用了多少」</div>
+        <div class="trigger-action">即時回報本週截至目前的使用量</div>
+      </div>
+      <div class="trigger-card fade-up" style="animation-delay:0.44s;">
+        <div class="trigger-kw">「@O大 新聞投稿 [標題] [網址]」</div>
+        <div class="trigger-action">收錄進本週 AI 週報，週一一起推播</div>
+      </div>
+    </div>
+
+    <!-- Alert -->
+    <div class="sub-gap">
+      <h3 style="font-size:var(--text-heading-sm);font-weight:var(--font-weight-semibold);letter-spacing:var(--tracking-heading-sm);margin-bottom:var(--spacing-16);">Alert 等級定義</h3>
+      <div class="grid-3">
+        <div class="alert-card fade-up d1">
+          <div class="alert-bar yellow"></div>
+          <div class="alert-level-name">🟡 Yellow</div>
+          <div class="alert-cond">距 deadline 剩 2 天，進度 &lt; 50%</div>
+          <div class="alert-who">通知：負責人</div>
+        </div>
+        <div class="alert-card fade-up d2">
+          <div class="alert-bar red"></div>
+          <div class="alert-level-name">🔴 Red</div>
+          <div class="alert-cond">已到期未完成</div>
+          <div class="alert-who">通知：負責人 + 組長 + PMO</div>
+        </div>
+        <div class="alert-card fade-up d3">
+          <div class="alert-bar black"></div>
+          <div class="alert-level-name">⚫ Blocked</div>
+          <div class="alert-cond">阻塞超過 1 天</div>
+          <div class="alert-who">通知：組長 + PMO</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- IDA Pulse -->
+    <div class="sub-gap">
+      <h3 style="font-size:var(--text-heading-sm);font-weight:var(--font-weight-semibold);letter-spacing:var(--tracking-heading-sm);margin-bottom:var(--spacing-16);">IDA Pulse 確認流程</h3>
+      <div class="grid-2" style="gap:var(--spacing-16);">
+        <div class="feature-card fade-up d1">
+          <span class="mini-label">每天 17:00 觸發</span>
+          <div class="flow-list" id="pulse-flow-list" style="margin-top:var(--spacing-12);"></div>
+        </div>
+        <div class="msg-box fade-up d2" style="font-size:12.5px;"><span class="mv">欸等等⋯⋯IDA Pulse 還有人沒填 👀</span>
+
+今天應填 5 人，目前 3 人完成
+
+還沒填的：
+<span class="mw">@小明 @阿凱</span>
+
+真的 5 分鐘內可以搞定啦 🦀
+
+填完回我一聲，我幫你記 ✅</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ════════ SPRINT ════════ -->
+  <div class="section" id="sec-sprint">
+
+    <div class="sec-header">
+      <h2 class="sec-title">Sprint 節奏支援</h2>
+      <p class="sec-desc">會議前自動備料、Retro 即時主持，讓每個 Sprint 都有 AI 加持</p>
+    </div>
+
+    <div class="grid-3" style="margin-bottom:var(--spacing-16);">
+
+      <div class="feature-card fade-up d1">
+        <span class="mini-label">📦 Sprint Planning 備料</span>
+        <div style="margin-top:var(--spacing-12);">
+          <div class="resp-item"><span class="resp-time">會議前 30 分</span>上 Sprint 完成率 + 未完成移轉清單</div>
+          <div class="resp-item"><span class="resp-time"></span>本 Sprint 阻塞分析</div>
+          <div class="resp-item"><span class="resp-time"></span>本週人力預警（請假比對）</div>
+          <div class="resp-item"><span class="resp-time"></span>Backlog 候選工項建議</div>
+        </div>
+      </div>
+
+      <div class="feature-card fade-up d2">
+        <span class="mini-label">🎯 Sprint Review 備料</span>
+        <div style="margin-top:var(--spacing-12);">
+          <div class="resp-item"><span class="resp-time">會議前 30 分</span>可 Demo 清單（GitHub Board 完成工項）</div>
+          <div class="resp-item"><span class="resp-time"></span>部分完成說明稿（建議話術）</div>
+          <div class="resp-item"><span class="resp-time"></span>未完成原因記錄</div>
+          <div class="resp-item"><span class="resp-time"></span>建議 Demo 順序</div>
+          <div class="resp-item"><span class="resp-time"></span>數據快照（完成率、阻塞次數、Claude 使用率）</div>
+        </div>
+      </div>
+
+      <div class="feature-card fade-up d3">
+        <span class="mini-label">🌀 Sprint Retro 備料</span>
+        <div style="margin-top:var(--spacing-12);">
+          <div class="resp-item"><span class="resp-time">會議前 30 分</span>本 Sprint 時間分布分析</div>
+          <div class="resp-item"><span class="resp-time"></span>阻塞記錄（次數、平均解除天數）</div>
+          <div class="resp-item"><span class="resp-time"></span>進展順利的工項</div>
+          <div class="resp-item"><span class="resp-time"></span>本 Sprint Claude 使用量趨勢</div>
+          <div class="resp-item"><span class="resp-time"></span>成員在 LINE 說過的話（關鍵詞萃取）</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Retro 主持 -->
+    <div class="elevated-card fade-up d4" style="margin-bottom:var(--spacing-16);">
+      <span class="mini-label">Retro 即時主持流程</span>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--spacing-24);margin-top:var(--spacing-16);">
+        <div>
+          <div class="flow-list">
+            <div class="flow-step"><span class="flow-num">1</span>逐題引導（好的 / 可改善 / 下次嘗試）</div>
+            <div class="flow-step"><span class="flow-num">2</span>即時記錄成員回應</div>
+            <div class="flow-step"><span class="flow-num">3</span>結束後自動產出正式彙整版</div>
+            <div class="flow-step"><span class="flow-num">4</span>存檔至 Notion（Retro 記錄頁）+ 通知 PMO 確認</div>
+          </div>
+        </div>
+        <div class="msg-box" style="font-size:12px;"><span class="mv">── Sprint W3 Retro 彙整 ──</span>
+<span class="mg">O大 整理版 🦀　2026/05/09</span>
+
+😊 做得好的
+  需求文件品質提升
+  Claude 全員使用率達 83%
+  Chatbot 提早 1 天完成
+
+😓 可以更好的
+  環境權限申請太慢 → 提前 3 天申請
+  UIUX 等待確認過長 → 24hr SLA
+
+💡 下次嘗試
+  Planning 加「欄位設計確認」議程
+  設計 review 改非同步，48hr 回饋
+
+☑️ 決議事項
+  Planning 加議程
+  設計 review SLA：48hr
+  環境申請提前 3 天
+
+已存入 Notion 📝  @Maggie 確認一下 🙂</div>
+      </div>
+    </div>
+
+    <!-- Review 備料範例 -->
+    <div class="msg-box fade-up d5"><span class="mv">📦 Sprint Review 備料包來了 🦀</span>
+
+<span class="mg">✅ 可 Demo（GitHub Board 完成）</span>
+  文字 Chatbot　　　AI 工程師
+  KM 問答集後台　　 SA + 工程師
+  登入頁設計稿　　　UIUX
+
+<span class="mw">⚠️ 部分完成（說明即可）</span>
+  語音互動 Realtime　完成 70%
+
+📊 本 Sprint 數字
+  完成率 83%　阻塞 3 次　Claude 使用率 83%
+
+建議 Demo 順序：
+  1️⃣ Chatbot → 2️⃣ KM 後台 → 3️⃣ 設計稿
+
+大家加油 💪 我幫你們計時 ⏱️</div>
+
+  </div>
+
+  <!-- ════════ ROADMAP ════════ -->
+  <div class="section" id="sec-roadmap">
+
+    <div class="sec-header">
+      <h2 class="sec-title">技術實作路線圖</h2>
+      <p class="sec-desc">三個 Phase，讓 O大 從基本跑起來，到真正 Agentic 能力</p>
+    </div>
+
+    <!-- Phase 1 -->
+    <div class="phase-wrap fade-up d1">
+      <div class="phase-head">
+        <div class="phase-icon p1">🚀</div>
+        <div class="phase-head-text">
+          <div class="phase-name">Phase 1 — 2 週內上線</div>
+          <div class="phase-sub">目標：讓 O大 基本跑起來</div>
+        </div>
+        <span class="pill pill-violet" style="margin-left:auto;">優先</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:var(--spacing-12);">
+        <div class="phase-item"><strong>LINE Bot 申請與設定</strong>Messaging API，需能 @mention｜AI 工程師</div>
+        <div class="phase-item"><strong>成員對照表建立</strong>Notion Database｜PMO</div>
+        <div class="phase-item"><strong>請假登記表建立</strong>Notion Database｜PMO</div>
+        <div class="phase-item"><strong>n8n 排程環境建置</strong>所有排程的觸發引擎｜AI 組長</div>
+        <div class="phase-item"><strong>Firebase API 串接</strong>讀取 IDA Pulse 填寫狀態｜AI 工程師</div>
+        <div class="phase-item"><strong>GitHub Board API 串接</strong>讀取工項狀態、燃盡數據｜AI 工程師</div>
+      </div>
+      <div style="margin-top:var(--spacing-16);padding:var(--spacing-12) var(--spacing-16);background:var(--color-whisper-purple);border-radius:var(--radius-default);font-size:var(--text-body);color:var(--color-deep-purple);">
+        <strong>Phase 1 上線功能：</strong>早安點名 · 下班 SOP 提醒 · IDA Pulse 確認（含二次提醒）· 逾期 Alert · Claude 使用量週報
+      </div>
+    </div>
+
+    <!-- Phase 2 -->
+    <div class="phase-wrap fade-up d2" style="margin-top:var(--spacing-16);">
+      <div class="phase-head">
+        <div class="phase-icon p2">⚙️</div>
+        <div class="phase-head-text">
+          <div class="phase-name">Phase 2 — Sprint 2～3 擴充</div>
+          <div class="phase-sub">目標：串接正式工項系統 + 自動化升級</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:var(--spacing-12);">
+        <div class="phase-item"><strong>GitHub Board 工單自動建立</strong>O大 開單直接建立 Issue</div>
+        <div class="phase-item"><strong>Notion API 串接</strong>週報 / Retro / 請假存檔自動化</div>
+        <div class="phase-item"><strong>開單草稿功能</strong>自然語言 → 標準工單（含 AC）</div>
+        <div class="phase-item"><strong>大 PO 指示解析</strong>意圖判斷 + 工單自動分派</div>
+        <div class="phase-item"><strong>會議前備料自動觸發</strong>串接 Google Calendar</div>
+        <div class="phase-item"><strong>Retro 即時記錄</strong>LINE 群組收集 + 彙整存 Notion</div>
+        <div class="phase-item"><strong>Claude 使用量自動讀取</strong>串接 Anthropic 企業版使用報表 API</div>
+      </div>
+    </div>
+
+    <!-- Phase 3 -->
+    <div class="phase-wrap fade-up d3" style="margin-top:var(--spacing-16);">
+      <div class="phase-head">
+        <div class="phase-icon p3">🤖</div>
+        <div class="phase-head-text">
+          <div class="phase-name">Phase 3 — M2 里程碑後 AI 化</div>
+          <div class="phase-sub">目標：真正 Agentic 能力</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:var(--spacing-12);">
+        <div class="phase-item"><strong>OpenAI Agents SDK 接入</strong>具備多步驟推理能力</div>
+        <div class="phase-item"><strong>知識庫自動累積</strong>阻塞解法 → Notion FAQ 自動更新</div>
+        <div class="phase-item"><strong>Sprint 回顧趨勢分析</strong>跨 Sprint 歷史數據比較</div>
+        <div class="phase-item"><strong>AC 模糊詞自動偵測</strong>掃描工單，提示量化條件</div>
+        <div class="phase-item"><strong>心情感知</strong>週五匿名評分，早期預警</div>
+        <div class="phase-item"><strong>Claude 使用量 AI 分析</strong>使用模式分析 + 建議改善工具組合</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ════════ ENGINEER ════════ -->
+  <div class="section" id="sec-engineer">
+
+    <div class="sec-header">
+      <h2 class="sec-title">工程師協助需求</h2>
+      <p class="sec-desc">O大 上線所需的工程清單，紅色最優先</p>
+    </div>
+
+    <!-- 工程清單 -->
+    <div class="table-wrap fade-up d1" style="margin-bottom:var(--spacing-48);">
+      <table class="ds-table">
+        <thead><tr><th>項目</th><th>優先級</th><th>說明</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="td-em">LINE Bot 建立與設定</td>
+            <td><span class="pill pill-red">🔴 最高</span></td>
+            <td>Phase 1 基礎，無此無法啟動</td>
+          </tr>
+          <tr>
+            <td class="td-em">Firebase REST API 讀取權限</td>
+            <td><span class="pill pill-red">🔴 最高</span></td>
+            <td>IDA Pulse 確認機制所需</td>
+          </tr>
+          <tr>
+            <td class="td-em">GitHub Board API 串接</td>
+            <td><span class="pill pill-red">🔴 最高</span></td>
+            <td>工項狀態讀取、燃盡數據來源</td>
+          </tr>
+          <tr>
+            <td class="td-em">n8n 環境建置</td>
+            <td><span class="pill pill-red">🔴 最高</span></td>
+            <td>所有排程的觸發引擎</td>
+          </tr>
+          <tr>
+            <td class="td-em">Notion API 串接</td>
+            <td><span class="pill pill-yellow">🟡 高</span></td>
+            <td>對照表、請假表、週報、新聞存檔</td>
+          </tr>
+          <tr>
+            <td class="td-em">RSS / Blog 爬取設定</td>
+            <td><span class="pill pill-yellow">🟡 高</span></td>
+            <td>AI 週報新聞來源（Anthropic / OpenAI / The Verge）</td>
+          </tr>
+          <tr>
+            <td class="td-em">Claude API 摘要串接</td>
+            <td><span class="pill pill-yellow">🟡 高</span></td>
+            <td>新聞自動摘要生成（2-3 句精華）</td>
+          </tr>
+          <tr>
+            <td class="td-em">Google Calendar API</td>
+            <td><span class="pill pill-green">🟢 中</span></td>
+            <td>Phase 2，會議前備料觸發</td>
+          </tr>
+          <tr>
+            <td class="td-em">Anthropic 使用量 API</td>
+            <td><span class="pill pill-green">🟢 中</span></td>
+            <td>Phase 2，Claude 使用量自動讀取</td>
+          </tr>
+          <tr>
+            <td class="td-em">OpenAI Agents SDK 接入</td>
+            <td><span class="pill pill-green">🟢 中</span></td>
+            <td>Phase 3，完整 AI 能力</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 資料流 -->
+    <h3 style="font-size:var(--text-heading-sm);font-weight:var(--font-weight-semibold);letter-spacing:var(--tracking-heading-sm);margin-bottom:var(--spacing-16);">資料流架構總覽</h3>
+    <div class="data-flow-list fade-up d2" style="margin-bottom:var(--spacing-48);">
+      <div class="data-flow-row"><div class="dfr-src">GitHub Board API</div><div class="dfr-arrow">→</div><div class="dfr-dest">工項狀態 / 燃盡 <span class="dest-tag">LINE 推播</span></div></div>
+      <div class="data-flow-row"><div class="dfr-src">Firebase API</div><div class="dfr-arrow">→</div><div class="dfr-dest">IDA Pulse 填寫 <span class="dest-tag">LINE @mention</span></div></div>
+      <div class="data-flow-row"><div class="dfr-src">Notion Database</div><div class="dfr-arrow">→</div><div class="dfr-dest">請假表 / 對照表 <span class="dest-tag">LINE 推播</span></div></div>
+      <div class="data-flow-row"><div class="dfr-src">Anthropic Usage API</div><div class="dfr-arrow">→</div><div class="dfr-dest">Claude 使用量 <span class="dest-tag">LINE 週報</span></div></div>
+      <div class="data-flow-row"><div class="dfr-src">RSS / Blog API</div><div class="dfr-arrow">→</div><div class="dfr-dest">AI 新聞 / Claude 新聞 <span class="dest-tag">LINE 週報（週一）</span></div></div>
+      <div class="data-flow-row"><div class="dfr-src">Claude API</div><div class="dfr-arrow">→</div><div class="dfr-dest">新聞自動摘要 <span class="dest-tag">LINE 推播</span></div></div>
+      <div class="data-flow-row"><div class="dfr-src">LINE 成員訊息</div><div class="dfr-arrow">→</div><div class="dfr-dest">阻塞 / 請假關鍵詞 <span class="dest-tag">Notion 存檔</span> <span class="dest-tag">GitHub Issue</span></div></div>
+    </div>
+
+    <!-- 完整職責 -->
+    <h3 style="font-size:var(--text-heading-sm);font-weight:var(--font-weight-semibold);letter-spacing:var(--tracking-heading-sm);margin-bottom:var(--spacing-16);">完整職責速覽</h3>
+    <div class="grid-4 fade-up d3">
+      <div class="feature-card">
+        <span class="mini-label">⏰ 每日自動</span>
+        <div style="margin-top:var(--spacing-12);">
+          <div class="resp-item"><span class="resp-time">08:50</span>☀️ 早安點名</div>
+          <div class="resp-item"><span class="resp-time">17:00</span>📋 下班 SOP 提醒</div>
+          <div class="resp-item"><span class="resp-time">17:45</span>📊 每日工作總結 + 逾期 Alert</div>
+          <div class="resp-item"><span class="resp-time">18:00</span>🚨 IDA Pulse 最終確認</div>
+        </div>
+      </div>
+      <div class="feature-card">
+        <span class="mini-label">📅 每週自動</span>
+        <div style="margin-top:var(--spacing-12);">
+          <div class="resp-item"><span class="resp-time">週一 09:00</span>🚀 週開工包</div>
+          <div class="resp-item"><span class="resp-time">週一 09:30</span>🗞️ AI 週報新聞</div>
+          <div class="resp-item"><span class="resp-time">週四 17:30</span>🏁 週收尾報告</div>
+          <div class="resp-item"><span class="resp-time">週四 23:00</span>📊 Claude 週報</div>
+          <div class="resp-item"><span class="resp-time">週日 23:00</span>🔍 AI 新聞爬取</div>
+        </div>
+      </div>
+      <div class="feature-card">
+        <span class="mini-label">🏃 Sprint 節奏</span>
+        <div style="margin-top:var(--spacing-12);">
+          <div class="resp-item"><span class="resp-time">Planning 前</span>📦 備料包</div>
+          <div class="resp-item"><span class="resp-time">Review 前</span>🎯 備料 + Demo 清單</div>
+          <div class="resp-item"><span class="resp-time">Retro 前</span>🌀 備料 + 阻塞彙整</div>
+          <div class="resp-item"><span class="resp-time">Retro 中</span>即時主持記錄</div>
+          <div class="resp-item"><span class="resp-time">Retro 後</span>正式彙整 → Notion</div>
+        </div>
+      </div>
+      <div class="feature-card">
+        <span class="mini-label">💬 即時待命</span>
+        <div style="margin-top:var(--spacing-12);">
+          <div class="resp-item"><span class="resp-time">🔧</span>開單協助</div>
+          <div class="resp-item"><span class="resp-time">📋</span>大 PO 指示解析</div>
+          <div class="resp-item"><span class="resp-time">🆘</span>阻塞記錄 + Board 標記</div>
+          <div class="resp-item"><span class="resp-time">📊</span>即時進度查詢</div>
+          <div class="resp-item"><span class="resp-time">🎒</span>臨時會議備料</div>
+          <div class="resp-item"><span class="resp-time">📰</span>新聞投稿收稿</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+<footer>
+  O大 🦀 提案 v3.1 &nbsp;·&nbsp; AI Scrum Team PMO 整理 &nbsp;·&nbsp; 2026/05/09 &nbsp;·&nbsp; 僅供國泰世華銀行內部使用
+</footer>
+
+<script>
+// ── TAB SWITCH ──
+function switchTab(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('sec-' + id).classList.add('active');
+  btn.classList.add('active');
+
+  // Re-trigger fade-up animations
+  const els = document.querySelectorAll('#sec-' + id + ' .fade-up');
+  els.forEach(el => {
+    el.style.animation = 'none';
+    el.offsetHeight; // reflow
+    el.style.animation = '';
+  });
+}
+
+// ── IDA PULSE FLOW ──
+const pulseSteps = [
+  '查 Notion 請假表（排除今日請假成員）',
+  '打 Firebase REST API（取得今日填寫名單）',
+  '比對成員對照表',
+  '找出「應填但未填」成員',
+  'LINE Bot @未填成員',
+  '18:00 最終記錄 + 通知組長',
+  '記錄存入 Notion（每日填寫率追蹤）',
+];
+(function renderPulse() {
+  const el = document.getElementById('pulse-flow-list');
+  pulseSteps.forEach((step, i) => {
+    const div = document.createElement('div');
+    div.className = 'flow-step';
+    div.innerHTML = `<span class="flow-num">${i + 1}</span><span>${step}</span>`;
+    el.appendChild(div);
+  });
+})();
+</script>
+</body>
+</html>
