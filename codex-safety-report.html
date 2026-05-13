@@ -24,16 +24,11 @@
 
       --font-openrunde: 'OpenRunde', ui-sans-serif, system-ui, -apple-system,
                         BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: 'SF Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
 
-      --spacing-4: 4px;
-      --spacing-8: 8px;
-      --spacing-12: 12px;
-      --spacing-16: 16px;
-      --spacing-20: 20px;
-      --spacing-24: 24px;
-      --spacing-32: 32px;
-      --spacing-48: 48px;
-      --spacing-64: 64px;
+      --spacing-4: 4px;   --spacing-8: 8px;   --spacing-12: 12px;
+      --spacing-16: 16px; --spacing-20: 20px; --spacing-24: 24px;
+      --spacing-32: 32px; --spacing-48: 48px; --spacing-64: 64px;
 
       --radius-default: 8px;
       --radius-cards: 16px;
@@ -52,13 +47,13 @@
       font-family: var(--font-openrunde);
       background-color: var(--color-canvas-white);
       color: var(--color-slate-ink);
-      font-size: 14px;
-      line-height: 1.43;
+      font-size: 15px;
+      line-height: 1.7;
       letter-spacing: -0.025px;
     }
 
     .container {
-      max-width: 800px;
+      max-width: 760px;
       margin: 0 auto;
       padding: 0 var(--spacing-24);
     }
@@ -68,13 +63,11 @@
       padding: var(--spacing-16) 0;
       margin-bottom: var(--spacing-64);
     }
-
     .page-header .container {
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
-
     .logo {
       font-size: 18px;
       font-weight: 600;
@@ -82,7 +75,6 @@
       letter-spacing: -0.02px;
       text-decoration: none;
     }
-
     .source-link {
       display: inline-flex;
       align-items: center;
@@ -92,12 +84,11 @@
       text-decoration: none;
       background: var(--color-canvas-white);
       border-radius: var(--radius-pill);
-      padding: var(--spacing-4) var(--spacing-12);
+      padding: 5px var(--spacing-12);
       box-shadow: var(--shadow-subtle-2);
       transition: color 0.15s;
       letter-spacing: -0.05px;
     }
-
     .source-link:hover { color: var(--color-radiant-violet); }
 
     .hero {
@@ -105,235 +96,154 @@
       border-bottom: 1px solid var(--color-light-gray);
       margin-bottom: var(--spacing-64);
     }
-
-    .hero-tag {
-      display: inline-flex;
+    .hero-eyebrow {
+      display: flex;
       align-items: center;
       gap: var(--spacing-8);
+      margin-bottom: var(--spacing-24);
+    }
+    .tag-pill {
+      display: inline-flex;
+      align-items: center;
       font-size: 12px;
       font-weight: 500;
-      color: var(--color-radiant-violet);
-      background: var(--color-whisper-purple);
       border-radius: var(--radius-pill);
-      padding: var(--spacing-4) var(--spacing-12);
-      margin-bottom: var(--spacing-24);
+      padding: 3px 10px;
+      letter-spacing: -0.03px;
+    }
+    .tag-security { background: #fce8f3; color: var(--color-accent-pink); }
+    .tag-safety   { background: var(--color-pale-mint); color: #1a9c3e; }
+    .hero-date {
+      font-size: 12px;
+      color: var(--color-muted-gray);
       letter-spacing: -0.05px;
     }
-
-    .hero-tag svg { flex-shrink: 0; }
-
     .hero-title {
-      font-size: 48px;
+      font-size: 42px;
       font-weight: 700;
       line-height: 1.13;
       letter-spacing: -0.013px;
       color: var(--color-slate-ink);
       margin-bottom: var(--spacing-20);
     }
-
     .hero-subtitle {
       font-size: 18px;
       font-weight: 400;
       color: var(--color-medium-gray);
       line-height: 1.6;
       letter-spacing: -0.02px;
-      max-width: 640px;
       margin-bottom: var(--spacing-32);
     }
-
     .hero-meta {
       display: flex;
       align-items: center;
       flex-wrap: wrap;
       gap: var(--spacing-12);
     }
-
     .meta-item {
       font-size: 12px;
       color: var(--color-muted-gray);
       letter-spacing: -0.05px;
     }
-
     .meta-dot {
-      width: 3px;
-      height: 3px;
+      width: 3px; height: 3px;
       border-radius: 50%;
       background: var(--color-light-gray);
     }
 
-    .section { margin-bottom: var(--spacing-64); }
+    .article-body { margin-bottom: var(--spacing-64); }
+    .prose p {
+      font-size: 15px;
+      color: #333544;
+      line-height: 1.78;
+      letter-spacing: -0.02px;
+      margin-bottom: var(--spacing-20);
+    }
+    .prose p:last-child { margin-bottom: 0; }
 
+    .article-section { margin-bottom: var(--spacing-64); }
     .section-label {
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 600;
       color: var(--color-muted-gray);
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      margin-bottom: var(--spacing-16);
-    }
-
-    .section-title {
-      font-size: 24px;
-      font-weight: 700;
-      color: var(--color-slate-ink);
-      line-height: 1.17;
-      letter-spacing: -0.017px;
-      margin-bottom: var(--spacing-16);
-    }
-
-    .section-body {
-      font-size: 14px;
-      color: var(--color-medium-gray);
-      line-height: 1.7;
-      letter-spacing: -0.025px;
-    }
-
-    .goals-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--spacing-16);
-      margin-top: var(--spacing-32);
-    }
-
-    .goal-card {
-      background: rgba(0,0,0,0.03);
-      border-radius: var(--radius-cards);
-      padding: var(--spacing-24);
-    }
-
-    .goal-number {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--color-radiant-violet);
-      margin-bottom: var(--spacing-12);
-      letter-spacing: -0.05px;
-    }
-
-    .goal-text {
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--color-slate-ink);
-      line-height: 1.4;
-      letter-spacing: -0.02px;
-    }
-
-    .arch-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--spacing-16);
-      margin-top: var(--spacing-32);
-    }
-
-    .arch-card {
-      border-radius: var(--radius-cards);
-      padding: var(--spacing-32);
-    }
-
-    .arch-card.sandbox  { background: var(--color-whisper-purple); }
-    .arch-card.approval { background: var(--color-pale-mint); }
-
-    .arch-card-label {
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: var(--spacing-12);
-    }
-
-    .arch-card.sandbox  .arch-card-label { color: var(--color-deep-purple); }
-    .arch-card.approval .arch-card-label { color: #1a9c3e; }
-
-    .arch-card-title {
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--color-slate-ink);
-      letter-spacing: -0.018px;
-      margin-bottom: var(--spacing-12);
-    }
-
-    .arch-card-body {
-      font-size: 14px;
-      color: var(--color-medium-gray);
-      line-height: 1.7;
-      letter-spacing: -0.025px;
-    }
-
-    .controls-list {
-      display: flex;
-      flex-direction: column;
-      gap: var(--spacing-16);
-      margin-top: var(--spacing-32);
-    }
-
-    .control-card {
-      background: var(--color-canvas-white);
-      border-radius: var(--radius-cards);
-      padding: var(--spacing-24);
-      box-shadow: var(--shadow-subtle-2);
-      display: grid;
-      grid-template-columns: 48px 1fr;
-      gap: var(--spacing-20);
-      align-items: start;
-    }
-
-    .control-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: var(--radius-default);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      flex-shrink: 0;
-    }
-
-    .control-icon.purple { background: var(--color-whisper-purple); }
-    .control-icon.green  { background: var(--color-pale-mint); }
-    .control-icon.yellow { background: #fff8e6; }
-    .control-icon.pink   { background: #fce8f3; }
-
-    .control-title {
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--color-slate-ink);
-      letter-spacing: -0.02px;
       margin-bottom: var(--spacing-8);
     }
+    .section-h2 {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--color-slate-ink);
+      line-height: 1.2;
+      letter-spacing: -0.017px;
+      margin-bottom: var(--spacing-20);
+    }
+    .section-h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--color-slate-ink);
+      line-height: 1.3;
+      letter-spacing: -0.02px;
+      margin-bottom: var(--spacing-12);
+    }
 
-    .control-body {
-      font-size: 14px;
-      color: var(--color-medium-gray);
+    .control-block {
+      margin-bottom: var(--spacing-48);
+      padding-bottom: var(--spacing-48);
+      border-bottom: 1px solid var(--color-light-gray);
+    }
+    .control-block:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+
+    .code-wrap {
+      margin: var(--spacing-20) 0;
+      border-radius: var(--radius-cards);
+      overflow: hidden;
+      box-shadow: var(--shadow-subtle-2);
+    }
+    .code-header {
+      background: #1e1f2e;
+      padding: var(--spacing-8) var(--spacing-16);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .code-filename {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: #8b8fa8;
+    }
+    .code-lang {
+      font-size: 11px;
+      color: #5a5e7a;
+      background: rgba(255,255,255,0.06);
+      border-radius: var(--radius-pill);
+      padding: 2px 8px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    .code-body {
+      background: #13141f;
+      padding: var(--spacing-20);
+      overflow-x: auto;
+    }
+    .code-body pre {
+      font-family: var(--font-mono);
+      font-size: 13px;
       line-height: 1.7;
-      letter-spacing: -0.025px;
+      color: #cdd2f0;
+      white-space: pre;
+      margin: 0;
     }
-
-    .control-bullets {
-      margin-top: var(--spacing-12);
-      padding-left: var(--spacing-16);
-      list-style: none;
-    }
-
-    .control-bullets li {
-      font-size: 14px;
-      color: var(--color-medium-gray);
-      line-height: 1.7;
-      letter-spacing: -0.025px;
-      margin-bottom: var(--spacing-4);
-      padding-left: var(--spacing-16);
-      position: relative;
-    }
-
-    .control-bullets li::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 8px;
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: var(--color-radiant-violet);
-      opacity: 0.5;
-    }
+    .cm { color: #5a5e7a; font-style: italic; }
+    .ck { color: #918df6; }
+    .cs { color: #a8e4a0; }
+    .cb { color: #ffa600; }
+    .cf { color: #57c8e5; }
 
     .quote-block {
       border-left: 3px solid var(--color-radiant-violet);
@@ -342,15 +252,13 @@
       border-radius: 0 var(--radius-default) var(--radius-default) 0;
       margin: var(--spacing-32) 0;
     }
-
     .quote-text {
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 500;
       color: var(--color-slate-ink);
-      line-height: 1.6;
+      line-height: 1.65;
       letter-spacing: -0.02px;
     }
-
     .quote-source {
       font-size: 12px;
       color: var(--color-muted-gray);
@@ -358,69 +266,126 @@
       letter-spacing: -0.05px;
     }
 
-    .telemetry-events {
+    .goals-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--spacing-12);
+      margin: var(--spacing-32) 0;
+    }
+    .goal-card {
+      background: rgba(0,0,0,0.03);
+      border-radius: var(--radius-cards);
+      padding: var(--spacing-20);
+    }
+    .goal-number {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-radiant-violet);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: var(--spacing-8);
+    }
+    .goal-text {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-slate-ink);
+      line-height: 1.4;
+    }
+
+    .pill-group {
       display: flex;
       flex-wrap: wrap;
       gap: var(--spacing-8);
-      margin-top: var(--spacing-20);
+      margin: var(--spacing-16) 0;
     }
-
-    .event-pill {
+    .pill {
       display: inline-flex;
       align-items: center;
       gap: 6px;
       font-size: 12px;
       font-weight: 500;
       color: var(--color-slate-ink);
-      background: rgba(0,0,0,0.03);
+      background: rgba(0,0,0,0.04);
       border-radius: var(--radius-pill);
-      padding: var(--spacing-4) var(--spacing-12);
-      letter-spacing: -0.05px;
+      padding: 4px 12px;
+      letter-spacing: -0.03px;
     }
-
-    .event-pill::before {
+    .pill::before {
       content: '';
-      width: 6px;
-      height: 6px;
+      width: 6px; height: 6px;
       border-radius: 50%;
       background: var(--color-radiant-violet);
       flex-shrink: 0;
     }
 
-    .compliance-card {
-      margin-top: var(--spacing-32);
-      background: rgba(0,0,0,0.03);
+    .arch-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-12);
+      margin: var(--spacing-24) 0;
+    }
+    .arch-card {
       border-radius: var(--radius-cards);
       padding: var(--spacing-24);
+    }
+    .arch-card.sandbox  { background: var(--color-whisper-purple); }
+    .arch-card.approval { background: var(--color-pale-mint); }
+    .arch-card-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: var(--spacing-8);
+    }
+    .arch-card.sandbox  .arch-card-label { color: var(--color-deep-purple); }
+    .arch-card.approval .arch-card-label { color: #1a9c3e; }
+    .arch-card-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--color-slate-ink);
+      letter-spacing: -0.018px;
+      margin-bottom: var(--spacing-8);
+    }
+    .arch-card-body {
+      font-size: 13px;
+      color: var(--color-medium-gray);
+      line-height: 1.65;
     }
 
     .conclusion-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: var(--spacing-16);
-      margin-top: var(--spacing-32);
+      gap: var(--spacing-12);
+      margin-top: var(--spacing-24);
     }
-
     .conclusion-card {
       background: rgba(0,0,0,0.03);
       border-radius: var(--radius-cards);
       padding: var(--spacing-24);
     }
-
-    .conclusion-card .icon { font-size: 28px; margin-bottom: var(--spacing-12); }
+    .conclusion-card .icon { font-size: 26px; margin-bottom: var(--spacing-12); }
+    .conclusion-card-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--color-slate-ink);
+      margin-bottom: var(--spacing-8);
+    }
+    .conclusion-card-body {
+      font-size: 13px;
+      color: var(--color-medium-gray);
+      line-height: 1.6;
+    }
 
     .page-footer {
       border-top: 1px solid var(--color-light-gray);
       padding: var(--spacing-32) 0;
       margin-top: var(--spacing-64);
     }
-
     .footer-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
-
     .footer-note {
       font-size: 12px;
       color: var(--color-muted-gray);
@@ -428,18 +393,16 @@
     }
 
     @media (max-width: 768px) {
-      .hero-title    { font-size: 32px; }
-      .goals-grid    { grid-template-columns: 1fr; }
-      .arch-grid     { grid-template-columns: 1fr; }
+      .hero-title      { font-size: 30px; }
+      .goals-grid      { grid-template-columns: 1fr; }
+      .arch-grid       { grid-template-columns: 1fr; }
       .conclusion-grid { grid-template-columns: 1fr; }
     }
-
     @media (max-width: 600px) {
-      .hero-title    { font-size: 28px; }
-      .container     { padding: 0 var(--spacing-16); }
+      .hero-title  { font-size: 26px; }
+      .container   { padding: 0 var(--spacing-16); }
       .page-header .container { flex-direction: column; align-items: flex-start; gap: var(--spacing-12); }
-      .control-card  { grid-template-columns: 1fr; }
-      .footer-inner  { flex-direction: column; align-items: flex-start; gap: var(--spacing-12); }
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: var(--spacing-12); }
     }
   </style>
 </head>
@@ -449,7 +412,7 @@
     <div class="container">
       <a href="index.html" class="logo">AI Scrum Team</a>
       <a href="https://openai.com/index/running-codex-safely/" class="source-link" target="_blank" rel="noopener">
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+        <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
           <path d="M2 10L10 2M10 2H5M10 2V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
         原文來源：openai.com
@@ -458,201 +421,208 @@
   </header>
 
   <main>
-
     <section class="hero">
       <div class="container">
-        <div class="hero-tag">
-          <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
-            <circle cx="4" cy="4" r="4" fill="#918df6"/>
-          </svg>
-          OpenAI 官方報告翻譯
+        <div class="hero-eyebrow">
+          <span class="tag-pill tag-security">Security</span>
+          <span class="tag-pill tag-safety">Safety</span>
+          <span class="hero-date">2026 年 5 月 8 日</span>
         </div>
         <h1 class="hero-title">安全運行 Codex</h1>
-        <p class="hero-subtitle">
-          OpenAI 如何在企業環境中部署 AI 程式代理——沙盒隔離、審批策略、網路管控與代理原生遙測，構成一套平衡開發效率與安全管控的完整框架。
-        </p>
+        <p class="hero-subtitle">在真實工作流程中治理程式代理所使用的控制、邊界與遙測機制全面解析。</p>
         <div class="hero-meta">
-          <span class="meta-item">原文發布：2026 年 5 月 8 日</span>
-          <span class="meta-dot"></span>
           <span class="meta-item">作者：OpenAI Security Team</span>
           <span class="meta-dot"></span>
-          <span class="meta-item">翻譯整理：AI Scrum Team</span>
+          <span class="meta-item">翻譯整理：AI Scrum Team · 2026/05/13</span>
         </div>
       </div>
     </section>
 
-    <section class="section">
+    <div class="article-body">
       <div class="container">
-        <div class="section-label">核心目標</div>
-        <h2 class="section-title">三個明確的部署目標</h2>
-        <p class="section-body">
-          OpenAI 在內部部署 Codex 時設定了三大目標，確保 AI 程式代理在提升生產力的同時不引入安全風險。
-        </p>
-        <div class="goals-grid">
-          <div class="goal-card">
-            <div class="goal-number">目標 01</div>
-            <div class="goal-text">將代理限制在明確的技術邊界之內</div>
-          </div>
-          <div class="goal-card">
-            <div class="goal-number">目標 02</div>
-            <div class="goal-text">讓開發者能快速執行低風險操作</div>
-          </div>
-          <div class="goal-card">
-            <div class="goal-number">目標 03</div>
-            <div class="goal-text">將高風險操作明確化並要求審批</div>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <section class="section">
-      <div class="container">
-        <div class="section-label">架構設計</div>
-        <h2 class="section-title">雙層安全架構</h2>
-        <p class="section-body">
-          Codex 的安全控制來自兩個協同運作的層次，共同界定代理「能做什麼」與「何時需要暫停」。兩層共同運作，缺一不可。
-        </p>
-        <div class="arch-grid">
-          <div class="arch-card sandbox">
-            <div class="arch-card-label">第一層</div>
-            <div class="arch-card-title">沙盒模式</div>
-            <div class="arch-card-body">
-              定義代理的技術能力邊界——可以寫入哪些位置、是否能存取網路、執行哪些模型生成的命令。作業系統層級的強制機制保障這些限制無法被繞過，預設狀態為無網路存取、寫入權限僅限於活躍工作目錄。
-            </div>
+        <section class="article-section">
+          <div class="prose">
+            <p>隨著 AI 系統能力不斷提升，它們越來越多地代替使用者執行任務。程式代理可以自主審查程式庫、執行命令、與開發工具互動——這些都是過去需要人工直接操作的工作。</p>
+            <p>在設計 Codex 的這些能力時，我們同步設計了組織安全部署所需的控制手段。安全團隊需要治理代理運作的方式：代理可以存取什麼、何時需要人工審批、可以與哪些系統互動，以及存在哪些遙測可以解釋代理的行為。</p>
+            <p>在 OpenAI，我們帶著幾個明確目標部署 Codex：將代理限制在明確的技術邊界之內、讓開發者在低風險操作上快速行動，以及將高風險操作明確化。我們同時保留代理原生遙測，以便理解與稽核代理的行為。在實務上，這意味著受管理的設定、受限的執行環境、網路政策，以及代理原生日誌。</p>
           </div>
-          <div class="arch-card approval">
-            <div class="arch-card-label">第二層</div>
-            <div class="arch-card-title">審批策略</div>
-            <div class="arch-card-body">
-              決定代理在執行操作前何時必須暫停並詢問使用者——例如離開沙盒、使用網路，或執行不在信任命令列表中的指令。讓人類保持對高風險決策點的最終控制。
-            </div>
+          <div class="goals-grid">
+            <div class="goal-card"><div class="goal-number">目標 01</div><div class="goal-text">將代理限制在明確的技術邊界之內</div></div>
+            <div class="goal-card"><div class="goal-number">目標 02</div><div class="goal-text">讓低風險的日常操作保持順暢無阻</div></div>
+            <div class="goal-card"><div class="goal-number">目標 03</div><div class="goal-text">保留代理原生遙測以便理解與稽核</div></div>
           </div>
-        </div>
-      </div>
-    </section>
+        </section>
 
-    <section class="section">
-      <div class="container">
-        <div class="section-label">安全控制</div>
-        <h2 class="section-title">四大控制面向</h2>
-        <p class="section-body">
-          OpenAI 從認證存取、沙盒隔離、網路管控、Shell 指令安全四個維度，構建完整的 Codex 安全部署框架。
-        </p>
-        <div class="controls-list">
-          <div class="control-card">
-            <div class="control-icon purple">🔐</div>
-            <div>
-              <div class="control-title">認證與存取控制</div>
-              <div class="control-body">CLI 與 MCP 的 OAuth 憑證儲存在作業系統安全金鑰環中，登入強制透過 ChatGPT 進行，存取範圍限制在 ChatGPT Enterprise 工作區內，確保 Codex 使用行為綁定工作區層級的管控。</div>
-              <ul class="control-bullets">
-                <li>OAuth 憑證存入 OS 安全金鑰環，不暴露於環境變數</li>
-                <li>強制透過 ChatGPT 登入驗證，統一身份管理</li>
-                <li>存取範圍綁定 ChatGPT Enterprise 工作區</li>
-              </ul>
-            </div>
+        <section class="article-section">
+          <div class="section-label">控制機制</div>
+          <h2 class="section-h2">控制 Codex 的運作方式</h2>
+          <div class="prose">
+            <p>我們以一個簡單的原則部署 Codex：在受限環境內保持高效生產力、低風險的日常操作應無摩擦地執行，而高風險操作則應暫停等待審查。</p>
           </div>
-          <div class="control-card">
-            <div class="control-icon green">📦</div>
-            <div>
-              <div class="control-title">沙盒隔離</div>
-              <div class="control-body">本地端使用作業系統強制沙盒，將代理操作範圍限制在當前工作目錄內；雲端則在獨立的 OpenAI 管理容器中執行，完全無法存取宿主系統或其他資料。</div>
-              <ul class="control-bullets">
-                <li>本地：OS 層級強制沙盒，寫入範圍限於工作目錄</li>
-                <li>雲端：隔離容器部署，與宿主系統完全隔絕</li>
-                <li>預設：網路存取關閉，寫入權限限於活躍工作區</li>
-              </ul>
-            </div>
-          </div>
-          <div class="control-card">
-            <div class="control-icon yellow">🌐</div>
-            <div>
-              <div class="control-title">網路政策管控</div>
-              <div class="control-body">代理預設關閉所有對外網路存取。OpenAI 採用受管理的網路策略：允許已知目標端點、封鎖不想讓 Codex 存取的目標、對陌生域名要求審批。</div>
-              <ul class="control-bullets">
-                <li>預設狀態：所有對外網路連線關閉</li>
-                <li>允許清單：已驗證且必要的目標端點</li>
-                <li>封鎖清單：明確禁止存取的目標</li>
-                <li>陌生域名：觸發審批流程，不自動放行</li>
-              </ul>
-            </div>
-          </div>
-          <div class="control-card">
-            <div class="control-icon pink">⚡</div>
-            <div>
-              <div class="control-title">Shell 指令安全分類</div>
-              <div class="control-body">Codex 不把每條 Shell 指令視為同等安全。日常開發常用的無害指令可直接執行，而特定危險指令則被封鎖或要求審批。</div>
-              <ul class="control-bullets">
-                <li>常用無害指令：依規則分類，無需逐一審批</li>
-                <li>危險指令：封鎖或強制審批，防止意外執行</li>
-                <li>規則驅動分類，而非手動維護白名單</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <section class="section">
-      <div class="container">
-        <div class="section-label">可觀測性</div>
-        <h2 class="section-title">代理原生遙測</h2>
-        <p class="section-body">
-          OpenAI 保留完整的代理原生遙測數據，以便稽核代理的每一步行為。Codex 支援透過 OpenTelemetry (OTel) 選擇性開啟監控，協助團隊進行稽核、問題調查與法規遵循。
-        </p>
-        <div class="quote-block">
-          <div class="quote-text">「我們的 AI 安全分類代理使用 Codex 日誌來檢視原始請求、工具活動、審批決策、工具結果，以及相關的網路策略決定或封鎖事件。」</div>
-          <div class="quote-source">— OpenAI Security Team，Running Codex Safely（2026/05/08）</div>
-        </div>
-        <p class="section-body">OTel 日誌記錄的事件類型：</p>
-        <div class="telemetry-events">
-          <span class="event-pill">使用者提示</span>
-          <span class="event-pill">工具審批決策</span>
-          <span class="event-pill">工具執行結果</span>
-          <span class="event-pill">MCP 伺服器使用</span>
-          <span class="event-pill">網路代理允許事件</span>
-          <span class="event-pill">網路代理封鎖事件</span>
-        </div>
-        <div class="compliance-card">
-          <div class="control-title" style="margin-bottom: var(--spacing-8);">企業合規支援</div>
-          <div class="control-body">Enterprise 與教育版客戶可透過 <strong>OpenAI Compliance Platform</strong> 存取 Codex 活動日誌，滿足企業級合規要求。遙測功能預設關閉，需在設定中明確啟用。</div>
-        </div>
-      </div>
-    </section>
+          <div class="control-block">
+            <h3 class="section-h3">沙盒與審批</h3>
+            <div class="prose">
+              <p>審批與沙盒協同運作。沙盒定義了技術執行邊界，包括 Codex 可以寫入的位置、是否可以存取網路，以及哪些路徑受到保護。審批策略決定 Codex 何時必須請求執行某個動作，例如當它需要執行沙盒以外的操作時。使用者可以一次性批准，或批准該類型操作在本次 session 內自動允許。</p>
+              <p>對於常規審批請求，我們使用 <strong>Auto-review 模式</strong>——此功能開啟後，可自動批准特定類型的請求，減少使用者需要手動停下來審批的頻率。Codex 將計劃執行的動作與近期上下文傳送給自動審批子代理，後者可自動批准低風險動作，不打斷使用者工作流程；對高風險或可能有意外後果的動作，則仍會暫停等待審查。</p>
+            </div>
+            <div class="arch-grid">
+              <div class="arch-card sandbox"><div class="arch-card-label">第一層</div><div class="arch-card-title">沙盒模式</div><div class="arch-card-body">定義代理的技術能力邊界——可寫入哪些位置、是否能存取網路、執行哪些模型生成的命令。</div></div>
+              <div class="arch-card approval"><div class="arch-card-label">第二層</div><div class="arch-card-title">審批策略</div><div class="arch-card-body">決定代理何時必須暫停並詢問使用者，例如離開沙盒、使用網路或執行信任清單外的指令。</div></div>
+            </div>
+            <div class="code-wrap">
+              <div class="code-header"><span class="code-filename">config.toml &amp; requirements.toml</span><span class="code-lang">TOML</span></div>
+              <div class="code-body"><pre><span class="cm"># config.toml</span>
 
-    <section class="section">
-      <div class="container">
-        <div class="section-label">結論</div>
-        <h2 class="section-title">讓安全團隊更有把握地啟用 Codex</h2>
-        <p class="section-body">
-          Codex 提供了控制介面、配置管理、沙盒隔離與詳細的代理感知遙測，為企業安全採用 AI 程式代理奠定基礎。安全團隊可在維持必要的可視性與企業安全管控的同時，讓開發者充分享有生產力提升。
-        </p>
-        <div class="conclusion-grid">
-          <div class="conclusion-card">
-            <div class="icon">🚀</div>
-            <div class="control-title">開發者受益</div>
-            <div class="control-body">快速執行低風險操作，高風險操作有明確審批流程，日常開發節奏不受干擾。</div>
-          </div>
-          <div class="conclusion-card">
-            <div class="icon">🛡️</div>
-            <div class="control-title">安全團隊受益</div>
-            <div class="control-body">完整稽核軌跡、可設定的網路策略與審批規則，滿足企業安全與合規要求。</div>
-          </div>
-        </div>
-      </div>
-    </section>
+<span class="cm"># 開啟自動審批模式</span>
+<span class="ck">approvals_reviewer</span> = <span class="cs">"auto_review"</span>
+<span class="cm"># 自動將已知開發目錄加入沙盒寫入範圍</span>
+<span class="ck">sandbox_workspace_write.writable_roots</span> = [<span class="cs">"~/development"</span>]
 
+<span class="cm"># requirements.toml</span>
+
+<span class="cm"># 要求 Codex 在沙盒模式內運作</span>
+<span class="ck">allowed_sandbox_modes</span> = [<span class="cs">"read-only"</span>, <span class="cs">"workspace-write"</span>]</pre></div>
+            </div>
+          </div>
+
+          <div class="control-block">
+            <h3 class="section-h3">網路存取</h3>
+            <div class="prose">
+              <p>我們不讓 Codex 擁有不受限制的對外存取權限。我們的受管理網路政策允許已知目標端點、封鎖我們不想讓 Codex 存取的目標，並對陌生域名要求審批。這讓 Codex 能夠完成常見的既有工作流程，而不需要授予廣泛的網路存取權限。</p>
+            </div>
+            <div class="code-wrap">
+              <div class="code-header"><span class="code-filename">requirements.toml</span><span class="code-lang">TOML</span></div>
+              <div class="code-body"><pre><span class="cm"># requirements.toml</span>
+
+<span class="cm"># 確保網頁擷取只來自 OpenAI 的快取</span>
+<span class="ck">allowed_web_search_modes</span> = [<span class="cs">"cached"</span>]
+
+[<span class="cf">experimental_network</span>]
+<span class="cm"># 開啟網路代理</span>
+<span class="ck">enabled</span> = <span class="cb">true</span>
+<span class="cm"># 允許 Codex 與本機連接</span>
+<span class="ck">allow_local_binding</span> = <span class="cb">true</span>
+<span class="cm"># 封鎖對此域名的所有請求</span>
+<span class="ck">denied_domains</span> = [<span class="cs">"pastebin.com"</span>]
+<span class="cm"># 自動允許對這些域名的請求</span>
+<span class="ck">allowed_domains</span> = [<span class="cs">"login.microsoftonline.com"</span>, <span class="cs">"*.openai.com"</span>]</pre></div>
+            </div>
+          </div>
+
+          <div class="control-block">
+            <h3 class="section-h3">身份與憑證</h3>
+            <div class="prose">
+              <p>我們也管理 Codex 的身份驗證方式。CLI 與 MCP 的 OAuth 憑證儲存在作業系統安全金鑰環中，登入強制透過 ChatGPT 進行，存取範圍固定在我們的 ChatGPT Enterprise 工作區。這讓 Codex 使用行為綁定工作區層級的管控，並使 Codex 活動日誌可透過 ChatGPT Compliance Logs Platform 供企業工作區存取。</p>
+            </div>
+            <div class="code-wrap">
+              <div class="code-header"><span class="code-filename">config.toml</span><span class="code-lang">TOML</span></div>
+              <div class="code-body"><pre><span class="cm"># config.toml</span>
+
+<span class="cm"># 將 CLI 驗證憑證儲存在 OS 金鑰環</span>
+<span class="ck">cli_auth_credentials_store</span> = <span class="cs">"keyring"</span>
+<span class="cm"># 將 MCP 憑證儲存在 OS 金鑰環</span>
+<span class="ck">mcp_oauth_credentials_store</span> = <span class="cs">"keyring"</span>
+<span class="cm"># 強制透過 ChatGPT 驗證</span>
+<span class="ck">forced_login_method</span> = <span class="cs">"chatgpt"</span>
+<span class="cm"># 強制驗證至特定 ChatGPT 工作區</span>
+<span class="ck">forced_chatgpt_workspace_id</span> = <span class="cs">"&lt;workspace-uuid&gt;"</span></pre></div>
+            </div>
+          </div>
+
+          <div class="control-block">
+            <h3 class="section-h3">指令規則</h3>
+            <div class="prose">
+              <p>我們使用規則，讓 Codex 不會把每條 Shell 指令都視為同等安全。工程師在日常開發中常用的無害指令，可在沙盒外直接執行；特定危險指令則被封鎖或要求審批。這讓 Codex 能快速完成一般工程任務，同時對我們不希望在沙盒外執行的指令模式強制審查或封鎖。</p>
+            </div>
+            <div class="code-wrap">
+              <div class="code-header"><span class="code-filename">default.rules</span><span class="code-lang">Rules DSL</span></div>
+              <div class="code-body"><pre><span class="cm"># default.rules</span>
+
+<span class="cf">prefix_rule</span>(
+    <span class="ck">pattern</span>       = [<span class="cs">"gh"</span>, <span class="cs">"pr"</span>, [<span class="cs">"view"</span>, <span class="cs">"list"</span>]],
+    <span class="ck">decision</span>      = <span class="cs">"allow"</span>,
+    <span class="ck">justification</span> = <span class="cs">"允許透過 gh CLI 進行唯讀的 GitHub PR 檢視。"</span>,
+)
+<span class="cf">prefix_rule</span>(
+    <span class="ck">pattern</span>       = [<span class="cs">"kubectl"</span>, [<span class="cs">"get"</span>, <span class="cs">"describe"</span>, <span class="cs">"logs"</span>]],
+    <span class="ck">decision</span>      = <span class="cs">"allow"</span>,
+    <span class="ck">justification</span> = <span class="cs">"允許 Kubernetes 資源檢視以供除錯使用。"</span>,
+)</pre></div>
+            </div>
+          </div>
+
+          <div class="control-block">
+            <h3 class="section-h3">受管理的設定</h3>
+            <div class="prose">
+              <p>我們透過雲端受管理的 requirements、macOS 受管理偏好設定，以及本地 requirements 檔案的組合來套用上述安全策略。Requirements 是管理員強制執行的控制，使用者無法覆蓋。macOS 受管理偏好設定與本地 requirements 檔案讓我們能維持一致的基準，同時仍可依團隊、使用者群組或環境測試不同設定。這些設定適用於所有本地 Codex 介面，包括桌面應用程式、CLI 與 IDE 擴充套件。</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="article-section">
+          <div class="section-label">可觀測性</div>
+          <h2 class="section-h2">代理原生遙測與稽核軌跡</h2>
+          <div class="prose">
+            <p>控制只是工作的一半。代理部署後，安全團隊需要掌握代理正在做什麼以及為何這樣做的可視性。傳統的安全日誌在查看 Codex 所採取的動作時仍然有用，但它們主要回答的是「發生了什麼」：某個程序啟動了、某個檔案被修改了、某個網路連線被嘗試了。防穡者仍然需要自行判斷 Codex 為何執行某件事，或使用者的意圖是什麼。</p>
+            <p>Codex 可以為安全團隊提供更具代理意識的視角。Codex 支援透過 OpenTelemetry 匯出各種 Codex 事件的日誌。Enterprise 與 Edu 客戶也可透過 OpenAI Compliance Platform 存取 Codex 活動日誌。</p>
+          </div>
+
+          <p style="font-size:13px;color:var(--color-muted-gray);margin-bottom:var(--spacing-12);letter-spacing:-0.03px;">OTel 日誌記錄的事件類型：</p>
+          <div class="pill-group">
+            <span class="pill">使用者提示</span>
+            <span class="pill">工具審批決策</span>
+            <span class="pill">工具執行結果</span>
+            <span class="pill">MCP 伺服器使用</span>
+            <span class="pill">網路代理允許事件</span>
+            <span class="pill">網路代理封鎖事件</span>
+          </div>
+
+          <div class="code-wrap">
+            <div class="code-header"><span class="code-filename">config.toml — OTel 遙測設定</span><span class="code-lang">TOML</span></div>
+            <div class="code-body"><pre><span class="cm"># config.toml</span>
+
+[<span class="cf">otel</span>]
+<span class="ck">log_user_prompt</span> = <span class="cb">true</span>
+<span class="ck">environment</span>     = <span class="cs">"prod"</span>
+
+[<span class="cf">otel.exporter.otlp-http</span>]
+<span class="ck">endpoint</span> = <span class="cs">"http://localhost:14318/v1/logs"</span>
+<span class="ck">protocol</span> = <span class="cs">"binary"</span></pre></div>
+          </div>
+
+          <div class="quote-block">
+            <div class="quote-text">「我們的 AI 安全分類代理使用 Codex 日誌來檢視原始請求、工具活動、審批決策、工具結果，以及相關的網路策略決定或封鎖事件——再將分析結果呈報安全團隊，以區分預期的代理行為、無害的錯誤，以及真正需要升級處理的活動。」</div>
+            <div class="quote-source">— OpenAI Security Team，Running Codex Safely（2026/05/08）</div>
+          </div>
+
+          <div class="prose">
+            <p>我們同時也將相同的遙測用於日常運營：了解內部採用趨勢的變化、哪些工具與 MCP 伺服器被使用、網路沙盒封鎖或提示的頻率，以及部署在哪些方面仍需調整。這些 OpenTelemetry 日誌可集中整合至 SIEM 與合規日誌系統。</p>
+          </div>
+        </section>
+
+        <section class="article-section">
+          <div class="section-label">展望</div>
+          <h2 class="section-h2">讓安全團隊更有把握地啟用 Codex</h2>
+          <div class="prose">
+            <p>隨著 Codex 等程式代理日益融入開發工作流程，安全團隊需要專為管理這一轉變而設計的工具。Codex 提供了確保安全採用所需的控制介面、設定管理、沙盒隔離，以及詳細的代理感知遙測。有了這些能力，安全團隊可以更有把握地啟用 Codex，在開發者生產力與企業安全所需的可視性及管控之間取得平衡。</p>
+          </div>
+          <div class="conclusion-grid">
+            <div class="conclusion-card"><div class="icon">🚀</div><div class="conclusion-card-title">開發者受益</div><div class="conclusion-card-body">低風險操作無摩擦執行，高風險操作有明確審批流程，日常開發節奏不受干擾。</div></div>
+            <div class="conclusion-card"><div class="icon">🛡️</div><div class="conclusion-card-title">安全團隊受益</div><div class="conclusion-card-body">完整稽核軌跡、可設定的網路策略與審批規則， SIEM 整合支援，滿足企業安全與合規要求。</div></div>
+          </div>
+        </section>
+
+      </div>
+    </div>
   </main>
 
   <footer class="page-footer">
     <div class="container">
       <div class="footer-inner">
-        <span class="footer-note">翻譯整理：AI Scrum Team · 2026/05/12 · 內容來源 openai.com</span>
-        <a href="https://openai.com/index/running-codex-safely/" class="source-link" target="_blank" rel="noopener">
-          閱讀原文
-          <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-            <path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
+        <span class="footer-note">翻譯整理：AI Scrum Team · 2026/05/13 · 內容來源 openai.com</span>
+        <a href="https://openai.com/index/running-codex-safely/" class="source-link" target="_blank" rel="noopener">閱讀原文 <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </div>
     </div>
   </footer>
