@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Codex 設定參考 — Configuration Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Runde:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --color-canvas-white: #ffffff;
+  --color-slate-ink: #181925;
+  --color-medium-gray: #666666;
+  --color-muted-gray: #999999;
+  --color-light-gray: #e8e8e8;
+  --color-whisper-purple: #dad9fc;
+  --color-radiant-violet: #918df6;
+  --color-deep-purple: #9580ff;
+  --color-pale-mint: #def6e4;
+  --color-success-green: #33c758;
+  --color-warning-yellow: #ffa600;
+  --color-accent-pink: #d6409f;
+
+  --font-openrunde: 'Open Runde', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  --text-caption: 12px;    --leading-caption: 1.56;  --tracking-caption: -0.05px;
+  --text-body: 14px;       --leading-body: 1.43;     --tracking-body: -0.025px;
+  --text-heading-sm: 18px; --leading-heading-sm: 1.33; --tracking-heading-sm: -0.02px;
+  --text-heading: 20px;    --leading-heading: 1.22;  --tracking-heading: -0.018px;
+  --text-heading-lg: 24px; --leading-heading-lg: 1.17; --tracking-heading-lg: -0.017px;
+  --text-display: 48px;    --leading-display: 1.13;  --tracking-display: -0.013px;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --spacing-4: 4px;   --spacing-8: 8px;   --spacing-12: 12px;
+  --spacing-16: 16px; --spacing-20: 20px; --spacing-24: 24px;
+  --spacing-32: 32px; --spacing-48: 48px; --spacing-64: 64px;
+
+  --section-gap: 64px;
+  --card-padding: 16px;
+  --element-gap: 16px;
+
+  --radius-default: 8px;
+  --radius-cards: 16px;
+  --radius-large: 24px;
+  --radius-pill: 9999px;
+  --radius-buttons: 9999px;
+
+  --shadow-subtle:   rgba(0,0,0,0.08) 0px 1px 1px 1px, rgba(0,0,0,0.06) 0px 0px 0px 0.5px;
+  --shadow-subtle-2: rgba(0,0,0,0.08) 0px 1px 1px 0px, rgba(0,0,0,0.05) 0px 0px 0px 1px;
+  --shadow-subtle-3: rgba(0,0,0,0.06) 0px 1px 3px 0px, rgba(0,0,0,0.06) 0px 8px 16px 0px, rgba(0,0,0,0.02) 0px 0px 0px 1px;
+
+  --surface-subtle-accent: #fafafa;
+  --surface-light-card: rgba(0,0,0,0.03);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-openrunde);
+  background: var(--color-canvas-white);
+  color: var(--color-slate-ink);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  letter-spacing: var(--tracking-body);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--color-canvas-white);
+  border-bottom: 1px solid var(--color-light-gray);
+  padding: 0 5vw;
+}
+.navbar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-16);
+}
+.navbar-logo {
+  font-size: var(--text-heading-sm);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-heading-sm);
+  color: var(--color-slate-ink);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+}
+.navbar-logo-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--color-radiant-violet);
+}
+.navbar-badge {
+  background: var(--color-deep-purple);
+  color: white;
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-caption);
+  padding: 2px var(--spacing-8);
+  border-radius: var(--radius-pill);
+}
+.navbar-back {
+  font-size: var(--text-body);
+  color: var(--color-medium-gray);
+  text-decoration: none;
+  letter-spacing: var(--tracking-body);
+  transition: color 0.15s;
+}
+.navbar-back:hover { color: var(--color-slate-ink); }
+
+.hero {
+  background: linear-gradient(135deg, var(--color-whisper-purple) 0%, #f0effd 40%, var(--color-canvas-white) 100%);
+  padding: var(--spacing-64) 5vw;
+  border-bottom: 1px solid var(--color-light-gray);
+}
+.hero-inner { max-width: 1200px; margin: 0 auto; }
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  background: rgba(145,141,246,0.12);
+  border: 1px solid rgba(145,141,246,0.3);
+  border-radius: var(--radius-pill);
+  padding: var(--spacing-4) var(--spacing-12);
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-caption);
+  color: var(--color-deep-purple);
+  margin-bottom: var(--spacing-20);
+}
+.hero-eyebrow-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--color-radiant-violet);
+}
+.hero h1 {
+  font-size: var(--text-display);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
+  color: var(--color-slate-ink);
+  margin-bottom: var(--spacing-16);
+}
+.hero-sub {
+  font-size: var(--text-heading-sm);
+  line-height: var(--leading-heading-sm);
+  letter-spacing: var(--tracking-heading-sm);
+  color: var(--color-medium-gray);
+  max-width: 680px;
+  margin-bottom: var(--spacing-32);
+}
+.hero-links { display: flex; flex-wrap: wrap; gap: var(--spacing-12); }
+.hero-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  background: var(--color-canvas-white);
+  border: 1px solid var(--color-light-gray);
+  border-radius: var(--radius-pill);
+  padding: var(--spacing-8) var(--spacing-16);
+  font-size: var(--text-body);
+  color: var(--color-slate-ink);
+  text-decoration: none;
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-body);
+  box-shadow: var(--shadow-subtle-2);
+  transition: box-shadow 0.15s, border-color 0.15s;
+}
+.hero-link:hover { border-color: var(--color-radiant-violet); box-shadow: var(--shadow-subtle-3); }
+.hero-link-arrow { color: var(--color-muted-gray); font-size: 12px; }
+
+.page-content { max-width: 1200px; margin: 0 auto; padding: var(--spacing-48) 5vw var(--spacing-64); }
+
+.section-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--color-light-gray);
+  margin-bottom: var(--spacing-48);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.section-tabs::-webkit-scrollbar { display: none; }
+.tab-btn {
+  flex-shrink: 0;
+  padding: var(--spacing-12) var(--spacing-24);
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: none;
+  font-family: var(--font-openrunde);
+  font-size: var(--text-body);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--tracking-body);
+  color: var(--color-medium-gray);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.15s, border-color 0.15s;
+  margin-bottom: -1px;
+}
+.tab-btn:hover { color: var(--color-slate-ink); }
+.tab-btn.active {
+  color: var(--color-slate-ink);
+  border-bottom-color: var(--color-radiant-violet);
+  font-weight: var(--font-weight-medium);
+}
+.tab-section { display: none; }
+.tab-section.active { display: block; }
+
+.section-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-24);
+  flex-wrap: wrap;
+  margin-bottom: var(--spacing-24);
+}
+.section-title-block h2 {
+  font-size: var(--text-heading-lg);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--leading-heading-lg);
+  letter-spacing: var(--tracking-heading-lg);
+  color: var(--color-slate-ink);
+  margin-bottom: var(--spacing-8);
+}
+.section-desc {
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  letter-spacing: var(--tracking-body);
+  color: var(--color-medium-gray);
+  max-width: 640px;
+}
+.section-desc code {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 12px;
+  background: var(--surface-light-card);
+  border: 1px solid var(--color-light-gray);
+  border-radius: var(--radius-default);
+  padding: 1px 5px;
+  color: var(--color-slate-ink);
+}
+.count-badge {
+  flex-shrink: 0;
+  background: var(--surface-light-card);
+  border: 1px solid var(--color-light-gray);
+  border-radius: var(--radius-pill);
+  padding: var(--spacing-4) var(--spacing-12);
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--tracking-caption);
+  color: var(--color-medium-gray);
+}
+
+.search-bar { position: relative; margin-bottom: var(--spacing-24); }
+.search-bar-icon {
+  position: absolute;
+  left: var(--spacing-16);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-muted-gray);
+  pointer-events: none;
+}
+.search-input {
+  width: 100%;
+  padding: var(--spacing-12) var(--spacing-16) var(--spacing-12) 44px;
+  font-family: var(--font-openrunde);
+  font-size: var(--text-body);
+  letter-spacing: var(--tracking-body);
+  color: var(--color-slate-ink);
+  background: var(--color-canvas-white);
+  border: 1px solid var(--color-light-gray);
+  border-radius: var(--radius-default);
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.search-input::placeholder { color: var(--color-muted-gray); }
+.search-input:focus {
+  border-color: var(--color-radiant-violet);
+  box-shadow: 0 0 0 3px rgba(145,141,246,0.12);
+}
+.search-clear {
+  position: absolute;
+  right: var(--spacing-12);
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--color-light-gray);
+  border: none;
+  border-radius: var(--radius-pill);
+  width: 20px; height: 20px;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: var(--color-medium-gray);
+  transition: background 0.15s;
+}
+.search-clear:hover { background: var(--color-whisper-purple); }
+.search-clear.visible { display: flex; }
+
+.config-table-wrap {
+  border: 1px solid var(--color-light-gray);
+  border-radius: var(--radius-cards);
+  overflow: hidden;
+  box-shadow: var(--shadow-subtle-2);
+}
+.config-table { width: 100%; border-collapse: collapse; }
+.config-table thead th {
+  background: var(--surface-subtle-accent);
+  padding: var(--spacing-12) var(--spacing-16);
+  text-align: left;
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.04em;
+  color: var(--color-medium-gray);
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--color-light-gray);
+}
+.config-table tbody tr {
+  border-bottom: 1px solid var(--color-light-gray);
+  transition: background 0.1s;
+}
+.config-table tbody tr:last-child { border-bottom: none; }
+.config-table tbody tr:hover { background: #fafbff; }
+.config-table tbody tr.hidden { display: none; }
+.config-table td {
+  padding: var(--spacing-12) var(--spacing-16);
+  vertical-align: top;
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  letter-spacing: var(--tracking-body);
+}
+.config-table td:first-child { width: 36%; min-width: 220px; }
+.key-cell {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 12px;
+  color: var(--color-slate-ink);
+  font-weight: var(--font-weight-medium);
+  word-break: break-all;
+}
+.key-cell mark {
+  background: rgba(145,141,246,0.2);
+  color: var(--color-deep-purple);
+  border-radius: 3px;
+  padding: 0 1px;
+}
+.config-table td:nth-child(2) { width: 26%; min-width: 160px; }
+.type-cell {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 11px;
+  color: var(--color-deep-purple);
+  word-break: break-word;
+  background: rgba(145,141,246,0.06);
+  border: 1px solid rgba(145,141,246,0.15);
+  border-radius: var(--radius-default);
+  padding: 3px var(--spacing-8);
+  display: inline-block;
+}
+.config-table td:nth-child(3) { width: 38%; color: var(--color-medium-gray); }
+.config-table td:nth-child(3) code {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 11px;
+  background: var(--surface-light-card);
+  border: 1px solid var(--color-light-gray);
+  border-radius: 4px;
+  padding: 1px 4px;
+  color: var(--color-slate-ink);
+}
+.config-table td:nth-child(3) mark {
+  background: rgba(145,141,246,0.2);
+  color: var(--color-deep-purple);
+  border-radius: 3px;
+  padding: 0 1px;
+}
+
+.no-results {
+  display: none;
+  text-align: center;
+  padding: var(--spacing-64) var(--spacing-24);
+  color: var(--color-muted-gray);
+  font-size: var(--text-body);
+  letter-spacing: var(--tracking-body);
+}
+.no-results.visible { display: block; }
+.no-results-icon { font-size: 32px; margin-bottom: var(--spacing-12); opacity: 0.5; }
+
+.notice-card {
+  background: var(--surface-subtle-accent);
+  border: 1px solid var(--color-light-gray);
+  border-radius: var(--radius-cards);
+  padding: var(--spacing-20) var(--spacing-24);
+  margin-bottom: var(--spacing-24);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  letter-spacing: var(--tracking-body);
+  color: var(--color-medium-gray);
+  display: flex;
+  gap: var(--spacing-12);
+  align-items: flex-start;
+}
+.notice-card-icon {
+  flex-shrink: 0;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--color-whisper-purple);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: var(--color-deep-purple);
+  margin-top: 1px;
+}
+.notice-card a { color: var(--color-radiant-violet); text-decoration: none; }
+.notice-card a:hover { text-decoration: underline; }
+.notice-card code {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 11px;
+  background: rgba(0,0,0,0.04);
+  border: 1px solid var(--color-light-gray);
+  border-radius: 4px;
+  padding: 1px 4px;
+  color: var(--color-slate-ink);
+}
+
+.deprecation-notice {
+  background: rgba(255,166,0,0.06);
+  border: 1px solid rgba(255,166,0,0.3);
+  border-radius: var(--radius-cards);
+  padding: var(--spacing-16) var(--spacing-20);
+  margin-top: var(--spacing-32);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  letter-spacing: var(--tracking-body);
+  color: var(--color-slate-ink);
+  display: flex;
+  gap: var(--spacing-12);
+  align-items: flex-start;
+}
+.deprecation-notice code {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 11px;
+  background: rgba(0,0,0,0.04);
+  border: 1px solid var(--color-light-gray);
+  border-radius: 4px;
+  padding: 1px 4px;
+  color: var(--color-slate-ink);
+}
+
+.schema-block {
+  background: var(--surface-subtle-accent);
+  border: 1px solid var(--color-light-gray);
+  border-radius: var(--radius-cards);
+  padding: var(--spacing-20) var(--spacing-24);
+  margin-top: var(--spacing-32);
+}
+.schema-block h3 {
+  font-size: var(--text-heading-sm);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-heading-sm);
+  color: var(--color-slate-ink);
+  margin-bottom: var(--spacing-12);
+}
+.schema-block p {
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  letter-spacing: var(--tracking-body);
+  color: var(--color-medium-gray);
+  margin-bottom: var(--spacing-12);
+}
+.schema-block a { color: var(--color-radiant-violet); text-decoration: none; }
+.schema-block a:hover { text-decoration: underline; }
+.schema-block pre {
+  background: var(--color-slate-ink);
+  color: #c9d1d9;
+  border-radius: var(--radius-default);
+  padding: var(--spacing-16);
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-x: auto;
+  margin-top: var(--spacing-12);
+}
+.schema-block pre .comment { color: #6e7681; }
+.schema-block pre .key { color: var(--color-radiant-violet); }
+
+footer {
+  border-top: 1px solid var(--color-light-gray);
+  padding: var(--spacing-32) 5vw;
+  background: var(--surface-subtle-accent);
+}
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-16);
+  flex-wrap: wrap;
+}
+.footer-text { font-size: var(--text-caption); letter-spacing: var(--tracking-caption); color: var(--color-muted-gray); }
+.footer-text a { color: var(--color-radiant-violet); text-decoration: none; }
+
+@media (max-width: 768px) {
+  .hero h1 { font-size: 32px; }
+  .hero-sub { font-size: var(--text-body); }
+  .section-header { flex-direction: column; align-items: flex-start; }
+  .config-table td:nth-child(2) { display: none; }
+  .config-table thead th:nth-child(2) { display: none; }
+  .config-table td:first-child { width: 45%; }
+  .config-table td:nth-child(3) { width: 55%; }
+}
+@media (max-width: 600px) {
+  .hero { padding: var(--spacing-48) 5vw; }
+  .hero h1 { font-size: 28px; }
+  .config-table td { padding: var(--spacing-8) var(--spacing-12); }
+  .config-table td:first-child { width: 40%; min-width: unset; }
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a href="index.html" class="navbar-logo">
+      <span class="navbar-logo-dot"></span>
+      AI Scrum Team
+    </a>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="navbar-badge">Codex Docs</span>
+      <a href="index.html" class="navbar-back">← 返回主頁</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <span class="hero-eyebrow-dot"></span>
+      Configuration Reference
+    </div>
+    <h1>Codex 設定參考</h1>
+    <p class="hero-sub">
+      可搜尋的 Codex 設定檔完整參考。若需概念說明與範例，請先參閱
+      Config Basics 與 Advanced Config 文件。
+    </p>
+    <div class="hero-links">
+      <a href="#config-toml" class="hero-link">config.toml 參數<span class="hero-link-arrow">↓</span></a>
+      <a href="#requirements-toml" class="hero-link">requirements.toml 參數<span class="hero-link-arrow">↓</span></a>
+    </div>
+  </div>
+</header>
+
+<main class="page-content">
+  <div class="section-tabs">
+    <button class="tab-btn active" data-tab="config">config.toml</button>
+    <button class="tab-btn" data-tab="requirements">requirements.toml</button>
+  </div>
+
+  <section id="config-toml" class="tab-section active" data-tab-content="config">
+    <div class="section-header">
+      <div class="section-title-block">
+        <h2>config.toml</h2>
+        <p class="section-desc">
+          使用者層級設定位於 <code>~/.codex/config.toml</code>。你也可以在 <code>.codex/config.toml</code>
+          加入專案範圍的覆寫設定。Codex 只在信任該專案時才載入專案範圍的設定檔。<br><br>
+          關於沙箱與審核相關的設定鍵（<code>approval_policy</code>、<code>sandbox_mode</code>、
+          <code>sandbox_workspace_write.*</code>），請搭配 Sandbox and approvals、
+          Protected paths in writable roots 以及 Network access 等文件閱讀。
+        </p>
+      </div>
+      <span class="count-badge" id="config-count"></span>
+    </div>
+    <div class="search-bar">
+      <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M10 10L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <input type="search" id="config-search" class="search-input" placeholder="搜尋設定鍵、型別或說明…" autocomplete="off" spellcheck="false">
+      <button class="search-clear" id="config-clear" title="清除搜尋">✕</button>
+    </div>
+    <div class="config-table-wrap">
+      <table class="config-table" id="config-table">
+        <thead><tr><th>設定鍵</th><th>型別</th><th>說明</th></tr></thead>
+        <tbody id="config-tbody"></tbody>
+      </table>
+      <div class="no-results" id="config-no-results"><div class="no-results-icon">⌕</div>找不到符合條件的設定鍵</div>
+    </div>
+    <div class="deprecation-notice">
+      <span style="font-size:16px;">⚠</span>
+      <span>請將 <code>experimental_instructions_file</code> 重新命名為 <code>model_instructions_file</code>。Codex 已棄用舊鍵，請更新現有設定。</span>
+    </div>
+    <div class="schema-block">
+      <h3>JSON Schema 與 IDE 自動補全</h3>
+      <p>你可以在 <a href="https://developers.openai.com/codex/config-schema.json" target="_blank" rel="noopener">這裡</a> 找到 <code>config.toml</code> 的最新 JSON Schema。</p>
+      <p>若要在 VS Code 或 Cursor 中編輯 <code>config.toml</code> 時獲得自動補全與診斷功能，可安裝 <a href="https://marketplace.visualstudio.com/items?itemName=tamasfe.even-better-toml" target="_blank" rel="noopener">Even Better TOML</a> 擴充套件，並在 <code>config.toml</code> 頂部加入以下這行：</p>
+      <pre><span class="comment">#</span><span class="key">:schema</span> https://developers.openai.com/codex/config-schema.json</pre>
+    </div>
+  </section>
+
+  <section id="requirements-toml" class="tab-section" data-tab-content="requirements">
+    <div class="section-header">
+      <div class="section-title-block">
+        <h2>requirements.toml</h2>
+        <p class="section-desc">
+          <code>requirements.toml</code> 是管理員強制執行的設定檔，用於限制使用者無法覆寫的安全敏感設定。
+          若需詳細說明、存放位置與範例，請參閱 Admin-enforced requirements 文件。<br><br>
+          ChatGPT Business 與 Enterprise 使用者的 Codex 也可套用雲端抓取的 requirements。
+          在 <code>[features]</code> 中使用與 <code>config.toml</code> 相同的 canonical 鍵名來釘選功能旗標；未指定的鍵不受限制。
+        </p>
+      </div>
+      <span class="count-badge" id="req-count"></span>
+    </div>
+    <div class="search-bar">
+      <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M10 10L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <input type="search" id="req-search" class="search-input" placeholder="搜尋設定鍵、型別或說明…" autocomplete="off" spellcheck="false">
+      <button class="search-clear" id="req-clear" title="清除搜尋">✕</button>
+    </div>
+    <div class="notice-card">
+      <span class="notice-card-icon">i</span>
+      <span>在 <code>requirements.toml</code> 中使用 <code>[features]</code>，以 <code>config.toml</code> 的 <code>[features]</code> 表所使用的 canonical 鍵名來釘選功能旗標。省略的鍵不受限制。</span>
+    </div>
+    <div class="config-table-wrap">
+      <table class="config-table" id="req-table">
+        <thead><tr><th>設定鍵</th><th>型別</th><th>說明</th></tr></thead>
+        <tbody id="req-tbody"></tbody>
+      </table>
+      <div class="no-results" id="req-no-results"><div class="no-results-icon">⌕</div>找不到符合條件的設定鍵</div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-text">AI Scrum Team 活動規劃 2026</span>
+    <span class="footer-text">資料來源：<a href="https://developers.openai.com/codex" target="_blank" rel="noopener">OpenAI Codex Docs</a></span>
+  </div>
+</footer>
+
+<script>
+const CONFIG_OPTIONS = [
+  { key: "model", type: "string", desc: "使用的模型（例如 <code>gpt-5.5</code>）。" },
+  { key: "review_model", type: "string", desc: "供 <code>/review</code> 使用的可選模型覆寫（預設使用目前 session 的模型）。" },
+  { key: "model_provider", type: "string", desc: "來自 <code>model_providers</code> 的 provider id（預設：<code>openai</code>）。" },
+  { key: "openai_base_url", type: "string", desc: "覆寫內建 <code>openai</code> model provider 的 Base URL。" },
+  { key: "model_context_window", type: "number", desc: "目前模型可用的 context window token 數量。" },
+  { key: "model_auto_compact_token_limit", type: "number", desc: "觸發自動壓縮歷史紀錄的 token 門檻（未設定時使用模型預設值）。" },
+  { key: "model_catalog_json", type: "string (path)", desc: "啟動時載入的 JSON 模型目錄可選路徑。Profile 層級的 <code>profiles.&lt;name&gt;.model_catalog_json</code> 可針對各 profile 覆寫此值。" },
+  { key: "oss_provider", type: "lmstudio | ollama", desc: "使用 <code>--oss</code> 執行時的預設本地 provider（未設定時會提示選擇）。" },
+  { key: "approval_policy", type: "untrusted | on-request | never | { granular }", desc: "控制 Codex 在執行指令前暫停等待審核的時機。<code>on-failure</code> 已棄用；互動式執行請改用 <code>on-request</code>，非互動式執行請用 <code>never</code>。" },
+  { key: "approval_policy.granular.sandbox_approval", type: "boolean", desc: "為 <code>true</code> 時，允許沙箱升級審核提示浮現。" },
+  { key: "approval_policy.granular.rules", type: "boolean", desc: "為 <code>true</code> 時，允許由 execpolicy <code>prompt</code> 規則觸發的審核提示浮現。" },
+  { key: "approval_policy.granular.mcp_elicitations", type: "boolean", desc: "為 <code>true</code> 時，MCP elicitation 提示允許浮現而非自動拒絕。" },
+  { key: "approval_policy.granular.request_permissions", type: "boolean", desc: "為 <code>true</code> 時，來自 <code>request_permissions</code> 工具的提示允許浮現。" },
+  { key: "approval_policy.granular.skill_approval", type: "boolean", desc: "為 <code>true</code> 時，skill 腳本審核提示允許浮現。" },
+  { key: "approvals_reviewer", type: "user | auto_review", desc: "在 <code>on-request</code> 或細粒度審核政策下審核提示的對象。預設為 <code>user</code>；<code>auto_review</code> 使用 reviewer 子代理。" },
+  { key: "auto_review.policy", type: "string", desc: "本地 Markdown 政策指示，供自動審核使用。受管理的 <code>guardian_policy_config</code> 優先。空白值會被忽略。" },
+  { key: "allow_login_shell", type: "boolean", desc: "允許 shell 工具使用 login-shell 語義。預設為 <code>true</code>。" },
+  { key: "sandbox_mode", type: "read-only | workspace-write | danger-full-access", desc: "指令執行期間的檔案系統與網路存取沙箱政策。" },
+  { key: "sandbox_workspace_write.writable_roots", type: "array&lt;string&gt;", desc: "<code>sandbox_mode = \"workspace-write\"</code> 時的額外可寫根目錄。" },
+  { key: "sandbox_workspace_write.network_access", type: "boolean", desc: "在 workspace-write 沙箱中允許對外的網路存取。" },
+  { key: "sandbox_workspace_write.exclude_tmpdir_env_var", type: "boolean", desc: "在 workspace-write 模式中，將 <code>$TMPDIR</code> 從可寫根目錄中排除。" },
+  { key: "sandbox_workspace_write.exclude_slash_tmp", type: "boolean", desc: "在 workspace-write 模式中，將 <code>/tmp</code> 從可寫根目錄中排除。" },
+  { key: "windows.sandbox", type: "unelevated | elevated", desc: "在 Windows 原生執行 Codex 時使用的 Windows 專屬原生沙箱模式。" },
+  { key: "windows.sandbox_private_desktop", type: "boolean", desc: "在 Windows 原生環境中，預設在私有桌面上執行最終的沙箱子行程。" },
+  { key: "notify", type: "array&lt;string&gt;", desc: "通知用的指令；接收來自 Codex 的 JSON payload。" },
+  { key: "check_for_update_on_startup", type: "boolean", desc: "啟動時檢查 Codex 更新。" },
+  { key: "feedback.enabled", type: "boolean", desc: "啟用透過 <code>/feedback</code> 在所有 Codex 介面提交回饋（預設：true）。" },
+  { key: "analytics.enabled", type: "boolean", desc: "為此機器/profile 啟用或停用分析。未設定時套用客戶端預設值。" },
+  { key: "instructions", type: "string", desc: "保留供未來使用；請優先使用 <code>model_instructions_file</code> 或 <code>AGENTS.md</code>。" },
+  { key: "developer_instructions", type: "string", desc: "注入至 session 的額外開發者指示（可選）。" },
+  { key: "log_dir", type: "string (path)", desc: "Codex 寫入日誌檔案的目錄；預設為 <code>$CODEX_HOME/log</code>。" },
+  { key: "sqlite_home", type: "string (path)", desc: "Codex 儲存 SQLite 狀態資料庫的目錄。" },
+  { key: "compact_prompt", type: "string", desc: "歷史壓縮 prompt 的 inline 覆寫。" },
+  { key: "commit_attribution", type: "string", desc: "啟用 <code>[features].codex_git_commit</code> 時使用的 commit co-author trailer。預設為 <code>Codex &lt;noreply@openai.com&gt;</code>。" },
+  { key: "model_instructions_file", type: "string (path)", desc: "取代內建指示而非 <code>AGENTS.md</code> 的替代檔案。" },
+  { key: "personality", type: "none | friendly | pragmatic", desc: "支援 <code>supportsPersonality</code> 的模型預設溝通風格。" },
+  { key: "service_tier", type: "flex | fast", desc: "新輪次偏好的服務層級。" },
+  { key: "experimental_compact_prompt_file", type: "string (path)", desc: "從檔案載入壓縮 prompt 覆寫（實驗性）。" },
+  { key: "skills.config", type: "array&lt;object&gt;", desc: "儲存在 config.toml 中的每個 skill 啟用覆寫。" },
+  { key: "skills.config.&lt;index&gt;.path", type: "string (path)", desc: "包含 <code>SKILL.md</code> 的 skill 資料夾路徑。" },
+  { key: "skills.config.&lt;index&gt;.enabled", type: "boolean", desc: "啟用或停用所參照的 skill。" },
+  { key: "apps.&lt;id&gt;.enabled", type: "boolean", desc: "依 id 啟用或停用特定 app/connector（預設：true）。" },
+  { key: "apps._default.enabled", type: "boolean", desc: "所有 app 的預設啟用狀態。" },
+  { key: "apps._default.destructive_enabled", type: "boolean", desc: "具有 <code>destructive_hint = true</code> 的 app 工具預設允許/拒絕。" },
+  { key: "apps._default.open_world_enabled", type: "boolean", desc: "具有 <code>open_world_hint = true</code> 的 app 工具預設允許/拒絕。" },
+  { key: "apps.&lt;id&gt;.destructive_enabled", type: "boolean", desc: "允許或封鎖此 app 中標示 <code>destructive_hint = true</code> 的工具。" },
+  { key: "apps.&lt;id&gt;.open_world_enabled", type: "boolean", desc: "允許或封鎖此 app 中標示 <code>open_world_hint = true</code> 的工具。" },
+  { key: "apps.&lt;id&gt;.default_tools_enabled", type: "boolean", desc: "此 app 中工具的預設啟用狀態。" },
+  { key: "apps.&lt;id&gt;.default_tools_approval_mode", type: "auto | prompt | approve", desc: "此 app 中工具的預設審核行為。" },
+  { key: "apps.&lt;id&gt;.tools.&lt;tool&gt;.enabled", type: "boolean", desc: "針對 app 工具的個別啟用覆寫。" },
+  { key: "apps.&lt;id&gt;.tools.&lt;tool&gt;.approval_mode", type: "auto | prompt | approve", desc: "針對單一 app 工具的個別審核行為覆寫。" },
+  { key: "tool_suggest.discoverables", type: "array&lt;table&gt;", desc: "允許針對額外可探索 connector 或 plugin 的工具建議。" },
+  { key: "tool_suggest.disabled_tools", type: "array&lt;table&gt;", desc: "停用特定可探索 connector 或 plugin 的建議。" },
+  { key: "features.apps", type: "boolean", desc: "啟用 ChatGPT Apps/connectors 支援（實驗性）。" },
+  { key: "features.codex_hooks", type: "boolean", desc: "啟用從 <code>hooks.json</code> 或 inline <code>[hooks]</code> 設定載入的生命週期 hooks。" },
+  { key: "features.codex_git_commit", type: "boolean", desc: "啟用 Codex 生成的 git commits。" },
+  { key: "hooks", type: "table", desc: "在 <code>config.toml</code> 中以 inline 方式設定的生命週期 hooks。" },
+  { key: "features.memories", type: "boolean", desc: "啟用 Memories 功能（預設關閉）。" },
+  { key: "mcp_servers.&lt;id&gt;.command", type: "string", desc: "MCP stdio server 的啟動指令。" },
+  { key: "mcp_servers.&lt;id&gt;.args", type: "array&lt;string&gt;", desc: "傳遞給 MCP stdio server 指令的參數。" },
+  { key: "mcp_servers.&lt;id&gt;.env", type: "map&lt;string,string&gt;", desc: "轉發給 MCP stdio server 的環境變數。" },
+  { key: "mcp_servers.&lt;id&gt;.env_vars", type: "array&lt;string | { name, source }&gt;", desc: "為 MCP stdio server 額外加入白名單的環境變數。" },
+  { key: "mcp_servers.&lt;id&gt;.cwd", type: "string", desc: "MCP stdio server 行程的工作目錄。" },
+  { key: "mcp_servers.&lt;id&gt;.url", type: "string", desc: "MCP streamable HTTP server 的端點。" },
+  { key: "mcp_servers.&lt;id&gt;.bearer_token_env_var", type: "string", desc: "提供 MCP HTTP server bearer token 的環境變數。" },
+  { key: "mcp_servers.&lt;id&gt;.http_headers", type: "map&lt;string,string&gt;", desc: "每次 MCP HTTP 請求都會包含的靜態 HTTP headers。" },
+  { key: "mcp_servers.&lt;id&gt;.env_http_headers", type: "map&lt;string,string&gt;", desc: "從環境變數填入的 MCP HTTP server HTTP headers。" },
+  { key: "mcp_servers.&lt;id&gt;.enabled", type: "boolean", desc: "不移除設定的情況下停用 MCP server。" },
+  { key: "mcp_servers.&lt;id&gt;.required", type: "boolean", desc: "為 true 時，若此已啟用的 MCP server 無法初始化，則啟動/恢復時失敗。" },
+  { key: "mcp_servers.&lt;id&gt;.startup_timeout_sec", type: "number", desc: "覆寫 MCP server 預設 10 秒的啟動逾時。" },
+  { key: "mcp_servers.&lt;id&gt;.startup_timeout_ms", type: "number", desc: "<code>startup_timeout_sec</code> 的毫秒別名。" },
+  { key: "mcp_servers.&lt;id&gt;.tool_timeout_sec", type: "number", desc: "覆寫 MCP server 預設每工具 60 秒的逾時。" },
+  { key: "mcp_servers.&lt;id&gt;.enabled_tools", type: "array&lt;string&gt;", desc: "MCP server 公開的工具名稱允許清單。" },
+  { key: "mcp_servers.&lt;id&gt;.disabled_tools", type: "array&lt;string&gt;", desc: "在 <code>enabled_tools</code> 之後套用的 MCP server 拒絕清單。" },
+  { key: "mcp_servers.&lt;id&gt;.scopes", type: "array&lt;string&gt;", desc: "向該 MCP server 驗證時請求的 OAuth scopes。" },
+  { key: "mcp_servers.&lt;id&gt;.oauth_resource", type: "string", desc: "MCP 登入時包含的可選 RFC 8707 OAuth resource 參數。" },
+  { key: "mcp_servers.&lt;id&gt;.experimental_environment", type: "local | remote", desc: "MCP server 的實驗性配置。" },
+  { key: "agents.max_threads", type: "number", desc: "可同時開啟的最大代理執行緒數量。未設定時預設為 <code>6</code>。" },
+  { key: "agents.max_depth", type: "number", desc: "生成的代理執行緒允許的最大巢狀深度（預設：1）。" },
+  { key: "agents.job_max_runtime_seconds", type: "number", desc: "<code>spawn_agents_on_csv</code> 工作的每個 worker 預設逾時。" },
+  { key: "agents.&lt;name&gt;.description", type: "string", desc: "Codex 選擇並生成該代理類型時顯示的角色說明。" },
+  { key: "agents.&lt;name&gt;.config_file", type: "string (path)", desc: "該角色的 TOML 設定層路徑。" },
+  { key: "agents.&lt;name&gt;.nickname_candidates", type: "array&lt;string&gt;", desc: "該角色生成代理的可選顯示暱稱池。" },
+  { key: "memories.generate_memories", type: "boolean", desc: "為 <code>false</code> 時，新建的執行緒不會儲存為記憶生成輸入。預設為 <code>true</code>。" },
+  { key: "memories.use_memories", type: "boolean", desc: "為 <code>false</code> 時，Codex 跳過將現有記憶注入未來 session。預設為 <code>true</code>。" },
+  { key: "memories.disable_on_external_context", type: "boolean", desc: "為 <code>true</code> 時，使用外部 context 的執行緒不會進入記憶生成。預設為 <code>false</code>。" },
+  { key: "memories.max_raw_memories_for_consolidation", type: "number", desc: "全域整合時保留的最大近期原始記憶數量。預設 <code>256</code>，上限 <code>4096</code>。" },
+  { key: "memories.max_unused_days", type: "number", desc: "記憶上次使用後的最大天數，超過後不符合整合資格。預設 <code>30</code>。" },
+  { key: "memories.max_rollout_age_days", type: "number", desc: "考慮進行記憶生成的執行緒最大年齡。預設 <code>30</code>。" },
+  { key: "memories.max_rollouts_per_startup", type: "number", desc: "每次啟動處理的最大 rollout 候選數量。預設 <code>16</code>，上限 <code>128</code>。" },
+  { key: "memories.min_rollout_idle_hours", type: "number", desc: "執行緒被考慮進行記憶生成前的最短閒置時間。預設 <code>6</code>。" },
+  { key: "memories.min_rate_limit_remaining_percent", type: "number", desc: "記憶生成開始前所需的最低速率限制剩餘百分比。預設 <code>25</code>。" },
+  { key: "memories.extract_model", type: "string", desc: "每個執行緒記憶提取的可選模型覆寫。" },
+  { key: "memories.consolidation_model", type: "string", desc: "全域記憶整合的可選模型覆寫。" },
+  { key: "features.unified_exec", type: "boolean", desc: "使用統一的 PTY 支援 exec 工具（穩定；除 Windows 外預設啟用）。" },
+  { key: "features.shell_snapshot", type: "boolean", desc: "快照 shell 環境以加速重複指令（穩定；預設開啟）。" },
+  { key: "features.undo", type: "boolean", desc: "啟用復原支援（穩定；預設關閉）。" },
+  { key: "features.multi_agent", type: "boolean", desc: "啟用多代理協作工具（穩定；預設開啟）。" },
+  { key: "features.personality", type: "boolean", desc: "啟用個性選擇控制項（穩定；預設開啟）。" },
+  { key: "features.web_search", type: "boolean", desc: "已棄用的舊版切換；請改用頂層 <code>web_search</code> 設定。" },
+  { key: "features.web_search_cached", type: "boolean", desc: "已棄用。<code>web_search</code> 未設定時，true 對應 <code>web_search = \"cached\"</code>。" },
+  { key: "features.web_search_request", type: "boolean", desc: "已棄用。<code>web_search</code> 未設定時，true 對應 <code>web_search = \"live\"</code>。" },
+  { key: "features.shell_tool", type: "boolean", desc: "啟用執行指令的預設 <code>shell</code> 工具（穩定；預設開啟）。" },
+  { key: "features.enable_request_compression", type: "boolean", desc: "支援時以 zstd 壓縮串流請求本體（穩定；預設開啟）。" },
+  { key: "features.skill_mcp_dependency_install", type: "boolean", desc: "允許提示並安裝 skill 缺少的 MCP 依賴（穩定；預設開啟）。" },
+  { key: "features.fast_mode", type: "boolean", desc: "啟用 Fast mode 選擇（穩定；預設開啟）。" },
+  { key: "features.prevent_idle_sleep", type: "boolean", desc: "在輪次主動執行時防止機器進入睡眠（實驗性；預設關閉）。" },
+  { key: "suppress_unstable_features_warning", type: "boolean", desc: "抑制啟用開發中功能旗標時出現的警告。" },
+  { key: "model_providers.&lt;id&gt;", type: "table", desc: "自訂 provider 定義。內建 ID（<code>openai</code>、<code>ollama</code>、<code>lmstudio</code>）已保留。" },
+  { key: "model_providers.&lt;id&gt;.name", type: "string", desc: "自訂模型 provider 的顯示名稱。" },
+  { key: "model_providers.&lt;id&gt;.base_url", type: "string", desc: "模型 provider 的 API base URL。" },
+  { key: "model_providers.&lt;id&gt;.env_key", type: "string", desc: "提供 provider API key 的環境變數。" },
+  { key: "model_providers.&lt;id&gt;.env_key_instructions", type: "string", desc: "provider API key 的可選設置說明。" },
+  { key: "model_providers.&lt;id&gt;.experimental_bearer_token", type: "string", desc: "provider 的直接 bearer token（不建議；請改用 <code>env_key</code>）。" },
+  { key: "model_providers.&lt;id&gt;.requires_openai_auth", type: "boolean", desc: "provider 使用 OpenAI 驗證（預設 false）。" },
+  { key: "model_providers.&lt;id&gt;.wire_api", type: "responses", desc: "provider 使用的協定。<code>responses</code> 是唯一支援的值。" },
+  { key: "model_providers.&lt;id&gt;.query_params", type: "map&lt;string,string&gt;", desc: "附加至 provider 請求的額外查詢參數。" },
+  { key: "model_providers.&lt;id&gt;.http_headers", type: "map&lt;string,string&gt;", desc: "加入 provider 請求的靜態 HTTP headers。" },
+  { key: "model_providers.&lt;id&gt;.env_http_headers", type: "map&lt;string,string&gt;", desc: "存在時從環境變數填入的 HTTP headers。" },
+  { key: "model_providers.&lt;id&gt;.request_max_retries", type: "number", desc: "對 provider HTTP 請求的重試次數（預設：4）。" },
+  { key: "model_providers.&lt;id&gt;.stream_max_retries", type: "number", desc: "SSE 串流中斷的重試次數（預設：5）。" },
+  { key: "model_providers.&lt;id&gt;.stream_idle_timeout_ms", type: "number", desc: "SSE 串流的閒置逾時，毫秒（預設：300000）。" },
+  { key: "model_providers.&lt;id&gt;.supports_websockets", type: "boolean", desc: "該 provider 是否支援 Responses API WebSocket 傳輸。" },
+  { key: "model_providers.&lt;id&gt;.auth", type: "table", desc: "自訂 provider 的指令驅動 bearer token 設定。" },
+  { key: "model_providers.&lt;id&gt;.auth.command", type: "string", desc: "Codex 需要 bearer token 時執行的指令（需將 token 印至 stdout）。" },
+  { key: "model_providers.&lt;id&gt;.auth.args", type: "array&lt;string&gt;", desc: "傳遞給 token 指令的參數。" },
+  { key: "model_providers.&lt;id&gt;.auth.timeout_ms", type: "number", desc: "token 指令的最長執行時間，毫秒（預設：5000）。" },
+  { key: "model_providers.&lt;id&gt;.auth.refresh_interval_ms", type: "number", desc: "Codex 主動更新 token 的頻率，毫秒（預設：300000）。" },
+  { key: "model_providers.&lt;id&gt;.auth.cwd", type: "string (path)", desc: "token 指令的工作目錄。" },
+  { key: "model_providers.amazon-bedrock.aws.profile", type: "string", desc: "內建 <code>amazon-bedrock</code> provider 使用的 AWS profile 名稱。" },
+  { key: "model_providers.amazon-bedrock.aws.region", type: "string", desc: "內建 <code>amazon-bedrock</code> provider 使用的 AWS 區域。" },
+  { key: "model_reasoning_effort", type: "minimal | low | medium | high | xhigh", desc: "調整支援模型的推理強度（僅限 Responses API）。" },
+  { key: "plan_mode_reasoning_effort", type: "none | minimal | low | medium | high | xhigh", desc: "Plan mode 的推理覆寫。" },
+  { key: "model_reasoning_summary", type: "auto | concise | detailed | none", desc: "選擇推理摘要詳細程度或完全停用摘要。" },
+  { key: "model_verbosity", type: "low | medium | high", desc: "可選的 GPT-5 Responses API 詳細程度覆寫。" },
+  { key: "model_supports_reasoning_summaries", type: "boolean", desc: "強制 Codex 傳送或不傳送推理元資料。" },
+  { key: "shell_environment_policy.inherit", type: "all | core | none", desc: "生成子行程時的基本環境繼承方式。" },
+  { key: "shell_environment_policy.ignore_default_excludes", type: "boolean", desc: "在其他過濾器執行前保留含有 KEY/SECRET/TOKEN 的變數。" },
+  { key: "shell_environment_policy.exclude", type: "array&lt;string&gt;", desc: "在預設值之後用於移除環境變數的 glob 模式。" },
+  { key: "shell_environment_policy.include_only", type: "array&lt;string&gt;", desc: "模式白名單；設定後只保留符合的變數。" },
+  { key: "shell_environment_policy.set", type: "map&lt;string,string&gt;", desc: "注入至每個子行程的明確環境覆寫。" },
+  { key: "shell_environment_policy.experimental_use_profile", type: "boolean", desc: "生成子行程時使用使用者 shell profile。" },
+  { key: "project_root_markers", type: "array&lt;string&gt;", desc: "專案根目錄標記檔案名稱清單。" },
+  { key: "project_doc_max_bytes", type: "number", desc: "建構專案指示時讀取 <code>AGENTS.md</code> 的最大位元組數。" },
+  { key: "project_doc_fallback_filenames", type: "array&lt;string&gt;", desc: "<code>AGENTS.md</code> 不存在時嘗試的額外檔案名稱。" },
+  { key: "profile", type: "string", desc: "啟動時套用的預設 profile（等同於 <code>--profile</code>）。" },
+  { key: "profiles.&lt;name&gt;.*", type: "various", desc: "任意支援設定鍵的 profile 範圍覆寫。" },
+  { key: "profiles.&lt;name&gt;.service_tier", type: "flex | fast", desc: "新輪次的 profile 範圍服務層級偏好。" },
+  { key: "profiles.&lt;name&gt;.plan_mode_reasoning_effort", type: "none | minimal | low | medium | high | xhigh", desc: "Profile 範圍的 Plan mode 推理覆寫。" },
+  { key: "profiles.&lt;name&gt;.web_search", type: "disabled | cached | live", desc: "Profile 範圍的網路搜尋模式覆寫。" },
+  { key: "profiles.&lt;name&gt;.personality", type: "none | friendly | pragmatic", desc: "支援模型的 profile 範圍溝通風格覆寫。" },
+  { key: "profiles.&lt;name&gt;.model_catalog_json", type: "string (path)", desc: "Profile 範圍的模型目錄 JSON 路徑覆寫。" },
+  { key: "profiles.&lt;name&gt;.model_instructions_file", type: "string (path)", desc: "Profile 範圍的內建指示檔案替代。" },
+  { key: "profiles.&lt;name&gt;.experimental_use_unified_exec_tool", type: "boolean", desc: "啟用 unified exec 的舊名稱。" },
+  { key: "profiles.&lt;name&gt;.oss_provider", type: "lmstudio | ollama", desc: "<code>--oss</code> session 的 profile 範圍 OSS provider。" },
+  { key: "profiles.&lt;name&gt;.tools_view_image", type: "boolean", desc: "在該 profile 中啟用或停用 <code>view_image</code> 工具。" },
+  { key: "profiles.&lt;name&gt;.analytics.enabled", type: "boolean", desc: "Profile 範圍的分析啟用覆寫。" },
+  { key: "profiles.&lt;name&gt;.windows.sandbox", type: "unelevated | elevated", desc: "Profile 範圍的 Windows 沙箱模式覆寫。" },
+  { key: "history.persistence", type: "save-all | none", desc: "控制 Codex 是否將 session 記錄儲存至 history.jsonl。" },
+  { key: "tool_output_token_limit", type: "number", desc: "儲存個別工具/函式輸出至歷史紀錄的 token 預算。" },
+  { key: "background_terminal_max_timeout", type: "number", desc: "空白 <code>write_stdin</code> 輪詢的最大輪詢視窗，毫秒（預設：300000）。" },
+  { key: "history.max_bytes", type: "number", desc: "若設定，透過刪除最舊項目來限制歷史檔案大小。" },
+  { key: "file_opener", type: "vscode | vscode-insiders | windsurf | cursor | none", desc: "從 Codex 輸出開啟引用時使用的 URI scheme（預設：<code>vscode</code>）。" },
+  { key: "otel.environment", type: "string", desc: "套用至發出的 OpenTelemetry 事件的環境標籤（預設：<code>dev</code>）。" },
+  { key: "otel.exporter", type: "none | otlp-http | otlp-grpc", desc: "選擇 OpenTelemetry exporter。" },
+  { key: "otel.trace_exporter", type: "none | otlp-http | otlp-grpc", desc: "選擇 OpenTelemetry trace exporter。" },
+  { key: "otel.metrics_exporter", type: "none | statsig | otlp-http | otlp-grpc", desc: "選擇 OpenTelemetry metrics exporter（預設：<code>statsig</code>）。" },
+  { key: "otel.log_user_prompt", type: "boolean", desc: "選擇加入以 OpenTelemetry logs 匯出原始使用者提示。" },
+  { key: "otel.exporter.&lt;id&gt;.endpoint", type: "string", desc: "OTEL logs 的 exporter 端點。" },
+  { key: "otel.exporter.&lt;id&gt;.protocol", type: "binary | json", desc: "OTLP/HTTP exporter 使用的協定。" },
+  { key: "otel.exporter.&lt;id&gt;.headers", type: "map&lt;string,string&gt;", desc: "OTEL exporter 請求包含的靜態 headers。" },
+  { key: "otel.trace_exporter.&lt;id&gt;.endpoint", type: "string", desc: "OTEL trace exporter 端點。" },
+  { key: "otel.trace_exporter.&lt;id&gt;.protocol", type: "binary | json", desc: "OTLP/HTTP trace exporter 使用的協定。" },
+  { key: "otel.trace_exporter.&lt;id&gt;.headers", type: "map&lt;string,string&gt;", desc: "OTEL trace exporter 請求包含的靜態 headers。" },
+  { key: "otel.exporter.&lt;id&gt;.tls.ca-certificate", type: "string", desc: "OTEL exporter TLS 的 CA 憑證路徑。" },
+  { key: "otel.exporter.&lt;id&gt;.tls.client-certificate", type: "string", desc: "OTEL exporter TLS 的用戶端憑證路徑。" },
+  { key: "otel.exporter.&lt;id&gt;.tls.client-private-key", type: "string", desc: "OTEL exporter TLS 的用戶端私鑰路徑。" },
+  { key: "otel.trace_exporter.&lt;id&gt;.tls.ca-certificate", type: "string", desc: "OTEL trace exporter TLS 的 CA 憑證路徑。" },
+  { key: "otel.trace_exporter.&lt;id&gt;.tls.client-certificate", type: "string", desc: "OTEL trace exporter TLS 的用戶端憑證路徑。" },
+  { key: "otel.trace_exporter.&lt;id&gt;.tls.client-private-key", type: "string", desc: "OTEL trace exporter TLS 的用戶端私鑰路徑。" },
+  { key: "tui", type: "table", desc: "TUI 專屬選項，例如啟用 inline 桌面通知。" },
+  { key: "tui.notifications", type: "boolean | array&lt;string&gt;", desc: "啟用 TUI 通知；可選擇限制特定事件類型。" },
+  { key: "tui.notification_method", type: "auto | osc9 | bel", desc: "終端機通知的通知方法（預設：auto）。" },
+  { key: "tui.notification_condition", type: "unfocused | always", desc: "控制 TUI 通知觸發條件。預設為 <code>unfocused</code>。" },
+  { key: "tui.animations", type: "boolean", desc: "啟用終端機動畫（預設：true）。" },
+  { key: "tui.alternate_screen", type: "auto | always | never", desc: "控制 TUI 的備用螢幕使用方式（預設：auto）。" },
+  { key: "tui.show_tooltips", type: "boolean", desc: "在 TUI 歡迎畫面顯示新手提示（預設：true）。" },
+  { key: "tui.status_line", type: "array&lt;string&gt; | null", desc: "TUI 底部狀態列項目識別碼的有序清單。<code>null</code> 停用狀態列。" },
+  { key: "tui.terminal_title", type: "array&lt;string&gt; | null", desc: "終端機視窗/頁籤標題項目識別碼的有序清單。" },
+  { key: "tui.theme", type: "string", desc: "語法高亮主題覆寫。" },
+  { key: "tui.keymap.&lt;context&gt;.&lt;action&gt;", type: "string | array&lt;string&gt;", desc: "TUI 操作的鍵盤快捷鍵綁定。" },
+  { key: "tui.keymap.&lt;context&gt;.&lt;action&gt; = []", type: "empty array", desc: "解除該 keymap context 中的操作綁定。" },
+  { key: "tui.model_availability_nux.&lt;model&gt;", type: "integer", desc: "以模型 slug 為鍵的內部啟動提示狀態。" },
+  { key: "hide_agent_reasoning", type: "boolean", desc: "在 TUI 與 <code>codex exec</code> 輸出中隱藏推理事件。" },
+  { key: "show_raw_agent_reasoning", type: "boolean", desc: "當目前模型發出原始推理內容時予以呈現。" },
+  { key: "disable_paste_burst", type: "boolean", desc: "停用 TUI 中的連續貼上偵測。" },
+  { key: "windows_wsl_setup_acknowledged", type: "boolean", desc: "追蹤 Windows 入門確認（僅限 Windows）。" },
+  { key: "chatgpt_base_url", type: "string", desc: "覆寫 ChatGPT 登入流程使用的 base URL。" },
+  { key: "cli_auth_credentials_store", type: "file | keyring | auto", desc: "控制 CLI 儲存快取憑證的位置。" },
+  { key: "mcp_oauth_credentials_store", type: "auto | file | keyring", desc: "MCP OAuth 憑證的偏好儲存位置。" },
+  { key: "mcp_oauth_callback_port", type: "integer", desc: "MCP OAuth 登入期間本地 HTTP callback server 的可選固定連接埠。" },
+  { key: "mcp_oauth_callback_url", type: "string", desc: "MCP OAuth 登入的可選重新導向 URI 覆寫。" },
+  { key: "experimental_use_unified_exec_tool", type: "boolean", desc: "啟用 unified exec 的舊名稱；請改用 <code>[features].unified_exec</code>。" },
+  { key: "tools.web_search", type: "boolean | { context_size, allowed_domains, location }", desc: "可選的網路搜尋工具設定。" },
+  { key: "tools.view_image", type: "boolean", desc: "啟用本地圖片附件工具 <code>view_image</code>。" },
+  { key: "web_search", type: "disabled | cached | live", desc: "網路搜尋模式（預設：<code>\"cached\"</code>）。" },
+  { key: "default_permissions", type: "string", desc: "套用至沙箱工具呼叫的預設權限 profile 名稱。" },
+  { key: "permissions.&lt;name&gt;.filesystem", type: "table", desc: "具名檔案系統權限 profile。" },
+  { key: "permissions.&lt;name&gt;.filesystem.glob_scan_max_depth", type: "number", desc: "拒絕讀取 glob 模式的最大展開深度。" },
+  { key: "permissions.&lt;name&gt;.filesystem.&lt;path-or-glob&gt;", type: '"read" | "write" | "none" | table', desc: "授予路徑、glob 模式或特殊 token 的直接存取。" },
+  { key: 'permissions.&lt;name&gt;.filesystem.":project_roots".&lt;subpath-or-glob&gt;', type: '"read" | "write" | "none"', desc: "相對於偵測到的專案根目錄的範圍檔案系統存取。" },
+  { key: "permissions.&lt;name&gt;.network.enabled", type: "boolean", desc: "為此具名權限 profile 啟用網路存取。" },
+  { key: "permissions.&lt;name&gt;.network.proxy_url", type: "string", desc: "受管理網路 proxy 的 HTTP proxy 端點。" },
+  { key: "permissions.&lt;name&gt;.network.enable_socks5", type: "boolean", desc: "公開 SOCKS5 監聽器。" },
+  { key: "permissions.&lt;name&gt;.network.socks_url", type: "string", desc: "SOCKS5 proxy 端點。" },
+  { key: "permissions.&lt;name&gt;.network.enable_socks5_udp", type: "boolean", desc: "啟用時允許 SOCKS5 監聽器上的 UDP。" },
+  { key: "permissions.&lt;name&gt;.network.allow_upstream_proxy", type: "boolean", desc: "允許受管理 proxy 鏈結至另一個上游 proxy。" },
+  { key: "permissions.&lt;name&gt;.network.dangerously_allow_non_loopback_proxy", type: "boolean", desc: "允許受管理 proxy 監聽器使用非 loopback 綁定位址。" },
+  { key: "permissions.&lt;name&gt;.network.dangerously_allow_all_unix_sockets", type: "boolean", desc: "允許 proxy 使用任意 Unix sockets。" },
+  { key: "permissions.&lt;name&gt;.network.mode", type: "limited | full", desc: "用於子行程流量的網路 proxy 模式。" },
+  { key: "permissions.&lt;name&gt;.network.domains", type: "map&lt;string, allow | deny&gt;", desc: "受管理 proxy 的網域規則。" },
+  { key: "permissions.&lt;name&gt;.network.unix_sockets", type: "map&lt;string, allow | none&gt;", desc: "受管理 proxy 的 Unix socket 規則。" },
+  { key: "permissions.&lt;name&gt;.network.allow_local_binding", type: "boolean", desc: "允許透過受管理 proxy 進行本地綁定/監聽操作。" },
+  { key: "projects.&lt;path&gt;.trust_level", type: "string", desc: "將專案或工作樹標記為 <code>\"trusted\"</code> 或 <code>\"untrusted\"</code>。" },
+  { key: "notice.hide_full_access_warning", type: "boolean", desc: "追蹤完整存取警告提示的確認狀態。" },
+  { key: "notice.hide_world_writable_warning", type: "boolean", desc: "追蹤 Windows 全域可寫入目錄警告的確認狀態。" },
+  { key: "notice.hide_rate_limit_model_nudge", type: "boolean", desc: "追蹤速率限制模型切換提醒的選擇退出狀態。" },
+  { key: "notice.hide_gpt5_1_migration_prompt", type: "boolean", desc: "追蹤 GPT-5.1 遷移提示的確認狀態。" },
+  { key: "notice.hide_gpt-5.1-codex-max_migration_prompt", type: "boolean", desc: "追蹤 gpt-5.1-codex-max 遷移提示的確認狀態。" },
+  { key: "notice.model_migrations", type: "map&lt;string,string&gt;", desc: "以舊→新對應追蹤已確認的模型遷移。" },
+  { key: "forced_login_method", type: "chatgpt | api", desc: "限制 Codex 使用特定的驗證方法。" },
+  { key: "forced_chatgpt_workspace_id", type: "string (uuid)", desc: "將 ChatGPT 登入限制至特定工作區識別碼。" },
+];
+
+const REQ_OPTIONS = [
+  { key: "allowed_approval_policies", type: "array&lt;string&gt;", desc: "<code>approval_policy</code> 的允許值（例如 <code>untrusted</code>、<code>on-request</code>、<code>never</code>、<code>granular</code>）。" },
+  { key: "allowed_approvals_reviewers", type: "array&lt;string&gt;", desc: "<code>approvals_reviewer</code> 的允許值，例如 <code>user</code> 和 <code>auto_review</code>。" },
+  { key: "guardian_policy_config", type: "string", desc: "自動審核的受管理 Markdown 政策指示。優先於本地 <code>[auto_review].policy</code>。" },
+  { key: "allowed_sandbox_modes", type: "array&lt;string&gt;", desc: "<code>sandbox_mode</code> 的允許值。" },
+  { key: "remote_sandbox_config", type: "array&lt;table&gt;", desc: "主機特定的沙箱要求。" },
+  { key: "remote_sandbox_config[].hostname_patterns", type: "array&lt;string&gt;", desc: "不區分大小寫的主機名稱模式。支援 <code>*</code> 和 <code>?</code>。" },
+  { key: "remote_sandbox_config[].allowed_sandbox_modes", type: "array&lt;string&gt;", desc: "此主機特定項目符合時套用的允許沙箱模式。" },
+  { key: "allowed_web_search_modes", type: "array&lt;string&gt;", desc: "<code>web_search</code> 的允許值（<code>disabled</code>、<code>cached</code>、<code>live</code>）。" },
+  { key: "features", type: "table", desc: "釘選功能值，以 <code>config.toml</code> 的 <code>[features]</code> canonical 名稱為鍵。" },
+  { key: "features.&lt;name&gt;", type: "boolean", desc: "要求特定 canonical 功能鍵保持啟用或停用。" },
+  { key: "features.in_app_browser", type: "boolean", desc: "設為 <code>false</code> 可停用應用程式內瀏覽器面板。" },
+  { key: "features.browser_use", type: "boolean", desc: "設為 <code>false</code> 可停用 Browser Use 和 Browser Agent 可用性。" },
+  { key: "features.computer_use", type: "boolean", desc: "設為 <code>false</code> 可停用 Computer Use 可用性及相關安裝或啟用流程。" },
+  { key: "hooks", type: "table", desc: "管理員強制執行的受管理生命週期 hooks。" },
+  { key: "hooks.managed_dir", type: "string (absolute path)", desc: "macOS 和 Linux 上包含受管理 hook 腳本的目錄。" },
+  { key: "hooks.windows_managed_dir", type: "string (absolute path)", desc: "Windows 上包含受管理 hook 腳本的目錄。" },
+  { key: "hooks.&lt;Event&gt;", type: "array&lt;table&gt;", desc: "hook 事件的符合群組（例如 <code>PreToolUse</code>、<code>PostToolUse</code>、<code>SessionStart</code>）。" },
+  { key: "hooks.&lt;Event&gt;[].hooks", type: "array&lt;table&gt;", desc: "符合群組的 hook 處理器。" },
+  { key: "permissions.filesystem.deny_read", type: "array&lt;string&gt;", desc: "管理員強制執行的檔案系統讀取拒絕。使用者無法透過本地設定削弱這些限制。" },
+  { key: "mcp_servers", type: "table", desc: "可啟用的 MCP server 允許清單。" },
+  { key: "mcp_servers.&lt;id&gt;.identity", type: "table", desc: "單一 MCP server 的身分識別規則。" },
+  { key: "mcp_servers.&lt;id&gt;.identity.command", type: "string", desc: "當 MCP stdio server 的指令符合此值時允許。" },
+  { key: "mcp_servers.&lt;id&gt;.identity.url", type: "string", desc: "當 MCP streamable HTTP server 的 URL 符合此值時允許。" },
+  { key: "rules", type: "table", desc: "與 <code>.rules</code> 檔案合併的管理員強制執行指令規則。" },
+  { key: "rules.prefix_rules", type: "array&lt;table&gt;", desc: "強制執行的前綴規則清單。每條規則必須包含 <code>pattern</code> 和 <code>decision</code>。" },
+  { key: "rules.prefix_rules[].pattern", type: "array&lt;table&gt;", desc: "以模式 token 表達的指令前綴。" },
+  { key: "rules.prefix_rules[].pattern[].token", type: "string", desc: "此位置的單一字面 token。" },
+  { key: "rules.prefix_rules[].pattern[].any_of", type: "array&lt;string&gt;", desc: "此位置允許的替代 token 清單。" },
+  { key: "rules.prefix_rules[].decision", type: "prompt | forbidden", desc: "必填。Requirements 規則只能 prompt 或 forbidden。" },
+  { key: "rules.prefix_rules[].justification", type: "string", desc: "在審核提示或拒絕訊息中呈現的可選理由。" },
+];
+
+function renderRows(data, tbodyId) {
+  const tbody = document.getElementById(tbodyId);
+  data.forEach(item => {
+    const tr = document.createElement('tr');
+    tr.dataset.key = item.key.toLowerCase();
+    tr.dataset.type = item.type.toLowerCase();
+    tr.dataset.desc = item.desc.replace(/<[^>]+>/g, '').toLowerCase();
+    tr.innerHTML = `<td><span class="key-cell">${item.key}</span></td><td><span class="type-cell">${item.type}</span></td><td>${item.desc}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+renderRows(CONFIG_OPTIONS, 'config-tbody');
+renderRows(REQ_OPTIONS, 'req-tbody');
+document.getElementById('config-count').textContent = CONFIG_OPTIONS.length + ' 個設定鍵';
+document.getElementById('req-count').textContent = REQ_OPTIONS.length + ' 個設定鍵';
+
+function highlight(text, query) {
+  if (!query) return text;
+  const re = new RegExp('(' + query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+  return text.replace(re, '<mark>$1</mark>');
+}
+
+function setupSearch(inputId, clearId, tbodyId, noResultsId, countId, data) {
+  const input = document.getElementById(inputId);
+  const clearBtn = document.getElementById(clearId);
+  const noResults = document.getElementById(noResultsId);
+  function doSearch() {
+    const q = input.value.trim().toLowerCase();
+    const rows = document.getElementById(tbodyId).querySelectorAll('tr');
+    let visible = 0;
+    rows.forEach((tr, i) => {
+      const item = data[i];
+      const match = !q || tr.dataset.key.includes(q) || tr.dataset.type.includes(q) || tr.dataset.desc.includes(q);
+      if (match) {
+        tr.classList.remove('hidden');
+        visible++;
+        if (q) {
+          tr.cells[0].innerHTML = `<span class="key-cell">${highlight(item.key, q)}</span>`;
+          tr.cells[2].innerHTML = highlight(item.desc, q);
+        } else {
+          tr.cells[0].innerHTML = `<span class="key-cell">${item.key}</span>`;
+          tr.cells[2].innerHTML = item.desc;
+        }
+      } else { tr.classList.add('hidden'); }
+    });
+    clearBtn.classList.toggle('visible', q.length > 0);
+    noResults.classList.toggle('visible', visible === 0);
+    document.getElementById(countId).textContent = visible + ' 個設定鍵';
+  }
+  input.addEventListener('input', doSearch);
+  clearBtn.addEventListener('click', () => { input.value = ''; doSearch(); input.focus(); });
+}
+
+setupSearch('config-search', 'config-clear', 'config-tbody', 'config-no-results', 'config-count', CONFIG_OPTIONS);
+setupSearch('req-search', 'req-clear', 'req-tbody', 'req-no-results', 'req-count', REQ_OPTIONS);
+
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = btn.dataset.tab;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelector(`.tab-section[data-tab-content="${target}"]`).classList.add('active');
+  });
+});
+
+document.querySelectorAll('.hero-link').forEach(link => {
+  link.addEventListener('click', e => {
+    const href = link.getAttribute('href');
+    if (href === '#requirements-toml') {
+      e.preventDefault();
+      document.querySelector('.tab-btn[data-tab="requirements"]').click();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (href === '#config-toml') {
+      e.preventDefault();
+      document.querySelector('.tab-btn[data-tab="config"]').click();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  });
+});
+</script>
+</body>
+</html>
