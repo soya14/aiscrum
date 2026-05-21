@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenAI Codex vs GitHub Copilot Business — 比較報告 v2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=OpenRunde:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-canvas-white: #ffffff;
+      --color-slate-ink: #181925;
+      --color-medium-gray: #666666;
+      --color-muted-gray: #999999;
+      --color-light-gray: #e8e8e8;
+      --color-whisper-purple: #dad9fc;
+      --color-radiant-violet: #918df6;
+      --color-electric-blue: #2c78fc;
+      --color-success-green: #33c758;
+      --color-warning-yellow: #ffa600;
+      --color-accent-pink: #d6409f;
+      --color-pale-mint: #def6e4;
+      --color-deep-purple: #9580ff;
+      --color-vivid-orange: #ff3e00;
+
+      --surface-canvas-white: #ffffff;
+      --surface-subtle-accent: #fafafa;
+      --surface-light-card: rgba(0,0,0,0.03);
+
+      --font-openrunde: 'OpenRunde', ui-sans-serif, system-ui, -apple-system,
+                        BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: 'SF Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+
+      --spacing-4: 4px;   --spacing-8: 8px;   --spacing-12: 12px;
+      --spacing-16: 16px; --spacing-20: 20px; --spacing-24: 24px;
+      --spacing-32: 32px; --spacing-48: 48px; --spacing-64: 64px;
+
+      --radius-default: 8px;
+      --radius-cards: 16px;
+      --radius-large: 24px;
+      --radius-pill: 9999px;
+
+      --shadow-subtle:   rgba(0,0,0,0.08) 0px 1px 1px 1px, rgba(0,0,0,0.06) 0px 0px 0px 0.5px;
+      --shadow-subtle-2: rgba(0,0,0,0.08) 0px 1px 1px 0px, rgba(0,0,0,0.05) 0px 0px 0px 1px;
+      --shadow-subtle-3: rgba(0,0,0,0.06) 0px 1px 3px 0px, rgba(0,0,0,0.06) 0px 8px 16px 0px,
+                         rgba(0,0,0,0.02) 0px 0px 0px 1px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-openrunde);
+      background-color: var(--color-canvas-white);
+      color: var(--color-slate-ink);
+      font-size: 15px;
+      line-height: 1.7;
+      letter-spacing: -0.025px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-24);
+    }
+
+    /* ===== Page header ===== */
+    .page-header {
+      border-bottom: 1px solid var(--color-light-gray);
+      padding: var(--spacing-16) 0;
+      position: sticky;
+      top: 0;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: saturate(180%) blur(8px);
+      -webkit-backdrop-filter: saturate(180%) blur(8px);
+      z-index: 50;
+    }
+    .page-header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--spacing-16);
+    }
+    .logo {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--color-slate-ink);
+      letter-spacing: -0.02px;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-8);
+    }
+    .logo-dot {
+      width: 10px; height: 10px;
+      background: var(--color-radiant-violet);
+      border-radius: var(--radius-pill);
+      box-shadow: 0 0 0 4px var(--color-whisper-purple);
+    }
+    .header-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-4);
+      font-size: 12px;
+      color: var(--color-medium-gray);
+      background: var(--color-canvas-white);
+      border-radius: var(--radius-pill);
+      padding: 5px var(--spacing-12);
+      box-shadow: var(--shadow-subtle-2);
+      letter-spacing: -0.05px;
+    }
+
+    /* ===== Hero ===== */
+    .hero {
+      padding: var(--spacing-64) 0 var(--spacing-48);
+      border-bottom: 1px solid var(--color-light-gray);
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-8);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--color-radiant-violet);
+      background: var(--color-whisper-purple);
+      padding: 5px var(--spacing-12);
+      border-radius: var(--radius-pill);
+      letter-spacing: -0.02px;
+      margin-bottom: var(--spacing-20);
+    }
+    .eyebrow-dot {
+      width: 6px; height: 6px;
+      background: var(--color-radiant-violet);
+      border-radius: var(--radius-pill);
+    }
+    h1.hero-title {
+      font-size: 48px;
+      line-height: 1.13;
+      letter-spacing: -0.013em;
+      font-weight: 600;
+      margin-bottom: var(--spacing-16);
+      max-width: 880px;
+    }
+    h1.hero-title .accent {
+      background: linear-gradient(to right in oklab, #2c78fc 0%, #918df6 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .hero-sub {
+      font-size: 18px;
+      line-height: 1.5;
+      color: var(--color-medium-gray);
+      letter-spacing: -0.018px;
+      max-width: 720px;
+      margin-bottom: var(--spacing-24);
+    }
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-8);
+      margin-top: var(--spacing-16);
+    }
+    .meta-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-8);
+      font-size: 13px;
+      color: var(--color-slate-ink);
+      background: var(--surface-subtle-accent);
+      border: 1px solid var(--color-light-gray);
+      padding: 6px var(--spacing-12);
+      border-radius: var(--radius-pill);
+      letter-spacing: -0.02px;
+    }
+    .meta-chip strong {
+      color: var(--color-medium-gray);
+      font-weight: 400;
+      margin-right: 2px;
+    }
+
+    /* ===== TOC ===== */
+    .toc {
+      padding: var(--spacing-32) 0;
+      border-bottom: 1px solid var(--color-light-gray);
+    }
+    .toc-label {
+      font-size: 12px;
+      color: var(--color-muted-gray);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: var(--spacing-12);
+    }
+    .toc-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-8);
+    }
+    .toc-item {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-8);
+      font-size: 13px;
+      color: var(--color-slate-ink);
+      background: var(--color-canvas-white);
+      border: 1px solid var(--color-light-gray);
+      padding: 6px var(--spacing-12);
+      border-radius: var(--radius-pill);
+      text-decoration: none;
+      transition: all 0.15s;
+      letter-spacing: -0.02px;
+    }
+    .toc-item:hover {
+      border-color: var(--color-radiant-violet);
+      color: var(--color-radiant-violet);
+    }
+    .toc-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px; height: 18px;
+      font-size: 11px;
+      font-weight: 500;
+      background: var(--color-whisper-purple);
+      color: var(--color-radiant-violet);
+      border-radius: var(--radius-pill);
+    }
+
+    /* ===== Section ===== */
+    section.content {
+      padding: var(--spacing-64) 0;
+      border-bottom: 1px solid var(--color-light-gray);
+    }
+    section.content:last-of-type { border-bottom: none; }
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      gap: var(--spacing-12);
+      margin-bottom: var(--spacing-8);
+    }
+    .section-num {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-radiant-violet);
+      background: var(--color-whisper-purple);
+      padding: 4px var(--spacing-12);
+      border-radius: var(--radius-pill);
+      letter-spacing: -0.02px;
+    }
+    h2.section-title {
+      font-size: 32px;
+      line-height: 1.17;
+      letter-spacing: -0.017em;
+      font-weight: 600;
+      margin-bottom: var(--spacing-8);
+    }
+    .section-desc {
+      font-size: 16px;
+      color: var(--color-medium-gray);
+      letter-spacing: -0.018px;
+      margin-bottom: var(--spacing-32);
+      max-width: 760px;
+    }
+    h3.subsection-title {
+      font-size: 20px;
+      line-height: 1.22;
+      letter-spacing: -0.018em;
+      font-weight: 600;
+      margin: var(--spacing-48) 0 var(--spacing-16);
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-12);
+    }
+    h3.subsection-title:first-child { margin-top: 0; }
+    .subsection-tag {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--color-medium-gray);
+      background: var(--surface-light-card);
+      padding: 3px var(--spacing-8);
+      border-radius: var(--radius-pill);
+      letter-spacing: -0.02px;
+    }
+
+    /* ===== Compare table ===== */
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--color-light-gray);
+      border-radius: var(--radius-cards);
+      background: var(--color-canvas-white);
+    }
+    table.compare {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      min-width: 640px;
+    }
+    table.compare th,
+    table.compare td {
+      padding: var(--spacing-16);
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid var(--color-light-gray);
+      letter-spacing: -0.025px;
+    }
+    table.compare thead th {
+      background: var(--color-whisper-purple);
+      color: var(--color-slate-ink);
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: -0.02px;
+    }
+    table.compare thead th:first-child {
+      background: var(--surface-subtle-accent);
+      color: var(--color-medium-gray);
+      width: 28%;
+    }
+    table.compare tbody tr:last-child th,
+    table.compare tbody tr:last-child td { border-bottom: none; }
+    table.compare tbody th {
+      font-weight: 500;
+      color: var(--color-slate-ink);
+      background: var(--surface-subtle-accent);
+      width: 28%;
+    }
+    table.compare tbody td {
+      color: var(--color-medium-gray);
+    }
+    table.compare tbody td strong {
+      color: var(--color-slate-ink);
+      font-weight: 500;
+    }
+    .vendor-head {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-8);
+    }
+    .vendor-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px; height: 22px;
+      border-radius: var(--radius-pill);
+      font-size: 11px;
+      font-weight: 600;
+      color: #fff;
+    }
+    .vendor-badge.codex { background: var(--color-slate-ink); }
+    .vendor-badge.copilot { background: var(--color-deep-purple); }
+
+    /* ===== Status icons ===== */
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 500;
+      color: var(--color-slate-ink);
+    }
+    .status-dot {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px; height: 18px;
+      border-radius: var(--radius-pill);
+      font-size: 11px;
+      font-weight: 600;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .status-dot.yes { background: var(--color-success-green); }
+    .status-dot.no { background: var(--color-muted-gray); }
+    .status-dot.warn { background: var(--color-warning-yellow); }
+    .status-dot.na {
+      background: transparent;
+      color: var(--color-muted-gray);
+      border: 1px solid var(--color-light-gray);
+    }
+
+    /* ===== Callout / Note ===== */
+    .callout {
+      border-radius: var(--radius-cards);
+      padding: var(--spacing-20) var(--spacing-24);
+      margin: var(--spacing-24) 0;
+      border-left: 4px solid var(--color-radiant-violet);
+      background: var(--color-whisper-purple);
+      color: var(--color-slate-ink);
+      font-size: 14px;
+      line-height: 1.65;
+      letter-spacing: -0.02px;
+    }
+    .callout.bank {
+      border-left-color: var(--color-success-green);
+      background: var(--color-pale-mint);
+    }
+    .callout.warn {
+      border-left-color: var(--color-warning-yellow);
+      background: #fff7e6;
+    }
+    .callout.risk {
+      border-left-color: var(--color-accent-pink);
+      background: #fcecf5;
+    }
+    .callout-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: -0.02px;
+      margin-bottom: var(--spacing-8);
+      text-transform: uppercase;
+    }
+    .callout.bank .callout-label { color: #1d8a3a; }
+    .callout .callout-label { color: var(--color-radiant-violet); }
+    .callout.warn .callout-label { color: #c97800; }
+    .callout.risk .callout-label { color: var(--color-accent-pink); }
+
+    /* ===== Two-column cards (positioning) ===== */
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-24);
+      margin-top: var(--spacing-24);
+    }
+    .vendor-card {
+      background: var(--color-canvas-white);
+      border: 1px solid var(--color-light-gray);
+      border-radius: var(--radius-cards);
+      padding: var(--spacing-32);
+      box-shadow: var(--shadow-subtle-2);
+    }
+    .vendor-card.codex { border-top: 4px solid var(--color-slate-ink); }
+    .vendor-card.copilot { border-top: 4px solid var(--color-deep-purple); }
+    .vendor-card h4 {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -0.017em;
+      margin-bottom: var(--spacing-4);
+    }
+    .vendor-card .vendor-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--color-medium-gray);
+      margin-bottom: var(--spacing-12);
+    }
+    .vendor-card .vendor-row {
+      display: flex;
+      gap: var(--spacing-12);
+      padding: var(--spacing-12) 0;
+      border-top: 1px solid var(--color-light-gray);
+      font-size: 14px;
+    }
+    .vendor-card .vendor-row:first-of-type { border-top: none; padding-top: 0; }
+    .vendor-card .vendor-row .key {
+      flex: 0 0 96px;
+      color: var(--color-muted-gray);
+      font-size: 12px;
+      letter-spacing: -0.02px;
+      padding-top: 2px;
+    }
+    .vendor-card .vendor-row .val {
+      flex: 1;
+      color: var(--color-slate-ink);
+      letter-spacing: -0.02px;
+    }
+
+    /* ===== Recommendation cards ===== */
+    .rec-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-24);
+      margin-top: var(--spacing-24);
+    }
+    .rec-card {
+      border-radius: var(--radius-cards);
+      padding: var(--spacing-32);
+      border: 1px solid var(--color-light-gray);
+      background: var(--color-canvas-white);
+      box-shadow: var(--shadow-subtle-2);
+    }
+    .rec-card.codex {
+      background: linear-gradient(180deg, #f5f4ff 0%, #ffffff 60%);
+      border-color: var(--color-whisper-purple);
+    }
+    .rec-card.copilot {
+      background: linear-gradient(180deg, #f0f4ff 0%, #ffffff 60%);
+      border-color: #d9e3ff;
+    }
+    .rec-card h4 {
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.018em;
+      margin-bottom: var(--spacing-8);
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-12);
+    }
+    .rec-card .rec-tag {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 3px var(--spacing-8);
+      border-radius: var(--radius-pill);
+    }
+    .rec-card.codex .rec-tag {
+      color: #fff;
+      background: var(--color-slate-ink);
+    }
+    .rec-card.copilot .rec-tag {
+      color: #fff;
+      background: var(--color-deep-purple);
+    }
+    .rec-card .rec-desc {
+      font-size: 13px;
+      color: var(--color-medium-gray);
+      margin-bottom: var(--spacing-16);
+    }
+    .rec-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-12);
+    }
+    .rec-list li {
+      display: flex;
+      gap: var(--spacing-12);
+      font-size: 14px;
+      line-height: 1.6;
+      letter-spacing: -0.02px;
+      color: var(--color-slate-ink);
+    }
+    .rec-list .marker {
+      flex-shrink: 0;
+      width: 22px; height: 22px;
+      border-radius: var(--radius-pill);
+      background: var(--color-canvas-white);
+      border: 1px solid var(--color-light-gray);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: var(--color-radiant-violet);
+    }
+
+    /* ===== Dual-track card ===== */
+    .dual-track {
+      margin-top: var(--spacing-32);
+      border-radius: var(--radius-large);
+      padding: var(--spacing-32);
+      background: var(--color-slate-ink);
+      color: var(--color-canvas-white);
+      position: relative;
+      overflow: hidden;
+    }
+    .dual-track::after {
+      content: "";
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 220px; height: 220px;
+      background: radial-gradient(circle, var(--color-deep-purple) 0%, transparent 70%);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+    .dual-track .dt-label {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-whisper-purple);
+      margin-bottom: var(--spacing-8);
+    }
+    .dual-track h4 {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -0.017em;
+      margin-bottom: var(--spacing-20);
+    }
+    .dual-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-24);
+      position: relative;
+      z-index: 1;
+    }
+    .dual-col {
+      background: rgba(255,255,255,0.06);
+      border-radius: var(--radius-cards);
+      padding: var(--spacing-20);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .dual-col .dual-tag {
+      display: inline-block;
+      font-size: 11px;
+      padding: 3px var(--spacing-8);
+      border-radius: var(--radius-pill);
+      background: var(--color-radiant-violet);
+      color: #fff;
+      margin-bottom: var(--spacing-12);
+      letter-spacing: -0.02px;
+    }
+    .dual-col h5 {
+      font-size: 15px;
+      font-weight: 500;
+      margin-bottom: var(--spacing-8);
+      letter-spacing: -0.02px;
+    }
+    .dual-col p {
+      font-size: 13px;
+      color: var(--color-whisper-purple);
+      letter-spacing: -0.02px;
+    }
+
+    /* ===== Pending list ===== */
+    .pending-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-16);
+      margin-top: var(--spacing-24);
+    }
+    .pending-item {
+      display: flex;
+      gap: var(--spacing-16);
+      padding: var(--spacing-20) var(--spacing-24);
+      background: var(--surface-subtle-accent);
+      border: 1px solid var(--color-light-gray);
+      border-radius: var(--radius-cards);
+    }
+    .pending-num {
+      flex-shrink: 0;
+      width: 28px; height: 28px;
+      border-radius: var(--radius-pill);
+      background: var(--color-canvas-white);
+      border: 1px solid var(--color-light-gray);
+      color: var(--color-radiant-violet);
+      font-weight: 600;
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .pending-body { flex: 1; }
+    .pending-body h4 {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -0.02px;
+      margin-bottom: var(--spacing-8);
+    }
+    .pending-body ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .pending-body li {
+      font-size: 13px;
+      color: var(--color-medium-gray);
+      padding-left: var(--spacing-16);
+      position: relative;
+      letter-spacing: -0.02px;
+    }
+    .pending-body li::before {
+      content: "";
+      position: absolute;
+      left: 2px;
+      top: 9px;
+      width: 6px; height: 6px;
+      border-radius: var(--radius-pill);
+      background: var(--color-radiant-violet);
+    }
+    .pending-body li.todo::before { background: var(--color-warning-yellow); }
+    .tag-inline {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: -0.02px;
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
+      background: var(--color-whisper-purple);
+      color: var(--color-radiant-violet);
+      margin-right: 4px;
+    }
+
+    /* ===== Reference chips ===== */
+    .ref-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-8);
+      margin-top: var(--spacing-16);
+    }
+    .ref-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-8);
+      font-size: 12px;
+      color: var(--color-slate-ink);
+      background: var(--color-canvas-white);
+      border: 1px solid var(--color-light-gray);
+      padding: 6px var(--spacing-12);
+      border-radius: var(--radius-pill);
+      letter-spacing: -0.02px;
+    }
+    .ref-chip .ref-icon {
+      width: 6px; height: 6px;
+      background: var(--color-radiant-violet);
+      border-radius: var(--radius-pill);
+    }
+
+    /* ===== Footer ===== */
+    footer {
+      padding: var(--spacing-48) 0;
+      text-align: center;
+      color: var(--color-muted-gray);
+      font-size: 12px;
+      letter-spacing: -0.02px;
+    }
+    footer .version {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-8);
+      padding: 6px var(--spacing-16);
+      border-radius: var(--radius-pill);
+      background: var(--surface-subtle-accent);
+      border: 1px solid var(--color-light-gray);
+    }
+
+    /* ===== Inline elements ===== */
+    code.inline {
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      background: var(--surface-light-card);
+      padding: 2px 6px;
+      border-radius: var(--radius-default);
+      color: var(--color-slate-ink);
+      letter-spacing: 0;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {
+      h1.hero-title { font-size: 36px; }
+      h2.section-title { font-size: 26px; }
+      .hero { padding: var(--spacing-48) 0 var(--spacing-32); }
+      section.content { padding: var(--spacing-48) 0; }
+      .compare-grid,
+      .rec-grid,
+      .dual-cols {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 600px) {
+      h1.hero-title { font-size: 30px; }
+      .hero-sub { font-size: 16px; }
+      h2.section-title { font-size: 22px; }
+      .container { padding: 0 var(--spacing-16); }
+      .vendor-card,
+      .rec-card,
+      .dual-track { padding: var(--spacing-20); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== Page header ===== -->
+  <header class="page-header">
+    <div class="container">
+      <div class="logo">
+        <span class="logo-dot"></span>
+        AI Tools Comparison · 2026
+      </div>
+      <span class="header-chip">資料截止 · 2026/05</span>
+    </div>
+  </header>
+
+  <!-- ===== Hero ===== -->
+  <section class="hero">
+    <div class="container">
+      <span class="eyebrow"><span class="eyebrow-dot"></span>比較報告 · 修訂版 v2</span>
+      <h1 class="hero-title">
+        OpenAI Codex <span style="color:var(--color-muted-gray); font-weight:400;">vs</span>
+        <span class="accent">GitHub Copilot Business</span>
+      </h1>
+      <p class="hero-sub">
+        針對台灣本地銀行業團隊導入策略，從產品定位、IDE 支援、安全沙箱、
+        CI/CD 整合到價格授權模式的完整評估。
+      </p>
+      <div class="meta-row">
+        <span class="meta-chip"><strong>評估目的</strong>台灣本地銀行業團隊導入策略</span>
+        <span class="meta-chip"><strong>本版調整</strong>補 IDE 清單、移除雲端代理 / IP 賠付 / Cursor 相容項</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TOC ===== -->
+  <nav class="toc">
+    <div class="container">
+      <div class="toc-label">章節導覽</div>
+      <div class="toc-list">
+        <a class="toc-item" href="#s1"><span class="toc-num">1</span>產品定位本質差異</a>
+        <a class="toc-item" href="#s2"><span class="toc-num">2</span>IDE 支援比較</a>
+        <a class="toc-item" href="#s3"><span class="toc-num">3</span>程式開發維運面向</a>
+        <a class="toc-item" href="#s4"><span class="toc-num">4</span>跨工具協作</a>
+        <a class="toc-item" href="#s5"><span class="toc-num">5</span>價格與授權模式</a>
+        <a class="toc-item" href="#s6"><span class="toc-num">6</span>導入建議</a>
+        <a class="toc-item" href="#s7"><span class="toc-num">7</span>待確認與討論</a>
+        <a class="toc-item" href="#s8"><span class="toc-num">8</span>參考來源</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== §1 產品定位 ===== -->
+  <section class="content" id="s1">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-num">01</span>
+      </div>
+      <h2 class="section-title">產品定位本質差異</h2>
+      <p class="section-desc">兩款工具在互動模式、底層模型與訂閱方式上具有結構性差異，影響整個導入路徑與授權策略。</p>
+
+      <div class="compare-grid">
+        <div class="vendor-card codex">
+          <div class="vendor-tag">VENDOR · OPENAI</div>
+          <h4>OpenAI Codex</h4>
+          <div class="vendor-row">
+            <span class="key">核心定位</span>
+            <span class="val">AI 軟體工程代理（agent），逐步擴展為更廣泛的企業代理平台</span>
+          </div>
+          <div class="vendor-row">
+            <span class="key">互動模式</span>
+            <span class="val"><strong>非同步委派 + 同步互動</strong>雙軌</span>
+          </div>
+          <div class="vendor-row">
+            <span class="key">底層模型</span>
+            <span class="val">GPT 系列</span>
+          </div>
+          <div class="vendor-row">
+            <span class="key">訂閱方式</span>
+            <span class="val">透過 ChatGPT Pro / Business / Enterprise 訂閱使用</span>
+          </div>
+        </div>
+
+        <div class="vendor-card copilot">
+          <div class="vendor-tag">VENDOR · GITHUB</div>
+          <h4>GitHub Copilot Business</h4>
+          <div class="vendor-row">
+            <span class="key">核心定位</span>
+            <span class="val">AI 結對程式設計師（pair programmer），深度綁定 GitHub 生態</span>
+          </div>
+          <div class="vendor-row">
+            <span class="key">互動模式</span>
+            <span class="val"><strong>同步互動</strong>為主（IDE 內即時補全）</span>
+          </div>
+          <div class="vendor-row">
+            <span class="key">底層模型</span>
+            <span class="val">GPT-4o、Claude Sonnet、Gemini 等多模型可選</span>
+          </div>
+          <div class="vendor-row">
+            <span class="key">訂閱方式</span>
+            <span class="val">獨立訂閱 $19/user/月（含 $19 AI Credits）</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== §2 IDE 支援 ===== -->
+  <section class="content" id="s2">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-num">02</span>
+      </div>
+      <h2 class="section-title">IDE 支援比較</h2>
+      <p class="section-desc">針對 VS Code、Eclipse、IntelliJ IDEA 三款銀行業常見 IDE 進行支援度比對。</p>
+
+      <div class="table-wrap">
+        <table class="compare">
+          <thead>
+            <tr>
+              <th>IDE</th>
+              <th><span class="vendor-head"><span class="vendor-badge codex">C</span>OpenAI Codex</span></th>
+              <th><span class="vendor-head"><span class="vendor-badge copilot">G</span>GitHub Copilot Business</span></th>
+              <th>備註</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>VS Code</th>
+              <td><span class="status"><span class="status-dot yes">✓</span>官方原生支援</span></td>
+              <td><span class="status"><span class="status-dot yes">✓</span>官方原生支援</span></td>
+              <td>兩者皆為第一優先支援平台</td>
+            </tr>
+            <tr>
+              <th>Eclipse</th>
+              <td><span class="status"><span class="status-dot no">✕</span><strong>不支援</strong></span></td>
+              <td><span class="status"><span class="status-dot yes">✓</span>官方支援（含 GPT-5.2-Codex 模型）</span></td>
+              <td>Codex IDE Extension 官方僅支援 VS Code 系列與 JetBrains，未提供 Eclipse 擴充</td>
+            </tr>
+            <tr>
+              <th>IntelliJ IDEA</th>
+              <td><span class="status"><span class="status-dot yes">✓</span>官方支援（需 2025.3 以上版本）</span></td>
+              <td><span class="status"><span class="status-dot yes">✓</span>官方支援</span></td>
+              <td>Codex 可使用 ChatGPT 帳號、API key 或 JetBrains AI 訂閱登入</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout warn">
+        <div class="callout-label">⚠ Eclipse 使用者注意</div>
+        若團隊主力 IDE 為 Eclipse，<strong>只能選擇 GitHub Copilot Business</strong>。Codex 在 Eclipse 上無官方支援，
+        僅有社群第三方外掛可呼叫 OpenAI API，但非官方 Codex IDE Extension 功能。
+      </div>
+
+      <div class="callout bank">
+        <div class="callout-label">🏦 銀行業補充</div>
+        台灣銀行業 Java 系統多以 <strong>IntelliJ IDEA 或 Eclipse</strong> 為主，
+        建議評估時優先確認主力 IDE 版本。
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== §3 程式開發維運面向 ===== -->
+  <section class="content" id="s3">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-num">03</span>
+      </div>
+      <h2 class="section-title">程式開發維運面向</h2>
+      <p class="section-desc">從即時補全、PR 自動審查、CI/CD 整合到沙箱安全控制，全面比較開發維運能力。</p>
+
+      <!-- 3.1 -->
+      <h3 class="subsection-title">程式碼生成能力 <span class="subsection-tag">3.1</span></h3>
+      <div class="table-wrap">
+        <table class="compare">
+          <thead>
+            <tr>
+              <th>能力項目</th>
+              <th>OpenAI Codex</th>
+              <th>GitHub Copilot Business</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>IDE 內即時補全</th>
+              <td><span class="status"><span class="status-dot yes">✓</span>支援</span></td>
+              <td><span class="status"><span class="status-dot yes">✓</span>VS Code / JetBrains 內，按 Tab 接受多行補全</span></td>
+            </tr>
+            <tr>
+              <th>CLI 終端機代理</th>
+              <td><span class="status"><span class="status-dot yes">✓</span>Codex CLI（含沙箱）</span></td>
+              <td><span class="status"><span class="status-dot yes">✓</span>GitHub Copilot CLI（取代已退場的 gh copilot extension）</span></td>
+            </tr>
+            <tr>
+              <th>多檔案編輯</th>
+              <td><span class="status"><span class="status-dot yes">✓</span>支援</span></td>
+              <td><span class="status"><span class="status-dot yes">✓</span>支援</span></td>
+            </tr>
+            <tr>
+              <th>桌面 App</th>
+              <td><span class="status"><span class="status-dot yes">✓</span>Codex app 支援 macOS 與 Windows</span></td>
+              <td><span class="status"><span class="status-dot no">✕</span>無獨立桌面 App</span></td>
+            </tr>
+            <tr>
+              <th>行動 App</th>
+              <td><span class="status"><span class="status-dot yes">✓</span>加入 ChatGPT 行動 App（預覽版）</span></td>
+              <td><span class="status"><span class="status-dot no">✕</span>無</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 3.2 -->
+      <h3 class="subsection-title">Code Review 自動化 <span class="subsection-tag">3.2</span></h3>
+      <div class="table-wrap">
+        <table class="compare">
+          <thead>
+            <tr>
+              <th>能力</th>
+              <th>OpenAI Codex</th>
+              <th>GitHub Copilot Business</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>PR 自動審查</th>
+              <td><span class="status"><span class="status-dot yes">✓</span>Auto-review 機制</span></td>
+              <td><span class="status"><span class="status-dot yes">✓</span>PR 上可將「Copilot」加為 reviewer，幾分鐘內分析變更並留下評論（Business 與 Enterprise 方案可用）</span></td>
+            </tr>
+            <tr>
+              <th>Review → Fix 串接</th>
+              <td><span class="status"><span class="status-dot yes">✓</span>支援</span></td>
+              <td><span class="status"><span class="status-dot yes">✓</span>2026/3 上線的 agentic code review 可將建議直接交給 coding agent 自動產生修復 PR</span></td>
+            </tr>
+            <tr>
+              <th>CI/CD Gate 整合</th>
+              <td><span class="status"><span class="status-dot yes">✓</span>可透過 <code class="inline">codex exec --json</code> 整合</span></td>
+              <td><span class="status"><span class="status-dot no">✕</span>無法作為 GitHub Actions workflow 的 step，也無法基於 Copilot 的發現阻擋 merge</span></td>
+            </tr>
+            <tr>
+              <th>多 Git 平台</th>
+              <td><span class="status"><span class="status-dot yes">✓</span>不綁定平台</span></td>
+              <td><span class="status"><span class="status-dot no">✕</span>Copilot code review 只能在 GitHub 上運作；GitLab、Bitbucket、Azure DevOps 完全無法使用</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 3.3 -->
+      <h3 class="subsection-title">CI/CD 與自動化整合 <span class="subsection-tag">3.3</span></h3>
+      <div class="table-wrap">
+        <table class="compare">
+          <thead>
+            <tr>
+              <th>整合點</th>
+              <th>OpenAI Codex</th>
+              <th>GitHub Copilot Business</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>CI Pipeline 模式</th>
+              <td><span class="status"><span class="status-dot yes">✓</span><code class="inline">codex exec</code> 適用於腳本化或 CI 風格的執行</span></td>
+              <td><span class="status"><span class="status-dot warn">!</span>主要靠 GitHub Actions</span></td>
+            </tr>
+            <tr>
+              <th>Hooks / Plugins</th>
+              <td><span class="status"><span class="status-dot yes">✓</span>Hooks 已 GA、Access tokens for trusted automation、企業管理員設定指引</span></td>
+              <td><span class="status"><span class="status-dot warn">!</span>較少</span></td>
+            </tr>
+            <tr>
+              <th>MCP 協定</th>
+              <td><span class="status"><span class="status-dot yes">✓</span>Codex 完整支援 MCP，可串接自訂工具</span></td>
+              <td><span class="status"><span class="status-dot yes">✓</span>支援</span></td>
+            </tr>
+            <tr>
+              <th>管理層級設定強制</th>
+              <td><span class="status"><span class="status-dot yes">✓</span><code class="inline">requirements.toml</code> 可由企業強制約束（例如禁止 <code class="inline">approval_policy="never"</code> 或 <code class="inline">sandbox_mode="danger-full-access"</code>）</span></td>
+              <td><span class="status"><span class="status-dot warn">!</span>較依賴組織政策</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 3.4 -->
+      <h3 class="subsection-title">安全性與沙箱 <span class="subsection-tag">3.4 · 銀行業關鍵</span></h3>
+      <div class="table-wrap">
+        <table class="compare">
+          <thead>
+            <tr>
+              <th>安全機制</th>
+              <th>OpenAI Codex</th>
+              <th>GitHub Copilot Business</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>OS 級沙箱</th>
+              <td><span class="status"><span class="status-dot yes">✓</span>OS 級機制強制沙箱政策。預設無網路存取、寫入權限限制在當前工作區</span></td>
+              <td><span class="status"><span class="status-dot no">✕</span>無同等沙箱（IDE 內運行）</span></td>
+            </tr>
+            <tr>
+              <th>沙箱模式 + 批准政策雙層</th>
+              <td><span class="status"><span class="status-dot yes">✓</span>兩層協同：Sandbox mode（技術上能做什麼）+ Approval policy（何時必須詢問）</span></td>
+              <td><span class="status"><span class="status-dot warn">!</span>較粗</span></td>
+            </tr>
+            <tr>
+              <th>企業稽核日誌</th>
+              <td><span class="status"><span class="status-dot yes">✓</span>OpenAI Compliance Logs Platform 提供 Audit、Auth、Codex Usage Logs，以不可變、時窗化的 JSONL 檔案匯出</span></td>
+              <td><span class="status"><span class="status-dot yes">✓</span>標準 audit logs、SAML SSO</span></td>
+            </tr>
+            <tr>
+              <th>資料不訓練模型</th>
+              <td><span class="status"><span class="status-dot yes">✓</span>Business / Enterprise 預設不使用資料訓練模型</span></td>
+              <td><span class="status"><span class="status-dot yes">✓</span>Business 預設不訓練</span></td>
+            </tr>
+            <tr>
+              <th>HIPAA 支援</th>
+              <td><span class="status"><span class="status-dot yes">✓</span>企業團隊已擴展 HIPAA 支援</span></td>
+              <td><span class="status"><span class="status-dot yes">✓</span>支援</span></td>
+            </tr>
+            <tr>
+              <th>危險模式禁用</th>
+              <td><span class="status"><span class="status-dot yes">✓</span><code class="inline">--dangerously-bypass-approvals-and-sandbox</code> / <code class="inline">--yolo</code> 旗標可由管理層級禁用</span></td>
+              <td><span class="status"><span class="status-dot na">—</span>N/A</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout bank">
+        <div class="callout-label">🏦 銀行業評估重點</div>
+        Codex 的 <strong>OS 級沙箱 + 雙層批准機制 + 不可變稽核日誌</strong>
+        在處理敏感程式碼時提供更明確的技術隔離與合規佐證。
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== §4 跨工具協作 ===== -->
+  <section class="content" id="s4">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-num">04</span>
+      </div>
+      <h2 class="section-title">跨工具協作與工程師日常工作流</h2>
+      <p class="section-desc">從瀏覽器整合到第三方工具串接，影響日常工作流深度與攻擊面。</p>
+
+      <h3 class="subsection-title">瀏覽器整合 <span class="subsection-tag">4.1</span></h3>
+      <div class="table-wrap">
+        <table class="compare">
+          <thead>
+            <tr>
+              <th>能力</th>
+              <th>OpenAI Codex</th>
+              <th>GitHub Copilot Business</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>Chrome 擴充</th>
+              <td><span class="status"><span class="status-dot yes">✓</span>官方 Chrome 擴充</span></td>
+              <td><span class="status"><span class="status-dot no">✕</span>無</span></td>
+            </tr>
+            <tr>
+              <th>存取已登入網站</th>
+              <td><span class="status"><span class="status-dot yes">✓</span>可操作 LinkedIn、Salesforce、Gmail、內部工具</span></td>
+              <td><span class="status"><span class="status-dot no">✕</span>不支援</span></td>
+            </tr>
+            <tr>
+              <th>In-app browser</th>
+              <td><span class="status"><span class="status-dot yes">✓</span>適用 localhost、預覽、無需登入頁面</span></td>
+              <td><span class="status"><span class="status-dot no">✕</span>不支援</span></td>
+            </tr>
+            <tr>
+              <th>網站存取控制</th>
+              <td><span class="status"><span class="status-dot yes">✓</span>預設<strong>逐站詢問</strong>、可建立 allowlist / blocklist</span></td>
+              <td><span class="status"><span class="status-dot na">—</span>N/A</span></td>
+            </tr>
+            <tr>
+              <th>瀏覽歷史存取</th>
+              <td><span class="status"><span class="status-dot warn">!</span>高風險功能，僅單次授權</span></td>
+              <td><span class="status"><span class="status-dot na">—</span>N/A</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout risk">
+        <div class="callout-label">📌 ElevatedRiskBadge 高風險功能</div>
+        Codex Chrome 擴充將「Always allow browser content」「Browser history」標為
+        <strong>ElevatedRiskBadge</strong>（高風險），<strong>目前行內未開放使用</strong>。
+      </div>
+
+      <h3 class="subsection-title">第三方整合 <span class="subsection-tag">4.2</span></h3>
+      <div class="table-wrap">
+        <table class="compare">
+          <thead>
+            <tr>
+              <th>整合</th>
+              <th>OpenAI Codex</th>
+              <th>GitHub Copilot Business</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>GitHub</th>
+              <td><span class="status"><span class="status-dot yes">✓</span>可整合</span></td>
+              <td><span class="status"><span class="status-dot yes">✓✓✓</span>原生</span></td>
+            </tr>
+            <tr>
+              <th>Slack</th>
+              <td><span class="status"><span class="status-dot yes">✓</span>原生整合</span></td>
+              <td><span class="status"><span class="status-dot warn">!</span>有限</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== §5 價格 ===== -->
+  <section class="content" id="s5">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-num">05</span>
+      </div>
+      <h2 class="section-title">價格與授權模式</h2>
+      <p class="section-desc">2026 年起兩者皆轉向 usage-based + AI Credits 模式；台灣本地報價需再向銷售確認。</p>
+
+      <div class="table-wrap">
+        <table class="compare">
+          <thead>
+            <tr>
+              <th>項目</th>
+              <th>OpenAI Codex<br><span style="font-weight:400;color:var(--color-muted-gray);font-size:12px;">含 ChatGPT Business/Enterprise</span></th>
+              <th>GitHub Copilot Business</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>公開定價</th>
+              <td>Pro $100/月、Pro $200/月（個人方案）；<br>Business / Enterprise 採客製化定價</td>
+              <td>Business $19/user/月（含 $19 AI Credits）</td>
+            </tr>
+            <tr>
+              <th>計費模式 2026</th>
+              <td>信用額度制</td>
+              <td>2026/6/1 起所有 Copilot 方案改採 usage-based billing，每月含 AI Credits 額度，超額另購</td>
+            </tr>
+            <tr>
+              <th>台灣本地報價</th>
+              <td><span class="tag-inline">資料不足</span>建議直接與 OpenAI 銷售確認</td>
+              <td><span class="tag-inline">資料不足</span>建議與 GitHub 銷售確認</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== §6 導入建議 ===== -->
+  <section class="content" id="s6">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-num">06</span>
+      </div>
+      <h2 class="section-title">導入建議</h2>
+      <p class="section-desc">依使用情境推薦對應產品，並提供雙軌並行策略供跨部門擴展時參考。</p>
+
+      <div class="rec-grid">
+        <div class="rec-card codex">
+          <h4>
+            <span class="rec-tag">建議採用</span>
+            OpenAI Codex
+          </h4>
+          <p class="rec-desc">（ChatGPT Enterprise）的場景</p>
+          <ul class="rec-list">
+            <li><span class="marker">🌐</span><span>需要<strong>操作已登入的瀏覽器網站</strong>（如內部行員系統、Salesforce CRM、外部金融資訊網），但可行性尚待確認</span></li>
+            <li><span class="marker">📊</span><span>團隊<strong>同時或部分</strong>有「程式開發 + 辦公文件 + 財務試算」三類需求</span></li>
+            <li><span class="marker">🔒</span><span>對 <strong>OS 級沙箱、可匯出的不可變稽核日誌</strong>有強需求</span></li>
+            <li><span class="marker">🔄</span><span><strong>大量非同步任務委派</strong>（如背景批次重構、定期掃描）</span></li>
+            <li><span class="marker">⭐</span><span>高管對 Codex 的期待：全行使用。目前持續與總經理對焦中，並安排副總、協理體驗 Codex，定位將不再只 for 開發</span></li>
+          </ul>
+        </div>
+
+        <div class="rec-card copilot">
+          <h4>
+            <span class="rec-tag">建議採用</span>
+            GitHub Copilot Business
+          </h4>
+          <p class="rec-desc">的場景</p>
+          <ul class="rec-list">
+            <li><span class="marker">👥</span><span>開發者習慣 <strong>IDE 內即時補全</strong>的同步互動模式</span></li>
+            <li><span class="marker">💵</span><span>僅需純編程輔助、不需通用 AI 辦公能力</span></li>
+            <li><span class="marker">🚫</span><span>不希望工具操作瀏覽器（降低攻擊面）</span></li>
+            <li><span class="marker">🛠️</span><span>需要支援 <strong>Visual Studio 2022 / Xcode / Neovim</strong> 等更廣 IDE</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="dual-track">
+        <div class="dt-label">RECOMMENDATION · 待討論</div>
+        <h4>雙軌並行策略</h4>
+        <div class="dual-cols">
+          <div class="dual-col">
+            <span class="dual-tag">開發團隊</span>
+            <h5>GitHub Copilot Business</h5>
+            <p>多加 GitHub Copilot Business，提供 IDE 內同步補全與多檔案編輯能力。</p>
+          </div>
+          <div class="dual-col">
+            <span class="dual-tag">跨部門 / 維運 / 法遵 / 業務</span>
+            <h5>ChatGPT Enterprise + Codex</h5>
+            <p>辦公能力 + 瀏覽器自動化 + 長任務委派，覆蓋非開發部門的廣泛需求。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== §7 待確認 ===== -->
+  <section class="content" id="s7">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-num">07</span>
+      </div>
+      <h2 class="section-title">待確認與討論</h2>
+      <p class="section-desc">下列項目需在 2026/6 OpenAI 合約正式啟用前後，與金控、業管單位 AI 部及 GitHub 銷售完成釐清。</p>
+
+      <ul class="pending-list">
+        <li class="pending-item">
+          <span class="pending-num">1</span>
+          <div class="pending-body">
+            <h4>📜 Codex 議題</h4>
+            <ul>
+              <li class="todo"><span class="tag-inline">2026/06</span>OpenAI 合約正式啟用後才看得到後台，將請金控及業管單位 AI 部確認</li>
+              <li>Codex 是否為全行開放使用，若是，是否還能多移 credit 給開發單位使用</li>
+              <li>待 AI 部確認是否有加購可能</li>
+            </ul>
+          </div>
+        </li>
+        <li class="pending-item">
+          <span class="pending-num">2</span>
+          <div class="pending-body">
+            <h4>🐙 GitHub Copilot 開發申請情境</h4>
+            <ul>
+              <li>哪些單位保留申請</li>
+              <li>是否需要加購</li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== §8 參考來源 ===== -->
+  <section class="content" id="s8">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-num">08</span>
+      </div>
+      <h2 class="section-title">參考來源彙整</h2>
+      <p class="section-desc">各項數字依 2026 年 5 月公開資料整理。</p>
+
+      <div class="ref-list">
+        <span class="ref-chip"><span class="ref-icon"></span>OpenAI 官方 · developers.openai.com/codex</span>
+        <span class="ref-chip"><span class="ref-icon"></span>OpenAI Help Center · ChatGPT Enterprise Release Notes</span>
+        <span class="ref-chip"><span class="ref-icon"></span>OpenAI Help Center · ChatGPT for Excel and Google Sheets</span>
+        <span class="ref-chip"><span class="ref-icon"></span>GitHub 官方 · docs.github.com/copilot</span>
+        <span class="ref-chip"><span class="ref-icon"></span>github.blog · 2026/6 計費調整公告</span>
+        <span class="ref-chip"><span class="ref-icon"></span>JetBrains 官方 · 2025.3+ AI Chat 整合說明</span>
+        <span class="ref-chip"><span class="ref-icon"></span>Codex Chrome extension 官方文件</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <span class="version">
+        <span class="logo-dot"></span>
+        OpenAI Codex vs GitHub Copilot Business · 修訂版 v2 · 2026/05
+      </span>
+    </div>
+  </footer>
+
+</body>
+</html>
