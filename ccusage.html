@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CC Usage — AI Scrum Team 用量追蹤</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --color-canvas-white: #ffffff;
+      --color-slate-ink: #181925;
+      --color-medium-gray: #666666;
+      --color-muted-gray: #999999;
+      --color-light-gray: #e8e8e8;
+      --color-whisper-purple: #dad9fc;
+      --color-radiant-violet: #918df6;
+      --color-electric-blue: #2c78fc;
+      --gradient-electric-blue: linear-gradient(to right in oklab, rgb(44,120,252) 0%, rgb(145,141,246) 100%);
+      --color-success-green: #33c758;
+      --color-warning-yellow: #ffa600;
+      --color-accent-pink: #d6409f;
+      --color-pale-mint: #def6e4;
+      --color-deep-purple: #9580ff;
+      --color-vivid-orange: #ff3e00;
+
+      --font-main: 'Nunito', 'OpenRunde', ui-sans-serif, system-ui, -apple-system,
+                   BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+      --text-caption: 12px;    --leading-caption: 1.56;  --tracking-caption: -0.05px;
+      --text-body: 14px;       --leading-body: 1.43;     --tracking-body: -0.025px;
+      --text-heading-sm: 18px; --leading-heading-sm: 1.33; --tracking-heading-sm: -0.02px;
+      --text-heading: 20px;    --leading-heading: 1.22;  --tracking-heading: -0.018px;
+      --text-heading-lg: 24px; --leading-heading-lg: 1.17; --tracking-heading-lg: -0.017px;
+      --text-display: 48px;    --leading-display: 1.13;  --tracking-display: -0.013px;
+
+      --font-weight-regular: 400;
+      --font-weight-medium: 500;
+      --font-weight-semibold: 600;
+      --font-weight-bold: 700;
+
+      --spacing-4: 4px;   --spacing-8: 8px;   --spacing-12: 12px;
+      --spacing-16: 16px; --spacing-20: 20px; --spacing-24: 24px;
+      --spacing-32: 32px; --spacing-48: 48px; --spacing-64: 64px;
+
+      --section-gap: 64px;
+      --card-padding: 20px;
+      --element-gap: 16px;
+
+      --radius-default: 8px;
+      --radius-cards: 16px;
+      --radius-large: 24px;
+      --radius-pill: 9999px;
+      --radius-buttons: 9999px;
+
+      --shadow-subtle:   rgba(0,0,0,0.08) 0px 1px 1px 1px, rgba(0,0,0,0.06) 0px 0px 0px 0.5px;
+      --shadow-subtle-2: rgba(0,0,0,0.08) 0px 1px 1px 0px, rgba(0,0,0,0.05) 0px 0px 0px 1px;
+      --shadow-subtle-3: rgba(0,0,0,0.06) 0px 1px 3px 0px, rgba(0,0,0,0.06) 0px 8px 16px 0px,
+                         rgba(0,0,0,0.02) 0px 0px 0px 1px;
+
+      --surface-canvas-white: #ffffff;
+      --surface-subtle-accent: #fafafa;
+      --surface-light-card: rgba(0,0,0,0.03);
+      --surface-pale-mint-overlay: #def6e4;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-main);
+      font-size: var(--text-body);
+      line-height: var(--leading-body);
+      letter-spacing: var(--tracking-body);
+      color: var(--color-slate-ink);
+      background: var(--color-canvas-white);
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--color-canvas-white);
+      border-bottom: 1px solid var(--color-light-gray);
+      padding: var(--spacing-16) var(--spacing-32);
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-16);
+    }
+
+    .nav-logo {
+      font-size: var(--text-heading-sm);
+      font-weight: var(--font-weight-semibold);
+      letter-spacing: var(--tracking-heading-sm);
+      color: var(--color-slate-ink);
+      text-decoration: none;
+    }
+
+    .nav-badge {
+      background: var(--color-whisper-purple);
+      color: var(--color-deep-purple);
+      font-size: var(--text-caption);
+      font-weight: var(--font-weight-semibold);
+      letter-spacing: var(--tracking-caption);
+      padding: var(--spacing-4) var(--spacing-12);
+      border-radius: var(--radius-pill);
+    }
+
+    .nav-spacer { flex: 1; }
+
+    .nav-link {
+      font-size: var(--text-body);
+      font-weight: var(--font-weight-regular);
+      color: var(--color-medium-gray);
+      text-decoration: none;
+    }
+    .nav-link:hover { color: var(--color-slate-ink); }
+
+    /* ── HERO ── */
+    .hero {
+      padding: var(--spacing-64) var(--spacing-32) var(--spacing-48);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-8);
+      background: var(--surface-light-card);
+      border: 1px solid var(--color-light-gray);
+      border-radius: var(--radius-pill);
+      padding: var(--spacing-4) var(--spacing-12);
+      font-size: var(--text-caption);
+      font-weight: var(--font-weight-medium);
+      letter-spacing: var(--tracking-caption);
+      color: var(--color-medium-gray);
+      margin-bottom: var(--spacing-20);
+    }
+
+    .hero-eyebrow .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: var(--radius-pill);
+      background: var(--color-radiant-violet);
+      display: inline-block;
+    }
+
+    .hero-title {
+      font-size: var(--text-display);
+      font-weight: var(--font-weight-bold);
+      line-height: var(--leading-display);
+      letter-spacing: var(--tracking-display);
+      color: var(--color-slate-ink);
+      margin-bottom: var(--spacing-16);
+    }
+
+    .hero-title .accent {
+      background: var(--gradient-electric-blue);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-desc {
+      font-size: var(--text-heading-sm);
+      font-weight: var(--font-weight-regular);
+      line-height: var(--leading-heading-sm);
+      letter-spacing: var(--tracking-heading-sm);
+      color: var(--color-medium-gray);
+      max-width: 600px;
+      margin-bottom: var(--spacing-32);
+    }
+
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-16);
+      flex-wrap: wrap;
+    }
+
+    .period-btn {
+      background: var(--color-whisper-purple);
+      color: var(--color-deep-purple);
+      border: none;
+      border-radius: var(--radius-pill);
+      padding: var(--spacing-8) var(--spacing-20);
+      font-family: var(--font-main);
+      font-size: var(--text-body);
+      font-weight: var(--font-weight-semibold);
+      cursor: pointer;
+      letter-spacing: var(--tracking-body);
+      transition: background 0.15s;
+    }
+
+    .period-btn.active,
+    .period-btn:hover {
+      background: var(--color-radiant-violet);
+      color: #fff;
+    }
+
+    .period-label {
+      font-size: var(--text-caption);
+      color: var(--color-muted-gray);
+      letter-spacing: var(--tracking-caption);
+    }
+
+    /* ── CONTENT ── */
+    .content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-32) var(--spacing-64);
+    }
+
+    /* ── STAT CARDS ── */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--spacing-16);
+      margin-bottom: var(--spacing-64);
+    }
+
+    .stat-card {
+      background: var(--surface-subtle-accent);
+      border: 1px solid var(--color-light-gray);
+      border-radius: var(--radius-cards);
+      padding: var(--card-padding);
+      box-shadow: var(--shadow-subtle-2);
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-8);
+    }
+
+    .stat-card .label {
+      font-size: var(--text-caption);
+      font-weight: var(--font-weight-medium);
+      letter-spacing: var(--tracking-caption);
+      color: var(--color-muted-gray);
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-8);
+    }
+
+    .stat-card .label .icon {
+      width: 24px;
+      height: 24px;
+      border-radius: var(--radius-default);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+    }
+
+    .stat-card .value {
+      font-size: 32px;
+      font-weight: var(--font-weight-bold);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--color-slate-ink);
+    }
+
+    .stat-card .delta {
+      font-size: var(--text-caption);
+      font-weight: var(--font-weight-semibold);
+      letter-spacing: var(--tracking-caption);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .delta.up { color: var(--color-success-green); }
+    .delta.down { color: var(--color-vivid-orange); }
+    .delta.neutral { color: var(--color-muted-gray); }
+
+    /* ── SECTION ── */
+    .section {
+      margin-bottom: var(--spacing-64);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-12);
+      margin-bottom: var(--spacing-24);
+    }
+
+    .section-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-default);
+      background: var(--color-whisper-purple);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-size: var(--text-heading-lg);
+      font-weight: var(--font-weight-semibold);
+      line-height: var(--leading-heading-lg);
+      letter-spacing: var(--tracking-heading-lg);
+      color: var(--color-slate-ink);
+    }
+
+    /* ── BAR CHART ── */
+    .chart-card {
+      background: var(--surface-subtle-accent);
+      border: 1px solid var(--color-light-gray);
+      border-radius: var(--radius-cards);
+      padding: var(--card-padding);
+      box-shadow: var(--shadow-subtle-2);
+    }
+
+    .chart-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-16);
+      margin-bottom: var(--spacing-24);
+    }
+
+    .bar-chart {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-12);
+    }
+
+    .bar-chart-title {
+      font-size: var(--text-body);
+      font-weight: var(--font-weight-semibold);
+      letter-spacing: var(--tracking-body);
+      color: var(--color-slate-ink);
+      margin-bottom: var(--spacing-16);
+    }
+
+    .bar-row {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-12);
+    }
+
+    .bar-label {
+      font-size: var(--text-caption);
+      letter-spacing: var(--tracking-caption);
+      color: var(--color-medium-gray);
+      width: 56px;
+      flex-shrink: 0;
+      text-align: right;
+    }
+
+    .bar-track {
+      flex: 1;
+      height: 8px;
+      background: var(--color-light-gray);
+      border-radius: var(--radius-pill);
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: var(--radius-pill);
+      background: var(--gradient-electric-blue);
+      transition: width 0.4s ease;
+    }
+
+    .bar-fill.cost { background: linear-gradient(to right in oklab, #918df6 0%, #d6409f 100%); }
+    .bar-fill.tokens { background: var(--gradient-electric-blue); }
+    .bar-fill.sessions { background: linear-gradient(to right, #33c758, #2c78fc); }
+
+    .bar-val {
+      font-size: var(--text-caption);
+      font-weight: var(--font-weight-semibold);
+      letter-spacing: var(--tracking-caption);
+      color: var(--color-slate-ink);
+      width: 64px;
+      flex-shrink: 0;
+    }
+
+    /* ── MODEL TABLE ── */
+    .table-card {
+      background: var(--surface-subtle-accent);
+      border: 1px solid var(--color-light-gray);
+      border-radius: var(--radius-cards);
+      overflow: hidden;
+      box-shadow: var(--shadow-subtle-2);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead th {
+      background: var(--surface-light-card);
+      font-size: var(--text-caption);
+      font-weight: var(--font-weight-semibold);
+      letter-spacing: 0.04em;
+      color: var(--color-muted-gray);
+      text-transform: uppercase;
+      text-align: left;
+      padding: var(--spacing-12) var(--card-padding);
+      border-bottom: 1px solid var(--color-light-gray);
+    }
+
+    tbody tr {
+      border-bottom: 1px solid var(--color-light-gray);
+      transition: background 0.1s;
+    }
+
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--surface-light-card); }
+
+    tbody td {
+      padding: var(--spacing-16) var(--card-padding);
+      font-size: var(--text-body);
+      color: var(--color-slate-ink);
+    }
+
+    .model-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-8);
+      font-size: var(--text-caption);
+      font-weight: var(--font-weight-semibold);
+      letter-spacing: var(--tracking-caption);
+      padding: var(--spacing-4) var(--spacing-12);
+      border-radius: var(--radius-pill);
+    }
+
+    .model-badge.opus {
+      background: var(--color-whisper-purple);
+      color: var(--color-deep-purple);
+    }
+
+    .model-badge.sonnet {
+      background: #e8f0ff;
+      color: var(--color-electric-blue);
+    }
+
+    .model-badge.haiku {
+      background: var(--color-pale-mint);
+      color: #1a7a36;
+    }
+
+    .model-badge .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: var(--radius-pill);
+      background: currentColor;
+    }
+
+    .token-bar-track {
+      height: 4px;
+      background: var(--color-light-gray);
+      border-radius: var(--radius-pill);
+      overflow: hidden;
+      margin-top: var(--spacing-4);
+    }
+
+    .token-bar-fill {
+      height: 100%;
+      border-radius: var(--radius-pill);
+    }
+
+    .cost-val {
+      font-weight: var(--font-weight-semibold);
+    }
+
+    /* ── SESSION LIST ── */
+    .session-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-12);
+    }
+
+    .session-item {
+      background: var(--surface-subtle-accent);
+      border: 1px solid var(--color-light-gray);
+      border-radius: var(--radius-cards);
+      padding: var(--spacing-16) var(--card-padding);
+      box-shadow: var(--shadow-subtle-2);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: var(--spacing-16);
+      align-items: center;
+    }
+
+    .session-meta {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-12);
+      flex-wrap: wrap;
+    }
+
+    .session-project {
+      font-size: var(--text-body);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-slate-ink);
+    }
+
+    .session-time {
+      font-size: var(--text-caption);
+      color: var(--color-muted-gray);
+      letter-spacing: var(--tracking-caption);
+    }
+
+    .tag {
+      background: var(--surface-light-card);
+      border: 1px solid var(--color-light-gray);
+      color: var(--color-medium-gray);
+      font-size: var(--text-caption);
+      font-weight: var(--font-weight-medium);
+      letter-spacing: var(--tracking-caption);
+      padding: var(--spacing-4) var(--spacing-12);
+      border-radius: var(--radius-pill);
+    }
+
+    .tag.violet {
+      background: var(--color-whisper-purple);
+      border-color: var(--color-whisper-purple);
+      color: var(--color-deep-purple);
+    }
+
+    .session-stats {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-24);
+    }
+
+    .session-stat {
+      text-align: right;
+    }
+
+    .session-stat .s-label {
+      font-size: var(--text-caption);
+      color: var(--color-muted-gray);
+      letter-spacing: var(--tracking-caption);
+    }
+
+    .session-stat .s-value {
+      font-size: var(--text-body);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-slate-ink);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--color-light-gray);
+      padding: var(--spacing-32);
+      text-align: center;
+      font-size: var(--text-caption);
+      color: var(--color-muted-gray);
+      letter-spacing: var(--tracking-caption);
+    }
+
+    footer a {
+      color: var(--color-radiant-violet);
+      text-decoration: none;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: var(--spacing-12) var(--spacing-16); }
+      .hero { padding: var(--spacing-48) var(--spacing-16) var(--spacing-32); }
+      .content { padding: 0 var(--spacing-16) var(--spacing-48); }
+      .hero-title { font-size: 36px; }
+      .stat-grid { grid-template-columns: repeat(2, 1fr); }
+      .chart-grid { grid-template-columns: 1fr; }
+      .session-item { grid-template-columns: 1fr; }
+      .session-stats { justify-content: flex-start; }
+    }
+
+    @media (max-width: 600px) {
+      .stat-grid { grid-template-columns: 1fr 1fr; }
+      .hero-title { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">AI Scrum</a>
+    <span class="nav-badge">CC Usage</span>
+    <div class="nav-spacer"></div>
+    <a href="index.html" class="nav-link">首頁</a>
+    <a href="aimember.html" class="nav-link">AI 成員</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">
+      <span class="dot"></span>
+      Claude Code Usage Tracker · 2026/05
+    </div>
+    <h1 class="hero-title">
+      <span class="accent">CC Usage</span><br>用量追蹤儀表板
+    </h1>
+    <p class="hero-desc">
+      追蹤 AI Scrum Team 成員的 Claude Code 使用量、Token 消耗與費用分佈，協助團隊優化 AI 輔助開發效率。
+    </p>
+    <div class="hero-meta">
+      <button class="period-btn" onclick="switchPeriod('day', this)">今日</button>
+      <button class="period-btn" onclick="switchPeriod('week', this)">本週</button>
+      <button class="period-btn active" onclick="switchPeriod('month', this)">本月</button>
+      <span class="period-label">資料截至 2026/05/20 23:59 (UTC+8)</span>
+    </div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- STAT CARDS -->
+    <div class="stat-grid" id="stat-grid">
+      <div class="stat-card">
+        <div class="label">
+          <div class="icon" style="background:#dad9fc; color:#9580ff;">$</div>
+          總費用
+        </div>
+        <div class="value" id="val-cost">$47.83</div>
+        <div class="delta up" id="delta-cost">▲ 12.4% vs 上期</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">
+          <div class="icon" style="background:#e8f0ff; color:#2c78fc;">T</div>
+          總 Token 數
+        </div>
+        <div class="value" id="val-tokens">38.2M</div>
+        <div class="delta up" id="delta-tokens">▲ 18.7% vs 上期</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">
+          <div class="icon" style="background:#def6e4; color:#1a7a36;">⚡</div>
+          工作階段數
+        </div>
+        <div class="value" id="val-sessions">284</div>
+        <div class="delta up" id="delta-sessions">▲ 9.2% vs 上期</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">
+          <div class="icon" style="background:#fff3e0; color:#ffa600;">⏱</div>
+          平均 Session 長
+        </div>
+        <div class="value" id="val-avg">22m</div>
+        <div class="delta neutral" id="delta-avg">→ 持平</div>
+      </div>
+    </div>
+
+    <!-- DAILY BREAKDOWN -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon">📊</div>
+        <div class="section-title">每日用量</div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-grid">
+          <div class="bar-chart">
+            <div class="bar-chart-title">費用（USD）</div>
+            <div id="cost-bars"></div>
+          </div>
+          <div class="bar-chart">
+            <div class="bar-chart-title">Token 數（M）</div>
+            <div id="token-bars"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODEL BREAKDOWN -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon">🤖</div>
+        <div class="section-title">模型用量分佈</div>
+      </div>
+      <div class="table-card">
+        <table>
+          <thead>
+            <tr>
+              <th>模型</th>
+              <th>輸入 Token</th>
+              <th>輸出 Token</th>
+              <th>快取讀取</th>
+              <th>費用</th>
+              <th>佔比</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="model-badge opus"><span class="dot"></span>claude-opus-4-7</span></td>
+              <td>
+                8.4M
+                <div class="token-bar-track">
+                  <div class="token-bar-fill" style="width:62%; background:var(--color-deep-purple);"></div>
+                </div>
+              </td>
+              <td>1.2M</td>
+              <td>14.1M</td>
+              <td class="cost-val">$28.44</td>
+              <td><span class="tag violet">59.5%</span></td>
+            </tr>
+            <tr>
+              <td><span class="model-badge sonnet"><span class="dot"></span>claude-sonnet-4-6</span></td>
+              <td>
+                9.7M
+                <div class="token-bar-track">
+                  <div class="token-bar-fill" style="width:71%; background:var(--color-electric-blue);"></div>
+                </div>
+              </td>
+              <td>2.1M</td>
+              <td>3.8M</td>
+              <td class="cost-val">$15.62</td>
+              <td><span class="tag" style="background:#e8f0ff;border-color:#e8f0ff;color:#2c78fc;">32.7%</span></td>
+            </tr>
+            <tr>
+              <td><span class="model-badge haiku"><span class="dot"></span>claude-haiku-4-5</span></td>
+              <td>
+                1.3M
+                <div class="token-bar-track">
+                  <div class="token-bar-fill" style="width:10%; background:var(--color-success-green);"></div>
+                </div>
+              </td>
+              <td>0.3M</td>
+              <td>0.5M</td>
+              <td class="cost-val">$3.77</td>
+              <td><span class="tag" style="background:#def6e4;border-color:#def6e4;color:#1a7a36;">7.8%</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- RECENT SESSIONS -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon">📋</div>
+        <div class="section-title">近期工作階段</div>
+      </div>
+      <div class="session-list">
+        <div class="session-item">
+          <div>
+            <div class="session-meta">
+              <span class="session-project">aiscrum — ccusage.html 新增</span>
+              <span class="tag violet">opus-4-7</span>
+              <span class="tag">aiscrum</span>
+            </div>
+            <div class="session-time">2026/05/20 · 14:32 — 15:08 (36m)</div>
+          </div>
+          <div class="session-stats">
+            <div class="session-stat">
+              <div class="s-label">Token</div>
+              <div class="s-value">842K</div>
+            </div>
+            <div class="session-stat">
+              <div class="s-label">費用</div>
+              <div class="s-value">$2.14</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="session-item">
+          <div>
+            <div class="session-meta">
+              <span class="session-project">aimember.html — 排程更新</span>
+              <span class="tag violet">opus-4-7</span>
+              <span class="tag">aiscrum</span>
+            </div>
+            <div class="session-time">2026/05/19 · 10:15 — 10:48 (33m)</div>
+          </div>
+          <div class="session-stats">
+            <div class="session-stat">
+              <div class="s-label">Token</div>
+              <div class="s-value">601K</div>
+            </div>
+            <div class="session-stat">
+              <div class="s-label">費用</div>
+              <div class="s-value">$1.72</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="session-item">
+          <div>
+            <div class="session-meta">
+              <span class="session-project">codex-config.html — 參數查詢</span>
+              <span class="tag" style="background:#e8f0ff;border-color:#e8f0ff;color:#2c78fc;">sonnet-4-6</span>
+              <span class="tag">codex</span>
+            </div>
+            <div class="session-time">2026/05/18 · 16:02 — 16:24 (22m)</div>
+          </div>
+          <div class="session-stats">
+            <div class="session-stat">
+              <div class="s-label">Token</div>
+              <div class="s-value">388K</div>
+            </div>
+            <div class="session-stat">
+              <div class="s-label">費用</div>
+              <div class="s-value">$0.81</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="session-item">
+          <div>
+            <div class="session-meta">
+              <span class="session-project">codex-safety-report.html — 內容更新</span>
+              <span class="tag" style="background:#e8f0ff;border-color:#e8f0ff;color:#2c78fc;">sonnet-4-6</span>
+              <span class="tag">codex</span>
+            </div>
+            <div class="session-time">2026/05/17 · 09:41 — 10:05 (24m)</div>
+          </div>
+          <div class="session-stats">
+            <div class="session-stat">
+              <div class="s-label">Token</div>
+              <div class="s-value">312K</div>
+            </div>
+            <div class="session-stat">
+              <div class="s-label">費用</div>
+              <div class="s-value">$0.64</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="session-item">
+          <div>
+            <div class="session-meta">
+              <span class="session-project">index.html — Sprint 4 里程碑更新</span>
+              <span class="tag" style="background:#def6e4;border-color:#def6e4;color:#1a7a36;">haiku-4-5</span>
+              <span class="tag">aiscrum</span>
+            </div>
+            <div class="session-time">2026/05/16 · 14:10 — 14:22 (12m)</div>
+          </div>
+          <div class="session-stats">
+            <div class="session-stat">
+              <div class="s-label">Token</div>
+              <div class="s-value">98K</div>
+            </div>
+            <div class="session-stat">
+              <div class="s-label">費用</div>
+              <div class="s-value">$0.18</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+
+  <footer>
+    AI Scrum Team · CC Usage Tracker ·
+    資料來源：<a href="https://github.com/ryoppippi/ccusage" target="_blank">ccusage</a> ·
+    <a href="index.html">回首頁</a>
+  </footer>
+
+  <script>
+    /* ── period data ── */
+    const data = {
+      day: {
+        cost: '$3.21', tokens: '2.7M', sessions: '18', avg: '24m',
+        dCost: '▲ 8.1% vs 昨日', dTokens: '▲ 11.3% vs 昨日',
+        dSessions: '▼ 2 次 vs 昨日', dAvg: '→ 持平',
+        dCostCls: 'up', dTokensCls: 'up', dSessionsCls: 'down', dAvgCls: 'neutral',
+        bars: [
+          { label: '10:00', cost: 0.28, tokens: 0.22 },
+          { label: '11:00', cost: 0.41, tokens: 0.35 },
+          { label: '12:00', cost: 0.19, tokens: 0.15 },
+          { label: '14:00', cost: 0.62, tokens: 0.54 },
+          { label: '15:00', cost: 0.88, tokens: 0.78 },
+          { label: '16:00', cost: 0.47, tokens: 0.41 },
+          { label: '17:00', cost: 0.36, tokens: 0.25 },
+        ]
+      },
+      week: {
+        cost: '$12.47', tokens: '9.8M', sessions: '72', avg: '21m',
+        dCost: '▲ 6.3% vs 上週', dTokens: '▲ 9.1% vs 上週',
+        dSessions: '▲ 5 次 vs 上週', dAvg: '▼ 2m vs 上週',
+        dCostCls: 'up', dTokensCls: 'up', dSessionsCls: 'up', dAvgCls: 'down',
+        bars: [
+          { label: '週一', cost: 1.82, tokens: 1.41 },
+          { label: '週二', cost: 2.14, tokens: 1.78 },
+          { label: '週三', cost: 1.56, tokens: 1.22 },
+          { label: '週四', cost: 2.88, tokens: 2.34 },
+          { label: '週五', cost: 3.41, tokens: 2.81 },
+          { label: '週六', cost: 0.66, tokens: 0.24 },
+        ]
+      },
+      month: {
+        cost: '$47.83', tokens: '38.2M', sessions: '284', avg: '22m',
+        dCost: '▲ 12.4% vs 上期', dTokens: '▲ 18.7% vs 上期',
+        dSessions: '▲ 9.2% vs 上期', dAvg: '→ 持平',
+        dCostCls: 'up', dTokensCls: 'up', dSessionsCls: 'up', dAvgCls: 'neutral',
+        bars: [
+          { label: '05/01', cost: 1.24, tokens: 0.98 },
+          { label: '05/03', cost: 3.41, tokens: 2.87 },
+          { label: '05/05', cost: 2.88, tokens: 2.21 },
+          { label: '05/07', cost: 1.96, tokens: 1.54 },
+          { label: '05/10', cost: 4.12, tokens: 3.38 },
+          { label: '05/13', cost: 5.67, tokens: 4.81 },
+          { label: '05/16', cost: 3.24, tokens: 2.64 },
+          { label: '05/18', cost: 2.81, tokens: 2.17 },
+          { label: '05/20', cost: 3.21, tokens: 2.68 },
+        ]
+      }
+    };
+
+    let activePeriod = 'month';
+
+    function switchPeriod(period, btn) {
+      activePeriod = period;
+      document.querySelectorAll('.period-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const d = data[period];
+
+      document.getElementById('val-cost').textContent = d.cost;
+      document.getElementById('val-tokens').textContent = d.tokens;
+      document.getElementById('val-sessions').textContent = d.sessions;
+      document.getElementById('val-avg').textContent = d.avg;
+
+      setDelta('delta-cost', d.dCost, d.dCostCls);
+      setDelta('delta-tokens', d.dTokens, d.dTokensCls);
+      setDelta('delta-sessions', d.dSessions, d.dSessionsCls);
+      setDelta('delta-avg', d.dAvg, d.dAvgCls);
+
+      renderBars(d.bars);
+    }
+
+    function setDelta(id, text, cls) {
+      const el = document.getElementById(id);
+      el.textContent = text;
+      el.className = 'delta ' + cls;
+    }
+
+    function renderBars(bars) {
+      const maxCost = Math.max(...bars.map(b => b.cost));
+      const maxTokens = Math.max(...bars.map(b => b.tokens));
+
+      const costContainer = document.getElementById('cost-bars');
+      const tokenContainer = document.getElementById('token-bars');
+
+      costContainer.innerHTML = bars.map(b => `
+        <div class="bar-row">
+          <div class="bar-label">${b.label}</div>
+          <div class="bar-track">
+            <div class="bar-fill cost" style="width:${(b.cost/maxCost*100).toFixed(1)}%"></div>
+          </div>
+          <div class="bar-val">$${b.cost.toFixed(2)}</div>
+        </div>
+      `).join('');
+
+      tokenContainer.innerHTML = bars.map(b => `
+        <div class="bar-row">
+          <div class="bar-label">${b.label}</div>
+          <div class="bar-track">
+            <div class="bar-fill tokens" style="width:${(b.tokens/maxTokens*100).toFixed(1)}%"></div>
+          </div>
+          <div class="bar-val">${b.tokens.toFixed(2)}M</div>
+        </div>
+      `).join('');
+    }
+
+    /* initial render */
+    renderBars(data.month.bars);
+  </script>
+</body>
+</html>
