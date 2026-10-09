@@ -1,0 +1,7 @@
+{
+  "name": "usage-band",
+  "version": "0.1.0",
+  "description": "A thin band above the prompt: context %, 5-hour limit % with reset time, weekly limit %",
+  "author": { "name": "soya14" },
+  "types": "./types/index.d.ts"
+}

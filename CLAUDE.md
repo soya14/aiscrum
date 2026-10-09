@@ -46,7 +46,9 @@
 ├── index.html     # 主頁面（含所有 CSS 與 JS）
 ├── aimember.md    # O大 AI 成員提案說明（v3.1）
 ├── Design.md      # 設計系統規範（Visitors reference）
-└── CLAUDE.md      # 本檔案
+├── CLAUDE.md      # 本檔案
+├── .claude-plugin/marketplace.json  # Claude Code Mod marketplace 清單
+└── mods/usage-band/                 # Claude Code Mod：輸入框上方的用量細帶
 ```
 
 ### 技術規格
